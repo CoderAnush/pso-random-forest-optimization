@@ -205,21 +205,25 @@ class SearchSpace:
 class Evaluation:            # what an objective returns
     fitness: float           # the ONLY value the optimizer uses
     info: Mapping[str, Any]  # forwarded untouched to callbacks (fold scores, cache_hit, timing…)
-Objective = Callable[[dict[str, int]], Evaluation]
+Objective = Callable[[dict[str, int]], Evaluation | float]   # a plain number is accepted; NaN -> -inf
 class PSOOptimizer:
     def __init__(self, space: SearchSpace, objective: Objective, config: PSOConfig, rng: np.random.Generator)
     def run(self, callbacks: Sequence[Callback] = ()) -> OptimizationResult
+    # pure, separately tested steps: velocity_update, apply_absorbing_bounds, update_personal_best, best_index
 class RandomSearch:
     def __init__(self, space: SearchSpace, objective: Objective, budget: int, rng: np.random.Generator)
     def run(self, callbacks: Sequence[Callback] = ()) -> OptimizationResult
-class Callback(Protocol):
+class Callback:              # base class; every hook optional (duck typing also works)
     def on_evaluation(self, event: EvaluationEvent) -> None
     def on_iteration_end(self, summary: IterationSummary) -> None   # PSO only
+    def on_finish(self, result: OptimizationResult) -> None
 @dataclass(frozen=True)
 class OptimizationResult:
-    best_config: dict[str, int]; best_fitness: float; best_position: np.ndarray | None
-    n_evaluations: int; n_iterations: int | None; stop_reason: str
-    convergence_iteration: int | None; history: list[IterationSummary]
+    method: str; best_config: dict[str, int]; best_fitness: float
+    best_position: tuple[float, ...] | None; best_info: Mapping[str, Any]   # info of the evaluation that found it
+    best_found_at_eval: int; best_found_at_iteration: int | None
+    n_evaluations: int; n_iterations: int | None; stop_reason: str   # max_iter | patience | budget
+    convergence_iteration: int | None; n_ties_with_best: int; history: tuple[IterationSummary, ...]
 
 # evaluation.fitness   (never imports optimization: no Evaluation or Objective here)
 @dataclass(frozen=True)
@@ -236,13 +240,23 @@ class FitnessEvaluator:
     folds: tuple[tuple[np.ndarray, np.ndarray], ...]   # read-only property: the fixed inner folds
     n_unique_fits: int                                 # cache misses, failures included
 
-# evaluation.final
-def final_evaluate(config: dict[str, int | None], opt: OptimizationData, test: HeldOutTestSet,
-                   seed: int, preprocessing: PreprocessingSpec) -> FinalMetrics
+# evaluation.metrics / evaluation.final
+def compute_metrics(y_true, y_pred, labels: Sequence[int], positive_label: int | None = None) -> dict
+def final_evaluate(config: Mapping[str, int | None], opt: OptimizationData, test: HeldOutTestSet,
+                   seed: int, preprocessing: PreprocessingSpec, labels: Sequence[int],
+                   positive_label: int | None = None, n_jobs: int = 1) -> FinalEvaluation
+    # raises TestSetAccessError inside OptimizationPhase; FinalEvaluation = (metrics, row_index, y_true, y_pred)
 
 # experiments
-def make_objective(evaluator: FitnessEvaluator) -> Objective   # runner.py: FitnessResult -> Evaluation adapter (P8)
-def run_experiment(config: ExperimentConfig) -> Path    # returns results/<exp_id>/
+def make_objective(evaluator: FitnessEvaluator) -> Objective   # runner.py: FitnessResult -> Evaluation adapter
+def run_fold(cfg: ExperimentConfig, bundle: DatasetBundle, fold: FoldData, method: str, metric: str,
+             out_dir: Path, exp_id: str) -> dict              # final.json record; writes the run's files
+def run_deployment(cfg, bundle, opt: OptimizationData, metric: str, out_dir: Path, exp_id: str) -> dict
+class Recorder(Callback):   # recorder.py: events -> evaluations.csv / iterations.csv + INFO trace line
+    def __init__(self, context: RunContext, names, evaluations_path, iterations_path=None, logger=None,
+                 total_iterations=None, flush_every=10)
+class RunSeeds: run, pso, random_search, inner_cv, rf   # seeding.py; all equal the run seed
+def run_experiment(config: ExperimentConfig) -> Path    # returns results/<exp_id>/ (P10)
 ```
 
 **Coupling rule.** The optimizer sees only `SearchSpace` and `Objective`. The evaluator sees only

@@ -8,6 +8,7 @@ import json
 import os
 import tempfile
 from collections.abc import Iterable, Mapping, Sequence
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -85,3 +86,8 @@ def append_csv_rows(path: Path | str, rows: Iterable[Mapping[str, Any]], columns
         for row in rows:
             writer.writerow([format_csv_value(row[column]) for column in columns])
     return len(rows)
+
+
+def utc_timestamp() -> str:
+    """The current time as ISO-8601 UTC with milliseconds, e.g. ``2026-10-01T14:30:00.123Z``."""
+    return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")

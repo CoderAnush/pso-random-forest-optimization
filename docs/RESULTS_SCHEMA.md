@@ -234,6 +234,7 @@ method, which is the basis for the pooled confusion matrices.
 | `exp_id`, `dataset`, `seed` | — | seed = 5 |
 | `recommended_hyperparameters` | object | decoded gbest on the full dataset |
 | `validation_fitness` | float | inner-CV fitness on the full dataset; **biased; not a performance estimate** |
+| `fitness_metric` | str | metric used for the fitness |
 | `performance_estimate` | object | copied from `summary.csv` PSO row: `{test_accuracy_mean, test_accuracy_std, source: "summary.csv"}` |
 | `n_samples` | int | full dataset size |
 | `n_evaluations`, `n_unique_fits`, `convergence_iteration` | int / Int? | as in `final.json` |
