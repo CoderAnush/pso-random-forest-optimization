@@ -15,7 +15,7 @@ Related documents:
 
 | Item | State |
 |---|---|
-| Phase | **Phases 0–3 complete:** design documents; package scaffold with configuration loading; dataset loaders, Cleveland download and audit; leakage-safe preprocessing steps. Phases 4–15 pending. |
+| Phase | **Phases 0–4 complete:** design documents; package scaffold with configuration loading; dataset loaders, Cleveland download and audit; leakage-safe preprocessing steps; outer folds and the sealed test set. Phases 5–15 pending. |
 | Repository | `C:\Users\anush\Desktop\PSO`, remote `https://github.com/CoderAnush/pso-random-forest-optimization` |
 | Source of truth | `ppt/CB.EN.U4ELC23005_ANUSH_RAMESH_PPT.pdf` (13 slides, image-only; slide 12's references exist only in the PDF text layer), plus the decisions in [DECISIONS.md](DECISIONS.md) |
 | Environment (measured) | Windows 11, 20 CPU cores, Python 3.10.11, numpy 1.26.4, scikit-learn 1.7.2, pandas 2.3.3, matplotlib 3.10.6, PyYAML 6.0.1, pytest 9.1.1, joblib 1.5.2 |
@@ -167,14 +167,18 @@ def load_dataset(name: str, data_dir: Path) -> DatasetBundle
 
 # evaluation.splits
 @dataclass(frozen=True)
-class OptimizationData:  X: np.ndarray; y: np.ndarray; indices: np.ndarray
-class HeldOutTestSet:        # arrays are private; access only via reveal()
-    indices: np.ndarray
-    def reveal(self) -> tuple[np.ndarray, np.ndarray]   # raises TestSetAccessError inside OptimizationPhase
-class OptimizationPhase:     # context manager; sets a process-wide flag
+class OptimizationData:  X: np.ndarray; y: np.ndarray; indices: np.ndarray   # arrays are read-only
+class HeldOutTestSet:        # arrays are private (name-mangled); access only via reveal()
+    def __init__(self, X: np.ndarray, y: np.ndarray, indices: np.ndarray)
+    indices: np.ndarray      # read-only property; len() = fold size; repr shows only n and "sealed"
+    def reveal(self) -> tuple[np.ndarray, np.ndarray]   # copies; raises TestSetAccessError inside OptimizationPhase
+class OptimizationPhase:     # context manager over a process-wide depth counter (nesting- and exception-safe)
+def optimization_phase_active() -> bool
+class TestSetAccessError(RuntimeError)
 @dataclass(frozen=True)
 class FoldData: fold_index: int; opt: OptimizationData; test: HeldOutTestSet
 def outer_folds(bundle: DatasetBundle, n_splits: int, seed: int) -> list[FoldData]
+def full_data(bundle: DatasetBundle) -> OptimizationData   # deployment run: all rows, no test fold
 
 # optimization (generic — no ML knowledge)
 @dataclass(frozen=True)

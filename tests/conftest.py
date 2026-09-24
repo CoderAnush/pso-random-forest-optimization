@@ -2,14 +2,23 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
 
 from pso_rf.datasets import DatasetBundle, load_dataset
+from pso_rf.evaluation import FoldData, optimization_phase_active, outer_folds
 from pso_rf.experiments.config import ExperimentConfig, load_config
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+@pytest.fixture(autouse=True)
+def _no_optimization_phase_left_open() -> Iterator[None]:
+    """Every test must close the OptimizationPhase contexts it opens (the flag is process-wide)."""
+    yield
+    assert not optimization_phase_active(), "a test left an OptimizationPhase open"
 
 
 @pytest.fixture(scope="session")
@@ -46,3 +55,15 @@ def iris_bundle(data_dir: Path) -> DatasetBundle:
 def heart_bundle(data_dir: Path) -> DatasetBundle:
     """The real, checksum-verified Cleveland dataset (shared: never mutate its arrays)."""
     return load_dataset("heart_cleveland", data_dir)
+
+
+@pytest.fixture(scope="session")
+def iris_fold0(iris_bundle: DatasetBundle) -> FoldData:
+    """Real Iris outer fold 0 under the default split (5 folds, seed 42)."""
+    return outer_folds(iris_bundle, n_splits=5, seed=42)[0]
+
+
+@pytest.fixture(scope="session")
+def heart_fold0(heart_bundle: DatasetBundle) -> FoldData:
+    """Real Cleveland outer fold 0 under the default split (5 folds, seed 42)."""
+    return outer_folds(heart_bundle, n_splits=5, seed=42)[0]
