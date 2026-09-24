@@ -15,7 +15,7 @@ Related documents:
 
 | Item | State |
 |---|---|
-| Phase | **Phases 0–4 complete:** design documents; package scaffold with configuration loading; dataset loaders, Cleveland download and audit; leakage-safe preprocessing steps; outer folds and the sealed test set. Phases 5–15 pending. |
+| Phase | **Phases 0–5 complete:** design documents; package scaffold with configuration loading; dataset loaders, Cleveland download and audit; leakage-safe preprocessing steps; outer folds and the sealed test set; RF pipeline builder and baseline. Phases 6–15 pending. |
 | Repository | `C:\Users\anush\Desktop\PSO`, remote `https://github.com/CoderAnush/pso-random-forest-optimization` |
 | Source of truth | `ppt/CB.EN.U4ELC23005_ANUSH_RAMESH_PPT.pdf` (13 slides, image-only; slide 12's references exist only in the PDF text layer), plus the decisions in [DECISIONS.md](DECISIONS.md) |
 | Environment (measured) | Windows 11, 20 CPU cores, Python 3.10.11, numpy 1.26.4, scikit-learn 1.7.2, pandas 2.3.3, matplotlib 3.10.6, PyYAML 6.0.1, pytest 9.1.1, joblib 1.5.2 |
@@ -164,6 +164,17 @@ class DatasetBundle:
     class_names: list[str]
     meta: dict               # source, citation, sha256, audit {n, d, class_counts, duplicates, missing}
 def load_dataset(name: str, data_dir: Path) -> DatasetBundle
+
+# preprocessing
+@dataclass(frozen=True)
+class PreprocessingSpec:  impute: str | None = None          # None | "most_frequent" | "mean" | "median"
+def build_steps(spec: PreprocessingSpec) -> list[tuple[str, Any]]   # fresh, unfitted pipeline steps
+
+# models
+HYPERPARAMETER_NAMES = ("n_estimators", "max_depth", "min_samples_split")
+def build_model(config: Mapping[str, int | None], seed: int, preprocessing: PreprocessingSpec,
+                n_jobs: int = 1) -> Pipeline                  # steps + ("rf", RandomForestClassifier(...))
+BASELINE_CONFIG: Mapping[str, int | None]   # read-only {n_estimators: 100, max_depth: None, min_samples_split: 2}
 
 # evaluation.splits
 @dataclass(frozen=True)
