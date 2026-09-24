@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+results/scratch_*/
+plots/scratch_*/
+*.egg-info/
+.ruff_cache/
+build/
+dist/
