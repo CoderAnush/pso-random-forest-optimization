@@ -28,6 +28,7 @@ from typing import Any
 import yaml
 
 from pso_rf.optimization.pso import PSOConfig
+from pso_rf.preprocessing.pipeline import IMPUTE_STRATEGIES, PreprocessingSpec
 from pso_rf.utils.hashing import sha256_json
 
 KNOWN_DATASETS: tuple[str, ...] = ("iris", "digits", "heart_cleveland")
@@ -37,7 +38,6 @@ DIAGNOSTIC_METRICS: tuple[str, ...] = ("accuracy", "balanced_accuracy", "f1_macr
 PSO_BOUNDARIES: tuple[str, ...] = ("absorb",)  # "reflect" is a documented extension, not implemented
 PSO_TOPOLOGIES: tuple[str, ...] = ("gbest",)
 PSO_UPDATES: tuple[str, ...] = ("synchronous",)
-IMPUTE_STRATEGIES: tuple[str, ...] = ("most_frequent", "mean", "median")
 DATASET_SECTIONS: tuple[str, ...] = ("pso", "fitness", "random_search", "preprocessing")
 
 _CLI_WINS_SECTIONS = ("pso", "fitness", "random_search")
@@ -151,7 +151,7 @@ class DatasetSettings:
     name: str
     pso: PSOConfig
     fitness: FitnessConfig
-    preprocessing: dict[str, Any]
+    preprocessing: PreprocessingSpec
     random_search_budget: int
 
 
@@ -214,7 +214,7 @@ class ExperimentConfig:
             name=name,
             pso=pso,
             fitness=fitness,
-            preprocessing=copy.deepcopy(override.preprocessing),
+            preprocessing=_preprocessing_spec(name, override),
             random_search_budget=budget,
         )
 
@@ -470,6 +470,15 @@ def _effective_pso(config: ExperimentConfig, name: str, override: DatasetOverrid
 def _effective_fitness(config: ExperimentConfig, name: str, override: DatasetOverride) -> FitnessConfig:
     merged = deep_merge(_section_to_raw(config.fitness), override.fitness)
     return _section_from_raw(FitnessConfig, merged, f"datasets.{name}.fitness")
+
+
+def _preprocessing_spec(name: str, override: DatasetOverride) -> PreprocessingSpec:
+    where = f"datasets.{name}.preprocessing"
+    _check_keys(override.preprocessing, ("impute",), where)
+    try:
+        return PreprocessingSpec(**override.preprocessing)
+    except ValueError as exc:
+        raise ConfigError(f"{where}: {exc}") from exc
 
 
 def _resolve_budget(budget: int | str, pso: PSOConfig) -> int:

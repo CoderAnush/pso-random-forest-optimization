@@ -15,7 +15,7 @@ Related documents:
 
 | Item | State |
 |---|---|
-| Phase | **Phases 0–2 complete:** design documents; package scaffold with configuration loading; dataset loaders, Cleveland download and audit. Phases 3–15 pending. |
+| Phase | **Phases 0–3 complete:** design documents; package scaffold with configuration loading; dataset loaders, Cleveland download and audit; leakage-safe preprocessing steps. Phases 4–15 pending. |
 | Repository | `C:\Users\anush\Desktop\PSO`, remote `https://github.com/CoderAnush/pso-random-forest-optimization` |
 | Source of truth | `ppt/CB.EN.U4ELC23005_ANUSH_RAMESH_PPT.pdf` (13 slides, image-only; slide 12's references exist only in the PDF text layer), plus the decisions in [DECISIONS.md](DECISIONS.md) |
 | Environment (measured) | Windows 11, 20 CPU cores, Python 3.10.11, numpy 1.26.4, scikit-learn 1.7.2, pandas 2.3.3, matplotlib 3.10.6, PyYAML 6.0.1, pytest 9.1.1, joblib 1.5.2 |

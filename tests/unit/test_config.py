@@ -18,6 +18,7 @@ from pso_rf.experiments.config import (
     parse_override,
 )
 from pso_rf.optimization.pso import PSOConfig
+from pso_rf.preprocessing.pipeline import PreprocessingSpec
 
 
 def _write(path: Path, data: dict) -> Path:
@@ -58,8 +59,16 @@ def test_defaults_are_the_design_values(default_yaml: Path) -> None:
     assert cfg.experiment.datasets == KNOWN_DATASETS
     assert cfg.experiment.methods == ("baseline", "random_search", "pso")
     assert cfg.experiment.folds is None and cfg.experiment.deployment_run is True
-    assert cfg.for_dataset("heart_cleveland").preprocessing == {"impute": "most_frequent"}
-    assert cfg.for_dataset("iris").preprocessing == {}
+    assert cfg.for_dataset("heart_cleveland").preprocessing == PreprocessingSpec(impute="most_frequent")
+    assert cfg.for_dataset("iris").preprocessing == PreprocessingSpec()
+    assert cfg.for_dataset("digits").preprocessing == PreprocessingSpec()
+
+
+def test_preprocessing_can_be_overridden_per_dataset(default_yaml: Path) -> None:
+    cfg = load_config([default_yaml], ["datasets.heart_cleveland.preprocessing.impute=median"])
+    assert cfg.for_dataset("heart_cleveland").preprocessing == PreprocessingSpec(impute="median")
+    off = load_config([default_yaml], ["datasets.heart_cleveland.preprocessing.impute=null"])
+    assert off.for_dataset("heart_cleveland").preprocessing == PreprocessingSpec()
 
 
 def test_layer_order_is_default_then_file_then_dataset_then_cli(default_yaml: Path, tmp_path: Path) -> None:
