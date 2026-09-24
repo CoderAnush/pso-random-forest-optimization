@@ -217,7 +217,7 @@ See [EXPERIMENT_PLAN.md](docs/EXPERIMENT_PLAN.md).
 - Random search budget = PSO budget = 210; each method gets a fresh cache.
 - Results are paired by fold and descriptive only: mean ± sd, deltas, W/T/L, pooled metrics. **No p-values.**
 - The Phase 6 timing gate falls back to 3-fold inner CV only if the projected total exceeds 2 hours, and the change
-  is recorded as an ADR update.
+  is recorded as an ADR update. Result: a projected upper bound of 37.5 min, so 5-fold is kept (ADR-005).
 
 ## 19. Result logging requirements
 

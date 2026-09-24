@@ -3,6 +3,7 @@
 This package must never import ``pso_rf.optimization`` (ADR-023, enforced by UT-22).
 """
 
+from pso_rf.evaluation.fitness import FitnessEvaluator, FitnessResult
 from pso_rf.evaluation.splits import (
     FoldData,
     HeldOutTestSet,
@@ -15,6 +16,8 @@ from pso_rf.evaluation.splits import (
 )
 
 __all__ = [
+    "FitnessEvaluator",
+    "FitnessResult",
     "FoldData",
     "HeldOutTestSet",
     "OptimizationData",

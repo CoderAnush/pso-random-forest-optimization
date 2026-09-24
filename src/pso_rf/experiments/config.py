@@ -27,14 +27,13 @@ from typing import Any
 
 import yaml
 
+from pso_rf.evaluation.fitness import DIAGNOSTIC_METRICS, FITNESS_METRICS
 from pso_rf.optimization.pso import PSOConfig
 from pso_rf.preprocessing.pipeline import IMPUTE_STRATEGIES, PreprocessingSpec
 from pso_rf.utils.hashing import sha256_json
 
 KNOWN_DATASETS: tuple[str, ...] = ("iris", "digits", "heart_cleveland")
 KNOWN_METHODS: tuple[str, ...] = ("baseline", "random_search", "pso")  # canonical run order
-FITNESS_METRICS: tuple[str, ...] = ("accuracy", "balanced_accuracy")
-DIAGNOSTIC_METRICS: tuple[str, ...] = ("accuracy", "balanced_accuracy", "f1_macro")
 PSO_BOUNDARIES: tuple[str, ...] = ("absorb",)  # "reflect" is a documented extension, not implemented
 PSO_TOPOLOGIES: tuple[str, ...] = ("gbest",)
 PSO_UPDATES: tuple[str, ...] = ("synchronous",)

@@ -48,7 +48,8 @@ pso-random-forest-optimization/
 │
 ├── scripts/
 │   ├── download_cleveland.py     one-time download + checksum → data/raw/            P2
-│   └── audit_datasets.py         writes data/DATASET_AUDIT.md (until the P10 CLI)     P2
+│   ├── audit_datasets.py         writes data/DATASET_AUDIT.md (until the P10 CLI)     P2
+│   └── benchmark_eval.py         timing gate: t_eval and projected runtime            P6
 │
 ├── src/
 │   └── pso_rf/

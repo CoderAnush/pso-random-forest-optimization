@@ -295,7 +295,7 @@ Let $t_{eval}$ be the wall time of one fitness evaluation (5 inner fits run in p
 
 $$\text{evaluations} = \underbrace{5 \times (210_{PSO} + 210_{RS})}_{\text{outer folds}} + \underbrace{210}_{\text{deployment}} = 2{,}310, \qquad \text{wall time} \lesssim 2{,}310 \cdot t_{eval}$$
 
-Measured worst-case $t_{eval}$ (200 trees, depth 20) is 0.24 s for Iris and 0.52 s for Digits. That bounds the
-runtime at about 9 min for Iris and 20 min for Digits. Heart is expected to be similar to Iris (to verify). The
-actual time will be lower, because of cache hits and cheaper configurations. The baseline and final refits add a
+Measured worst-case $t_{eval}$ (200 trees, depth 20, `min_samples_split` 2) in the Phase 6 timing gate is 0.220 s
+for Iris, 0.533 s for Digits and 0.222 s for Heart. That bounds the runtime at about 8.5, 20.5 and 8.5 min, 37.5 min
+in total (DECISIONS ADR-005). The actual time will be lower, because of cache hits and cheaper configurations. The baseline and final refits add a
 negligible 5 + 1 fits per fold and method.

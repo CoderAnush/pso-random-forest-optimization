@@ -45,7 +45,7 @@ references [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md).
 
 | ID | Requirement | Source | Verified by | Phase |
 |---|---|---|---|---|
-| NFR-001 | The full default experiment (3 datasets × 5 folds × 3 methods, plus deployment runs) should complete within about 1 hour on the development machine (20 cores). Measured worst-case evaluation timings predict about 40 min. **TO VERIFY at P6.** | D12 | ET-06 | P6, P14 |
+| NFR-001 | The full default experiment (3 datasets × 5 folds × 3 methods, plus deployment runs) should complete within about 1 hour on the development machine (20 cores). Measured worst-case evaluation timings predict about 40 min. **Phase 6 timing gate: projected upper bound 37.5 min (ADR-005); the actual runtime is recorded in P14.** | D12 | ET-06 | P6, P14 |
 | NFR-002 | The system shall run on CPU only, with Python 3.10 on Windows 11. It should also run on Linux. | environment | ET-01 | P1 |
 | NFR-003 | The optimization package shall not import model, dataset or scikit-learn code. The evaluation package shall not import optimization code. | BRIEF (principle 4) | UT-22 | P1, P7 |
 | NFR-004 | All public functions shall have type hints and a docstring. Configuration and result records shall be typed dataclasses. | BRIEF | code review | all |

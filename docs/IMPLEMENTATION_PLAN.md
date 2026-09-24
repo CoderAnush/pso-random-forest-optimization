@@ -94,7 +94,9 @@ P0 docs ─▶ P1 scaffold ─▶ P2 datasets ─▶ P3 preprocessing ─▶ P4 
 
 ### Phase 6: Random Forest evaluator (fitness)
 - **Objective:** the fitness function, i.e. the measurement block of the loop.
-- **Files:** `evaluation/fitness.py` (`FitnessEvaluator`, `FitnessResult`, `as_objective`).
+- **Files:** `evaluation/fitness.py` (`FitnessEvaluator`, `FitnessResult`), `scripts/benchmark_eval.py` (timing
+  gate). The `FitnessResult` → `Evaluation` adapter is not here: it is `make_objective` in `experiments/runner.py`
+  (Phase 8), because `evaluation/` must not import `optimization/` (UT-22).
 - **Dependencies:** P4, P5.
 - **Inputs:** `OptimizationData`, `cv_folds = 5`, seed, metric, preprocessing, `n_jobs_folds = 5`.
 - **Outputs:** fitness with per-fold scores, diagnostics, cache flag, timing and status.
@@ -130,7 +132,8 @@ P0 docs ─▶ P1 scaffold ─▶ P2 datasets ─▶ P3 preprocessing ─▶ P4 
 
 ### Phase 8: Closed-loop integration (and the open-loop comparator)
 - **Objective:** wire PSO ⇄ evaluator into the closed loop; add random search, the recorder and the seeding.
-- **Files:** `optimization/random_search.py`, `experiments/{seeding,recorder,runner}.py` (`run_fold`).
+- **Files:** `optimization/random_search.py`, `experiments/{seeding,recorder,runner}.py` (`run_fold`, and
+  `make_objective`, the `FitnessResult` → `Evaluation` adapter).
 - **Dependencies:** P6, P7.
 - **Inputs:** one dataset, one fold, one method.
 - **Outputs:** `evaluations.csv` for a real closed-loop run; `OptimizationResult`.

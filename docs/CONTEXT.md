@@ -15,7 +15,7 @@ Related documents:
 
 | Item | State |
 |---|---|
-| Phase | **Phases 0–5 complete:** design documents; package scaffold with configuration loading; dataset loaders, Cleveland download and audit; leakage-safe preprocessing steps; outer folds and the sealed test set; RF pipeline builder and baseline. Phases 6–15 pending. |
+| Phase | **Phases 0–6 complete:** design documents; package scaffold with configuration loading; dataset loaders, Cleveland download and audit; leakage-safe preprocessing steps; outer folds and the sealed test set; RF pipeline builder and baseline; fitness evaluator and timing gate. Phases 7–15 pending. |
 | Repository | `C:\Users\anush\Desktop\PSO`, remote `https://github.com/CoderAnush/pso-random-forest-optimization` |
 | Source of truth | `ppt/CB.EN.U4ELC23005_ANUSH_RAMESH_PPT.pdf` (13 slides, image-only; slide 12's references exist only in the PDF text layer), plus the decisions in [DECISIONS.md](DECISIONS.md) |
 | Environment (measured) | Windows 11, 20 CPU cores, Python 3.10.11, numpy 1.26.4, scikit-learn 1.7.2, pandas 2.3.3, matplotlib 3.10.6, PyYAML 6.0.1, pytest 9.1.1, joblib 1.5.2 |
@@ -78,8 +78,9 @@ Related documents:
 
 ## 4. To verify during implementation
 
-Status after Phase 2: V1–V4 and V7 are **measured** (values from `data/DATASET_AUDIT.md` and
-`data/raw/MANIFEST.json`) and all match the expectations; V5 and V6 remain **TO VERIFY** until Phase 6.
+Status after Phase 6: every item is resolved. V1–V4 and V7 were **measured** in Phase 2 (values from
+`data/DATASET_AUDIT.md` and `data/raw/MANIFEST.json`) and all match the expectations; V5 was **measured** and V6
+**verified** in Phase 6 (DECISIONS ADR-005).
 
 | # | Item | Expected (from literature or measurement) | Verify in | How | Status |
 |---|---|---|---|---|---|
@@ -87,8 +88,8 @@ Status after Phase 2: V1–V4 and V7 are **measured** (values from `data/DATASET
 | V2 | Cleveland duplicates | none expected | P2 | audit | **measured (Phase 2):** 0 exact duplicate (X, y) rows |
 | V3 | Cleveland download URL and SHA-256 | URL `https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data` (the UCI archive may redirect; fallback is the `heart+disease.zip` bundle) | P2 | download script records both | **measured (Phase 2):** downloaded on 2026-09-24 from the primary URL above (the zip fallback was not needed); 18,461 bytes; SHA-256 `a74b7efa387bc9d108d7d0115d831fe9b414b29ae7124f331b622b4efa0427c8` |
 | V4 | Class-ratio gate outcome | none triggers (Iris 1.00, Digits 1.05, Cleveland ≈ 1.18) | P2 | audit | **measured (Phase 2):** none triggers; max/min ratios Iris 1.0000, Digits 1.0517, Cleveland 1.1799, so the fitness metric is accuracy for all three |
-| V5 | Evaluation time and total runtime | worst case per evaluation (5-fold, parallel folds): Iris 0.24 s, Digits 0.52 s (measured); Heart similar to Iris; total ≈ 40 min | P6 | timing benchmark → decision gate (ADR-005) | TO VERIFY |
-| V6 | Parallel folds give identical scores to serial | expected identical | P6 | IT-08 | TO VERIFY |
+| V5 | Evaluation time and total runtime | worst case per evaluation (5-fold, parallel folds): Iris 0.24 s, Digits 0.52 s (measured); Heart similar to Iris; total ≈ 40 min | P6 | timing benchmark → decision gate (ADR-005) | **measured (Phase 6, `scripts/benchmark_eval.py`):** worst case (200, 20, 2) per evaluation Iris 0.220 s, Digits 0.533 s, Heart 0.222 s; mid-range (125, 11, 6) 0.128 s, 0.325 s, 0.143 s; projected total 37.5 min (upper bound) and 22.9 min (typical), so 5-fold inner CV is kept |
+| V6 | Parallel folds give identical scores to serial | expected identical | P6 | IT-08 | **verified (Phase 6):** identical fold scores with `n_jobs_folds` = 5 and 1 on Iris and Heart fold 0 (`tests/integration/test_parallel_equivalence.py`, IT-08 partial); the full-scale re-run comparison is Phase 14 |
 | V7 | Iris duplicate row | 1 (measured); kept | P2 | audit | **measured (Phase 2):** 1 exact duplicate (X, y) row (0.67% of rows, below the 1% removal threshold); kept |
 
 ## 5. Architecture summary
@@ -125,8 +126,8 @@ run_fold(dataset, k, method):
     fold = folds[k]                                   # opt_data, test_set
     evaluator = FitnessEvaluator(fold.opt, cv=5, seed=k, ...)
     with OptimizationPhase():                         # test_set.reveal() raises inside this block
-        if method == "pso":            result = PSOOptimizer(space, evaluator.as_objective(), cfg, rng(k)).run(recorder)
-        elif method == "random_search": result = RandomSearch(space, evaluator.as_objective(), 210, rng(k)).run(recorder)
+        if method == "pso":            result = PSOOptimizer(space, make_objective(evaluator), cfg, rng(k)).run(recorder)
+        elif method == "random_search": result = RandomSearch(space, make_objective(evaluator), 210, rng(k)).run(recorder)
         elif method == "baseline":      result = FixedConfig(BASELINE).score(evaluator)   # CV score only, for reference
     # optimization phase closed; best configuration is now frozen
     metrics = final_evaluate(result.best_config, fold.opt, fold.test, seed=k, ...)
@@ -220,29 +221,34 @@ class OptimizationResult:
     n_evaluations: int; n_iterations: int | None; stop_reason: str
     convergence_iteration: int | None; history: list[IterationSummary]
 
-# evaluation.fitness
+# evaluation.fitness   (never imports optimization: no Evaluation or Objective here)
 @dataclass(frozen=True)
-class FitnessResult: fitness: float; cv_scores: list[float]; diagnostics: dict[str, float]
+class FitnessResult: config: dict[str, int | None]; fitness: float; cv_scores: tuple[float, ...]
+                     cv_std: float                  # ddof = 0
+                     diagnostics: dict[str, float]  # mean balanced_accuracy and f1_macro; never fed back
                      cache_hit: bool; fit_time_s: float; status: str; error: str | None
 class FitnessEvaluator:
     def __init__(self, opt: OptimizationData, cv_folds: int, seed: int, metric: str,
-                 preprocessing: PreprocessingSpec, n_jobs_folds: int, cache: bool = True)
-        # raises TypeError if given a HeldOutTestSet
-    def __call__(self, config: dict[str, int | None]) -> FitnessResult
-    def as_objective(self) -> Objective       # adapter: FitnessResult -> Evaluation
-    n_unique_fits: int
+                 preprocessing: PreprocessingSpec, n_jobs_folds: int = 5, cache: bool = True,
+                 rf_n_jobs: int = 1, logger: logging.Logger | logging.LoggerAdapter | None = None)
+        # raises TypeError unless given OptimizationData (so never a HeldOutTestSet); inner folds drawn once here
+    def __call__(self, config: Mapping[str, int | None]) -> FitnessResult   # cached by (n, d, s); failure -> -inf
+    folds: tuple[tuple[np.ndarray, np.ndarray], ...]   # read-only property: the fixed inner folds
+    n_unique_fits: int                                 # cache misses, failures included
 
 # evaluation.final
 def final_evaluate(config: dict[str, int | None], opt: OptimizationData, test: HeldOutTestSet,
                    seed: int, preprocessing: PreprocessingSpec) -> FinalMetrics
 
 # experiments
+def make_objective(evaluator: FitnessEvaluator) -> Objective   # runner.py: FitnessResult -> Evaluation adapter (P8)
 def run_experiment(config: ExperimentConfig) -> Path    # returns results/<exp_id>/
 ```
 
 **Coupling rule.** The optimizer sees only `SearchSpace` and `Objective`. The evaluator sees only
 `OptimizationData`. The **runner** in `experiments/` is the only component that knows about both, and it is where
-the closed loop is assembled.
+the closed loop is assembled. That is why the `FitnessResult` → `Evaluation` adapter, `make_objective`, lives in
+`experiments/runner.py` and not in `evaluation/`, which must not import `optimization/` (UT-22).
 
 ## 10. Mathematical formulation (summary)
 
@@ -279,8 +285,9 @@ All of this state lives in the optimizer. None of it is visible to the evaluator
   min_samples_split, random_state=seed, n_jobs=1)`. All other RF parameters are left at scikit-learn defaults:
   `criterion="gini"`, `max_features="sqrt"`, `bootstrap=True`, `min_samples_leaf=1`.
 - **Scoring:** `cross_validate(pipeline, X_opt, y_opt, cv=fixed_folds, scoring={"accuracy", "balanced_accuracy",
-  "f1_macro"}, n_jobs=5, error_score="raise")`. Fitness is the mean of the configured metric. The other two scores
-  are diagnostics only.
+  "f1_macro"}, n_jobs=5, error_score="raise")`, with macro F1 computed with `zero_division=0`. Fitness is the mean of
+  the configured metric, and `cv_std` is the standard deviation of its fold scores with ddof = 0. The other two
+  scores are diagnostics only.
 - **Failure handling:** an exception is caught, logged, recorded as `status = "failed"`, and scored
   `fitness = -inf`. A NaN score is treated the same way. The run continues.
 - **Cache:** the key is `(n_estimators, max_depth, min_samples_split)`. A hit returns the stored result with

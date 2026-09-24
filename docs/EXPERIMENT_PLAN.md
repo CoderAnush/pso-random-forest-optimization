@@ -215,13 +215,16 @@ Evaluations per dataset: $5 \times (210 + 210) + 210 = 2{,}310$. Wall time $\les
 
 | Dataset | Measured worst-case $t_{eval}$ (5-fold, parallel folds) | Upper bound on wall time |
 |---|---|---|
-| Iris | 0.24 s | ≈ 9 min |
-| Digits | 0.52 s | ≈ 20 min |
-| Heart | TO VERIFY (expected ≈ Iris) | ≈ 9–10 min |
-| **Total** | | **≈ 40 min** (upper bound; cache hits and cheaper configurations reduce it) |
+| Iris | 0.220 s | ≈ 8.5 min |
+| Digits | 0.533 s | ≈ 20.5 min |
+| Heart | 0.222 s | ≈ 8.5 min |
+| **Total** | | **≈ 37.5 min** (upper bound; cache hits and cheaper configurations reduce it) |
 
-The **Phase 6 timing gate** re-measures $t_{eval}$ for all three datasets. If the projected total exceeds 2 hours,
-the recorded fallback is inner 3-fold CV (the PDF's original choice), and the change is recorded as an ADR update.
+These are the **Phase 6 timing gate** measurements (`scripts/benchmark_eval.py`, outer fold 0, worst case
+(200, 20, 2), median of 3; the Phase 0 design review had measured 0.24 s for Iris and 0.52 s for Digits). A mid-range
+configuration (125, 11, 6) took 0.128 s, 0.325 s and 0.143 s, which projects a typical total of about 23 min. The gate
+would have fallen back to inner 3-fold CV (the PDF's original choice) only if the projected total exceeded 2 hours; it
+does not, so 5-fold is kept (DECISIONS ADR-005).
 
 ## 13. Optional extensions (separate named experiments; not part of the core claim)
 

@@ -111,7 +111,7 @@ a bundled dataset.
 | 19 | `fitness` | float | mean inner-CV score of `fitness_metric` (the value fed back); `-inf` if failed |
 | 20 | `fitness_metric` | str | `accuracy` \| `balanced_accuracy` |
 | 21 | `cv_scores` | json | list of 5 per-fold scores of the fitness metric |
-| 22 | `cv_std` | float | standard deviation of `cv_scores` |
+| 22 | `cv_std` | float | standard deviation of `cv_scores` (ddof = 0) |
 | 23 | `diag_balanced_accuracy` | float? | mean inner-CV balanced accuracy (diagnostic; never fed back) |
 | 24 | `diag_f1_macro` | float? | mean inner-CV macro F1 (diagnostic; never fed back) |
 | 25 | `cache_hit` | bool | result reused from this run's cache |
@@ -137,7 +137,7 @@ Row count: `budget` per run (default 210). For PSO, `eval_index = iteration × N
 | 11 | `gbest_min_samples_split` | int | " |
 | 12 | `gbest_improved` | bool | γᵗ > γᵗ⁻¹ (true at t = 0) |
 | 13 | `mean_fitness` | float | mean of the N particle fitnesses this iteration (failed = excluded, count in 21) |
-| 14 | `std_fitness` | float | standard deviation of the same |
+| 14 | `std_fitness` | float | standard deviation of the same (ddof = 0) |
 | 15 | `min_fitness` | float | minimum of the same |
 | 16 | `max_fitness` | float | maximum of the same |
 | 17 | `diversity` | float | mean Euclidean distance of the range-normalized positions from their centroid |

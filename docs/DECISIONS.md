@@ -127,6 +127,20 @@ Changes to any decision are made by adding a superseding ADR and updating the af
   total runtime exceeds 2 hours, fall back to 3-fold and record an update here.
 - **PPT impact:** slide 10, "3-Fold Stratified Cross-Validation" → "5-Fold", and "Mean 3-Fold Validation Accuracy" →
   "Mean 5-Fold". Slide 4, Objective 04 ("k-fold") needs no change.
+- **Timing gate result (Phase 6, 2026-09-24):** measured with `scripts/benchmark_eval.py` on the optimization portion
+  of outer fold 0 (5 inner folds run in parallel, RF `n_jobs = 1`, cache off, median of 3 repetitions after one
+  warm-up evaluation; Windows 11 build 26200, 20 CPUs, Python 3.10.11, scikit-learn 1.7.2). Evaluations per dataset
+  = 5 × (210 + 210) + 210 = 2,310.
+
+  | Dataset | Optimization rows | $t_{eval}$ worst case (200, 20, 2) | $t_{eval}$ mid-range (125, 11, 6) | Upper bound (2,310 × worst) | Typical (2,310 × mid) |
+  |---|---|---|---|---|---|
+  | Iris | 120 | 0.220 s | 0.128 s | 8.5 min | 4.9 min |
+  | Digits | 1,437 | 0.533 s | 0.325 s | 20.5 min | 12.5 min |
+  | Heart (Cleveland) | 242 | 0.222 s | 0.143 s | 8.5 min | 5.5 min |
+  | **Total** | | | | **37.5 min (0.62 h)** | **22.9 min** |
+
+  **Decision:** the projected upper bound (37.5 min) is below the 2-hour gate, so **5-fold inner CV is kept** and the
+  3-fold fallback is not used.
 
 ## ADR-006: Accuracy as the fitness metric (configurable)
 - **Decision:** fitness = mean inner-CV **accuracy**. The config key `fitness.metric ∈ {accuracy, balanced_accuracy}`
