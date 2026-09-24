@@ -148,7 +148,7 @@ Full formulation: [MATHEMATICAL_FORMULATION.md](docs/MATHEMATICAL_FORMULATION.md
 |---|---|---|---|
 | `iris` | `sklearn.datasets.load_iris` | species (3) | 150 × 4, 50/50/50, 1 duplicate row (kept) |
 | `digits` | `sklearn.datasets.load_digits` | digit (10) | 1797 × 64, classes 174–183 |
-| `heart_cleveland` | UCI id 45 `processed.cleveland.data`, committed in `data/raw/` with its SHA-256 | `num > 0 → 1` | 303 × 13 expected; `?` → NaN (≈6 cells) — **verify in Phase 2** |
+| `heart_cleveland` | UCI id 45 `processed.cleveland.data`, committed in `data/raw/` with its SHA-256 | `num > 0 → 1` | 303 × 13, 164 / 139; `?` → NaN in `ca` (4) and `thal` (2); 0 duplicate rows (measured in Phase 2, `data/DATASET_AUDIT.md`) |
 
 ## 12. Decision variables, search space, objective, fitness
 

@@ -134,7 +134,7 @@ Changes to any decision are made by adding a superseding ADR and updating the af
   accuracy and macro F1 are logged as diagnostics and are **never fed back**.
 - **Rationale (design review):**
   - The PDF defines fitness as mean validation accuracy (slide 10).
-  - Class balance, measured or expected: Iris 1.00, Digits 1.05, Cleveland ≈1.18 (to verify). At this level of
+  - Class balance, measured: Iris 1.00, Digits 1.05, Cleveland 1.18 (Phase 2 audit). At this level of
     balance, accuracy and balanced accuracy are essentially interchangeable (identical for Iris), so switching buys
     nothing measurable.
   - Accuracy is the easiest metric to explain.
@@ -219,8 +219,8 @@ Changes to any decision are made by adding a superseding ADR and updating the af
   | Statlog Heart (270 rows) | the credible runner-up: cleanest data, no missing values; but smaller, less documented lineage, and leaves the imputation rule untested |
   | OpenML `heart-c` | the same data with string categoricals and an extra service dependency |
 
-- **Consequences:** the row count, missing counts and class split are TO VERIFY at Phase 2 (expected: 303 rows;
-  4 missing in `ca` and 2 in `thal`; about 164 vs. 139).
+- **Consequences:** the row count, missing counts and class split were measured in Phase 2 and match the
+  expectation: 303 rows; 4 missing in `ca` and 2 in `thal`; 164 vs. 139 (`data/DATASET_AUDIT.md`).
 - **PPT impact:** none. It clarifies "Heart Disease (binary, real-world)".
 
 ## ADR-010: Preprocessing inside the model pipeline

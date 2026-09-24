@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+from pso_rf.datasets import DatasetBundle, load_dataset
 from pso_rf.experiments.config import ExperimentConfig, load_config
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -33,3 +34,15 @@ def data_dir(repo_root: Path) -> Path:
 def test_config(configs_dir: Path) -> ExperimentConfig:
     """The minimal-budget configuration used by tests: default.yaml ← test.yaml."""
     return load_config([configs_dir / "default.yaml", configs_dir / "test.yaml"])
+
+
+@pytest.fixture(scope="session")
+def iris_bundle(data_dir: Path) -> DatasetBundle:
+    """The real Iris dataset (shared: never mutate its arrays)."""
+    return load_dataset("iris", data_dir)
+
+
+@pytest.fixture(scope="session")
+def heart_bundle(data_dir: Path) -> DatasetBundle:
+    """The real, checksum-verified Cleveland dataset (shared: never mutate its arrays)."""
+    return load_dataset("heart_cleveland", data_dir)

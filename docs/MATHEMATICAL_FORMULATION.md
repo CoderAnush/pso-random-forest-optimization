@@ -85,8 +85,8 @@ PSO returns an approximation $\hat\theta_k = \mathrm{dec}(g_k^{final})$.
 
 **Alternative metric (configuration option).** With `fitness.metric = balanced_accuracy`, $\mathrm{acc}$ is replaced
 by the balanced accuracy $\frac{1}{C}\sum_c \mathrm{recall}_c$. This is selected automatically for a dataset whose
-largest-to-smallest class ratio exceeds 1.5. None of the three datasets is expected to trigger it (to verify in
-Phase 2).
+largest-to-smallest class ratio exceeds 1.5. None of the three datasets triggers it (measured in Phase 2: the
+largest ratio is Cleveland's 1.18).
 
 **Properties that matter for the design:**
 1. **Test independence.** $F_k$ is a function of $\mathcal{D}^{(k)}_{opt}$ only. Changing any value in

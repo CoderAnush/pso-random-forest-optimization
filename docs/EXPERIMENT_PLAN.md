@@ -21,20 +21,21 @@ placeholders (`—`); those values are filled only from saved result files (ER-0
 |---|---|---|---|
 | Source | `sklearn.datasets.load_iris` (UCI Iris) | `sklearn.datasets.load_digits` (UCI Optical Recognition of Handwritten Digits, test set) | UCI Heart Disease id 45, file `processed.cleveland.data`, DOI 10.24432/C52P4X, CC BY 4.0 |
 | Target | species (setosa, versicolor, virginica) | digit 0–9 | `num` (0–4), binarized: `num > 0` → 1 (disease) |
-| Samples | 150 (measured) | 1,797 (measured) | 303 (**TO VERIFY**) |
+| Samples | 150 (measured) | 1,797 (measured) | 303 (measured) |
 | Features | 4 continuous (cm) | 64 pixel intensities, 0–16 | 13: age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal |
 | Classes | 3 | 10 | 2 |
-| Class counts | 50 / 50 / 50 (measured) | 174–183 per class (measured) | ≈164 / ≈139 (**TO VERIFY**) |
-| Max/min class ratio | 1.00 | 1.05 | ≈1.18 (**TO VERIFY**) |
-| Missing values | none | none | `?` in `ca` (≈4) and `thal` (≈2) (**TO VERIFY**) |
-| Exact duplicate (X, y) rows | 1 (measured; kept) | 0 (measured) | expected 0 (**TO VERIFY**) |
+| Class counts | 50 / 50 / 50 (measured) | 174–183 per class (measured) | 164 / 139 (measured) |
+| Max/min class ratio | 1.00 | 1.05 | 1.18 (measured) |
+| Missing values | none | none | `?` in `ca` (4) and `thal` (2) (measured) |
+| Exact duplicate (X, y) rows | 1 (measured; kept) | 0 (measured) | 0 (measured) |
 | Categorical features | — | — | cp, restecg, slope, thal (integer-coded); sex, fbs, exang (binary) |
 | Preprocessing | none | none | NaN → `SimpleImputer(most_frequent)` inside the pipeline; integer codes kept |
 | Fitness metric | accuracy | accuracy | accuracy (the gate switches to balanced accuracy only if the ratio exceeds 1.5) |
 | Outer test fold size | 30 | ≈359–360 | ≈60–61 |
 | Inner validation fold size | 24 | ≈287–288 | ≈48–49 |
 
-All TO VERIFY values are resolved in Phase 2 by the audit (`data/DATASET_AUDIT.md`), before any experiment runs.
+The Heart values were measured in Phase 2 by the audit (`data/DATASET_AUDIT.md`), before any experiment runs;
+all of them match the values expected in Phase 0.
 
 ## 3. Preprocessing
 

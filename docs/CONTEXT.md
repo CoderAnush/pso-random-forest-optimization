@@ -15,11 +15,11 @@ Related documents:
 
 | Item | State |
 |---|---|
-| Phase | **Phase 0 complete when these docs are committed.** No implementation code exists. |
+| Phase | **Phases 0–2 complete:** design documents; package scaffold with configuration loading; dataset loaders, Cleveland download and audit. Phases 3–15 pending. |
 | Repository | `C:\Users\anush\Desktop\PSO`, remote `https://github.com/CoderAnush/pso-random-forest-optimization` |
 | Source of truth | `ppt/CB.EN.U4ELC23005_ANUSH_RAMESH_PPT.pdf` (13 slides, image-only; slide 12's references exist only in the PDF text layer), plus the decisions in [DECISIONS.md](DECISIONS.md) |
 | Environment (measured) | Windows 11, 20 CPU cores, Python 3.10.11, numpy 1.26.4, scikit-learn 1.7.2, pandas 2.3.3, matplotlib 3.10.6, PyYAML 6.0.1, pytest 9.1.1, joblib 1.5.2 |
-| Datasets on disk | none yet. Iris and Digits ship with scikit-learn; Cleveland is downloaded in Phase 2 |
+| Datasets on disk | Cleveland `data/raw/processed.cleveland.data` with `data/raw/MANIFEST.json` (downloaded in Phase 2); Iris and Digits ship with scikit-learn. Facts: `data/DATASET_AUDIT.md` |
 | Results | none. **No result values exist anywhere.** |
 
 ## 2. Confirmed requirements and decisions
@@ -78,15 +78,18 @@ Related documents:
 
 ## 4. To verify during implementation
 
-| # | Item | Expected (from literature or measurement) | Verify in | How |
-|---|---|---|---|---|
-| V1 | Cleveland row count, missing values, class split | 303 rows; `ca`: 4 missing, `thal`: 2 missing; `num > 0`: about 139, `num = 0`: about 164 | P2 | dataset audit script output, saved to `data/DATASET_AUDIT.md` |
-| V2 | Cleveland duplicates | none expected | P2 | audit |
-| V3 | Cleveland download URL and SHA-256 | URL `https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data` (the UCI archive may redirect; fallback is the `heart+disease.zip` bundle) | P2 | download script records both |
-| V4 | Class-ratio gate outcome | none triggers (Iris 1.00, Digits 1.05, Cleveland ≈ 1.18) | P2 | audit |
-| V5 | Evaluation time and total runtime | worst case per evaluation (5-fold, parallel folds): Iris 0.24 s, Digits 0.52 s (measured); Heart similar to Iris; total ≈ 40 min | P6 | timing benchmark → decision gate (ADR-005) |
-| V6 | Parallel folds give identical scores to serial | expected identical | P6 | IT-08 |
-| V7 | Iris duplicate row | 1 (measured); kept | P2 | audit |
+Status after Phase 2: V1–V4 and V7 are **measured** (values from `data/DATASET_AUDIT.md` and
+`data/raw/MANIFEST.json`) and all match the expectations; V5 and V6 remain **TO VERIFY** until Phase 6.
+
+| # | Item | Expected (from literature or measurement) | Verify in | How | Status |
+|---|---|---|---|---|---|
+| V1 | Cleveland row count, missing values, class split | 303 rows; `ca`: 4 missing, `thal`: 2 missing; `num > 0`: about 139, `num = 0`: about 164 | P2 | dataset audit script output, saved to `data/DATASET_AUDIT.md` | **measured (Phase 2):** 303 rows × 13 features; `ca`: 4 missing, `thal`: 2 missing (6 cells); `num = 0`: 164, `num > 0`: 139 |
+| V2 | Cleveland duplicates | none expected | P2 | audit | **measured (Phase 2):** 0 exact duplicate (X, y) rows |
+| V3 | Cleveland download URL and SHA-256 | URL `https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data` (the UCI archive may redirect; fallback is the `heart+disease.zip` bundle) | P2 | download script records both | **measured (Phase 2):** downloaded on 2026-09-24 from the primary URL above (the zip fallback was not needed); 18,461 bytes; SHA-256 `a74b7efa387bc9d108d7d0115d831fe9b414b29ae7124f331b622b4efa0427c8` |
+| V4 | Class-ratio gate outcome | none triggers (Iris 1.00, Digits 1.05, Cleveland ≈ 1.18) | P2 | audit | **measured (Phase 2):** none triggers; max/min ratios Iris 1.0000, Digits 1.0517, Cleveland 1.1799, so the fitness metric is accuracy for all three |
+| V5 | Evaluation time and total runtime | worst case per evaluation (5-fold, parallel folds): Iris 0.24 s, Digits 0.52 s (measured); Heart similar to Iris; total ≈ 40 min | P6 | timing benchmark → decision gate (ADR-005) | TO VERIFY |
+| V6 | Parallel folds give identical scores to serial | expected identical | P6 | IT-08 | TO VERIFY |
+| V7 | Iris duplicate row | 1 (measured); kept | P2 | audit | **measured (Phase 2):** 1 exact duplicate (X, y) row (0.67% of rows, below the 1% removal threshold); kept |
 
 ## 5. Architecture summary
 

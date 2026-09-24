@@ -176,7 +176,7 @@ system parameter, the system's response is measured, and that measurement is fed
 |---|---|---|---|
 | Iris | 3-class classification | small, 150 samples, perfectly balanced | scikit-learn bundled copy of the UCI dataset |
 | Digits | 10-class handwritten digit recognition | 1,797 images of 8×8 pixels (64 features) | scikit-learn bundled copy of the UCI Optical Digits test set |
-| Heart Disease | Binary classification (disease / no disease) | real-world clinical data, 303 patients (to verify), a few missing values | UCI Heart Disease, **Cleveland** subset |
+| Heart Disease | Binary classification (disease / no disease) | real-world clinical data, 303 patients, 6 missing values (measured in Phase 2) | UCI Heart Disease, **Cleveland** subset |
 
 The Cleveland subset was chosen over larger versions found online. The widely circulated 1,025-row version is mostly
 duplicated rows, which would leak test data into training. See [DECISIONS.md](DECISIONS.md), ADR-009.

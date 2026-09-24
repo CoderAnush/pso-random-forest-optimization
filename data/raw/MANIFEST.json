@@ -1,0 +1,10 @@
+{
+  "file": "processed.cleveland.data",
+  "source_url_used": "https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data",
+  "downloaded_at": "2026-09-24T09:36:54.104Z",
+  "sha256": "a74b7efa387bc9d108d7d0115d831fe9b414b29ae7124f331b622b4efa0427c8",
+  "size_bytes": 18461,
+  "citation": "Janosi, A., Steinbrunn, W., Pfisterer, M., & Detrano, R. (1989). Heart Disease [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C52P4X",
+  "license": "CC BY 4.0",
+  "uci_id": 45
+}
