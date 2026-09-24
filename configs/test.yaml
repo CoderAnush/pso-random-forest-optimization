@@ -1,0 +1,15 @@
+# Minimal-budget layer used by the test suite, applied on top of configs/default.yaml.
+# random_search.budget auto = 4 × (2 + 1) = 12.
+experiment:
+  name: test
+  deployment_run: false
+
+split:
+  inner_folds: 3
+
+fitness:
+  n_jobs_folds: 1                 # serial folds keep monkeypatch spies in-process
+
+pso:
+  n_particles: 4
+  max_iter: 2

@@ -38,7 +38,7 @@ P0 docs ─▶ P1 scaffold ─▶ P2 datasets ─▶ P3 preprocessing ─▶ P4 
 - **Files:** `pyproject.toml`, `requirements.txt` (pinned: numpy 1.26.4, scikit-learn 1.7.2, pandas 2.3.3,
   matplotlib 3.10.6, PyYAML 6.0.1, joblib 1.5.2, pytest 9.1.1), the `src/pso_rf/**/__init__.py` files,
   `utils/{hashing,io,log}.py`, `experiments/config.py`, `configs/default.yaml`, `configs/demo.yaml`,
-  `tests/conftest.py`.
+  `configs/test.yaml`, `tests/conftest.py`.
 - **Dependencies:** P0.
 - **Inputs:** the config template (ARCHITECTURE §H).
 - **Outputs:** `pip install -e .` works; `pytest` runs (empty suite passes); config loads, merges and validates.

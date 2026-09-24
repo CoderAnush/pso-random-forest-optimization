@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pso-rf"
+version = "0.1.0"
+description = "Closed-loop, from-scratch PSO tuning of Random Forest hyperparameters (Iris, Digits, UCI Cleveland Heart Disease)"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Anush Ramesh" }]
+# Exact pins: results depend on the library versions (see requirements.txt and the manifest).
+dependencies = [
+    "numpy==1.26.4",
+    "scikit-learn==1.7.2",
+    "pandas==2.3.3",
+    "matplotlib==3.10.6",
+    "PyYAML==6.0.1",
+    "joblib==1.5.2",
+]
+
+[project.optional-dependencies]
+test = ["pytest==9.1.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+markers = [
+    "isolation: test-data isolation proofs (UT-15, UT-22, IT-04 to IT-07, ET-04)",
+    "closed_loop: closed-loop proofs (IT-01 to IT-03)",
+    "slow: tests that take noticeably longer than a unit test",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]

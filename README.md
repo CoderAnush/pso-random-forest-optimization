@@ -15,7 +15,7 @@ Evolutionary Optimization mini-project: Anush Ramesh (CB.EN.U4ELC23005), EEE, Am
 
 Implementation in progress; no results yet. The design is fixed in the documents listed below.
 
-## Installation (available from Phase 1)
+## Installation
 
 Python 3.10. The pinned dependency versions are in `requirements.txt`.
 

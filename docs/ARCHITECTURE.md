@@ -384,6 +384,18 @@ datasets:
     preprocessing: {impute: most_frequent}
 ```
 
+**Optional keys not shown in the template** (implemented in `experiments/config.py`):
+- `experiment.folds`: the outer-fold indices to run; absent or `null` means all folds. `configs/demo.yaml` uses
+  `[0]`.
+- A `datasets.<name>` block may contain `pso`, `fitness` and `random_search` (partial overrides of the global
+  sections) and `preprocessing` (that dataset's own steps). With `random_search.budget: auto`, each dataset's budget
+  follows its own effective PSO settings, and `config.resolved.json` records any per-dataset budget that differs from
+  the global one.
+- A CLI `--set` of a global `pso`, `fitness` or `random_search` key also replaces that key in every dataset block that
+  sets it, so the CLI layer wins, as the layer order above requires.
+- Unknown keys, invalid values and not-implemented options (for example `boundary: reflect`) are rejected at load
+  time with a message naming the key.
+
 ## I. Logging and results
 
 - The **Recorder** callback writes `evaluations.csv` rows as evaluations happen (flushing each iteration, so a crashed

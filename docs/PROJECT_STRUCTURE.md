@@ -38,7 +38,7 @@ pso-random-forest-optimization/
 ├── configs/
 │   ├── default.yaml              full default experiment                             P1
 │   ├── demo.yaml                 tiny budget: live demo and smoke test               P1
-│   └── test.yaml                 minimal budget used by the test suite               P13
+│   └── test.yaml                 minimal budget used by the test suite               P1
 │
 ├── data/
 │   ├── raw/

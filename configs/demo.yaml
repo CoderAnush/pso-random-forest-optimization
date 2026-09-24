@@ -1,0 +1,11 @@
+# Live-demo and smoke-test layer, applied on top of configs/default.yaml.
+# Iris, outer fold 0, a tiny swarm (random_search.budget auto = 6 × (5 + 1) = 36), no deployment run.
+experiment:
+  name: demo
+  datasets: [iris]
+  folds: [0]                      # optional subset of outer folds; absent or null = all folds
+  deployment_run: false
+
+pso:
+  n_particles: 6
+  max_iter: 5
