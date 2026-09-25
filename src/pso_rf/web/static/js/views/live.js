@@ -159,8 +159,8 @@ export function mount(root, meta) {
     progress();
   }
   function progress() {
-    psoBar.firstChild.style.width = `${(run.n.pso / run.budget) * 100}%`;
-    rsBar.firstChild.style.width = `${(run.n.random_search / run.budget) * 100}%`;
+    psoBar.firstChild.style.transform = `scaleX(${run.n.pso / run.budget})`;
+    rsBar.firstChild.style.transform = `scaleX(${run.n.random_search / run.budget})`;
     psoLbl.replaceChildren(h("span", {}, "PSO (closed loop)"), h("span", { class: "mono" }, `${run.n.pso} / ${run.budget} · best ${fmt.acc(run.best.pso > -Infinity ? run.best.pso : null)}`));
     rsLbl.replaceChildren(h("span", {}, "Random search (open loop)"), h("span", { class: "mono" }, `${run.n.random_search} / ${run.budget} · best ${fmt.acc(run.best.random_search > -Infinity ? run.best.random_search : null)}`));
   }
