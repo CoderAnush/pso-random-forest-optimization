@@ -1,0 +1,69 @@
+{
+  "exp_id": "20260925-083324_default",
+  "created_at": "2026-09-25T08:33:24.394Z",
+  "finished_at": "2026-09-25T09:36:06.021Z",
+  "command": "'C:\\Users\\anush\\Desktop\\PSO\\src\\pso_rf\\__main__.py' run --config configs/default.yaml",
+  "config_hash": "80474a0c3a1485fe5ca85ffee0ff948c9eb261e251fcd2156a1eef7a54143ba5",
+  "git_commit": "8bd59275d345df3f648d114ada19f44b4c264f95",
+  "git_dirty": false,
+  "python_version": "3.10.11",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "cpu_count": 20,
+  "packages": {
+    "numpy": "1.26.4",
+    "scikit-learn": "1.7.2",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.6",
+    "pyyaml": "6.0.1",
+    "joblib": "1.5.2",
+    "scipy": "1.14.1"
+  },
+  "datasets": {
+    "iris": {
+      "source": "sklearn.datasets.load_iris (UCI Iris)",
+      "n_samples": 150,
+      "n_features": 4,
+      "n_classes": 3,
+      "sha256_raw": null,
+      "sha256_arrays": "aa06b8008ceba42efc654be0f83fdafc786239c9e8f13146044d078f5aab8f23",
+      "class_counts": {
+        "0": 50,
+        "1": 50,
+        "2": 50
+      }
+    },
+    "digits": {
+      "source": "sklearn.datasets.load_digits (UCI Optical Recognition of Handwritten Digits, test set)",
+      "n_samples": 1797,
+      "n_features": 64,
+      "n_classes": 10,
+      "sha256_raw": null,
+      "sha256_arrays": "f6d9e39f37dc45d327f6db33428ee58970ccceabb2535a5c179de35886b70443",
+      "class_counts": {
+        "0": 178,
+        "1": 182,
+        "2": 177,
+        "3": 183,
+        "4": 181,
+        "5": 182,
+        "6": 181,
+        "7": 179,
+        "8": 174,
+        "9": 180
+      }
+    },
+    "heart_cleveland": {
+      "source": "UCI Heart Disease (id 45), processed.cleveland.data",
+      "n_samples": 303,
+      "n_features": 13,
+      "n_classes": 2,
+      "sha256_raw": "a74b7efa387bc9d108d7d0115d831fe9b414b29ae7124f331b622b4efa0427c8",
+      "sha256_arrays": "4ae2938080a8719739a404e9a293dec2f476683ffa79947b9c533cbeee2e5f26",
+      "class_counts": {
+        "0": 164,
+        "1": 139
+      }
+    }
+  },
+  "status": "completed"
+}

@@ -1,0 +1,23 @@
+{
+  "exp_id": "20260925-083324_default",
+  "dataset": "heart_cleveland",
+  "seed": 5,
+  "recommended_hyperparameters": {
+    "n_estimators": 110,
+    "max_depth": 3,
+    "min_samples_split": 4
+  },
+  "validation_fitness": 0.8450273224043716,
+  "fitness_metric": "accuracy",
+  "performance_estimate": {
+    "test_accuracy_mean": 0.8283060109289616,
+    "test_accuracy_std": 0.04775898450338209,
+    "n_folds": 5,
+    "source": "summary.csv"
+  },
+  "n_samples": 303,
+  "n_evaluations": 210,
+  "n_unique_fits": 153,
+  "convergence_iteration": 4,
+  "note": "No held-out test data exists for the deployment run; performance is estimated by the outer 5-fold CV of the same procedure. validation_fitness is optimistically biased."
+}

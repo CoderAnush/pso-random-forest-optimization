@@ -1,0 +1,32 @@
+{
+  "dataset": "iris",
+  "n_samples": 150,
+  "n_features": 4,
+  "n_classes": 3,
+  "class_counts": {
+    "0": 50,
+    "1": 50,
+    "2": 50
+  },
+  "class_ratio": 1.0,
+  "fitness_metric": "accuracy",
+  "missing_per_feature": {
+    "sepal length (cm)": 0,
+    "sepal width (cm)": 0,
+    "petal length (cm)": 0,
+    "petal width (cm)": 0
+  },
+  "n_duplicate_rows": 1,
+  "duplicates_removed": false,
+  "feature_names": [
+    "sepal length (cm)",
+    "sepal width (cm)",
+    "petal length (cm)",
+    "petal width (cm)"
+  ],
+  "class_names": [
+    "setosa",
+    "versicolor",
+    "virginica"
+  ]
+}

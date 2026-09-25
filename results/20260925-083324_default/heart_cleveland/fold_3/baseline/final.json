@@ -1,0 +1,61 @@
+{
+  "exp_id": "20260925-083324_default",
+  "dataset": "heart_cleveland",
+  "method": "baseline",
+  "run_id": "fold_3",
+  "outer_fold": 3,
+  "seed": 3,
+  "best_hyperparameters": {
+    "n_estimators": 100,
+    "max_depth": null,
+    "min_samples_split": 2
+  },
+  "best_validation_fitness": 0.8104591836734695,
+  "validation_cv_scores": [
+    0.8571428571428571,
+    0.8163265306122449,
+    0.8163265306122449,
+    0.875,
+    0.6875
+  ],
+  "fitness_metric": "accuracy",
+  "best_found_at_eval": null,
+  "best_found_at_iteration": null,
+  "n_evaluations": 1,
+  "n_unique_fits": 1,
+  "n_iterations": null,
+  "stop_reason": null,
+  "convergence_iteration": null,
+  "convergence_status": null,
+  "n_ties_with_best": null,
+  "boundary_hits": [],
+  "test_metrics": {
+    "accuracy": 0.8,
+    "balanced_accuracy": 0.7912457912457913,
+    "precision_macro": 0.8049353701527615,
+    "recall_macro": 0.7912457912457913,
+    "f1_macro": 0.7942857142857143,
+    "positive_class_precision": 0.8260869565217391,
+    "positive_class_recall": 0.7037037037037037,
+    "positive_class_f1": 0.76,
+    "confusion_matrix": [
+      [
+        29,
+        4
+      ],
+      [
+        8,
+        19
+      ]
+    ],
+    "labels": [
+      0,
+      1
+    ]
+  },
+  "n_opt_samples": 243,
+  "n_test_samples": 60,
+  "optimization_finished_at": "2026-09-25T09:30:34.070Z",
+  "test_evaluated_at": "2026-09-25T09:30:34.283Z",
+  "total_time_s": 0.5183583000325598
+}

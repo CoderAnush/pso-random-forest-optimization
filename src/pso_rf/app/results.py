@@ -36,6 +36,7 @@ def _pick_experiment() -> Experiment | None:
             "Results directory",
             [e.exp_id for e in experiments],
             index=[e.exp_id for e in experiments].index(complete[0].exp_id),
+            key="results_exp",
         )
     return next(e for e in experiments if e.exp_id == choice)
 
@@ -194,7 +195,9 @@ def _dataset_view(exp: Experiment, dataset: str, summary: pd.DataFrame, folds: p
         )
         c2.plotly_chart(
             charts.convergence(
-                mean.to_dict("records"), "PSO convergence, mean of folds (band = fold range of gbest)"
+                mean.to_dict("records"),
+                "PSO convergence, mean of folds (band = fold range of gbest)",
+                band_label="gbest range across folds",
             ),
             use_container_width=True,
         )

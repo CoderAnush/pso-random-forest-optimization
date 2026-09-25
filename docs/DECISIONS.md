@@ -144,6 +144,13 @@ Changes to any decision are made by adding a superseding ADR and updating the af
   3-fold fallback is not used.
 
 ## ADR-006: Accuracy as the fitness metric (configurable)
+- **Actual runtime (Phase 14, 2026-09-25, ET-06):** the full experiment `results/20260925-083324_default` took
+  **62.7 min**, not the projected ≤ 37.5 min. The median per-evaluation times recorded in `evaluations.csv` were
+  Iris 0.354 s, Digits 1.000 s and Heart 0.350 s, about 2.7× the benchmark's mid-range values. That held even
+  during the Iris phase, which ran with no other load. The short, warm, repeated-call benchmark underestimated
+  sustained cost. The likely causes are per-call parallel dispatch and sustained-load CPU clocking, but these are
+  not proven. The run still met NFR-001's "about 1 hour" target within 3 minutes. It does not change the 5-fold
+  decision, because the 2-hour fallback threshold was not reached.
 - **Decision:** fitness = mean inner-CV **accuracy**. The config key `fitness.metric ∈ {accuracy, balanced_accuracy}`
   selects it, with a gate: a dataset whose max/min class ratio exceeds 1.5 uses `balanced_accuracy`. Balanced
   accuracy and macro F1 are logged as diagnostics and are **never fed back**.
@@ -441,6 +448,11 @@ Changes to any decision are made by adding a superseding ADR and updating the af
 - **Rationale:** test isolation becomes a runtime-enforced, testable property rather than a convention.
 - **Alternatives:** keeping test data in a separate process (overkill); relying on code review alone (weak).
 - **Consequences:** an accidental leak crashes loudly. Tests UT-15 and IT-05 to IT-07 prove isolation.
+- **Amendment (2026-09-25):** the phase flag is **per thread**, not process-wide. The interactive demo (ADR-026)
+  serves several browser sessions from one process on separate threads. With a process-wide flag, a live search in
+  one session made another session's legitimate final evaluation fail; this was found while testing the demo in two
+  browsers. A phase guards the flow of control that opened it, and the parallel CV folds run in separate processes
+  that never read test data. The test `test_phase_is_per_thread` covers this.
 - **PPT impact:** none.
 
 ## ADR-025: Configuration format and layering

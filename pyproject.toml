@@ -46,3 +46,4 @@ select = ["E", "F", "W", "I", "B", "UP"]
 # The demo layer holds UI copy, HTML and CSS strings; wrapping them would hurt readability.
 "src/pso_rf/app/*" = ["E501"]
 "tests/app/*" = ["E501"]
+"scripts/report_tables.py" = ["E501"]  # Markdown table strings

@@ -1,3 +1,5 @@
 # Keep the vendored dataset byte-exact: its SHA-256 is verified at load time (DR-002).
 data/raw/** -text
 *.pdf binary
+results/** -text
+plots/** -text

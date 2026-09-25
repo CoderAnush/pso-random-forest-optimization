@@ -88,7 +88,7 @@ Status after Phase 6: every item is resolved. V1–V4 and V7 were **measured** i
 | V2 | Cleveland duplicates | none expected | P2 | audit | **measured (Phase 2):** 0 exact duplicate (X, y) rows |
 | V3 | Cleveland download URL and SHA-256 | URL `https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data` (the UCI archive may redirect; fallback is the `heart+disease.zip` bundle) | P2 | download script records both | **measured (Phase 2):** downloaded on 2026-09-24 from the primary URL above (the zip fallback was not needed); 18,461 bytes; SHA-256 `a74b7efa387bc9d108d7d0115d831fe9b414b29ae7124f331b622b4efa0427c8` |
 | V4 | Class-ratio gate outcome | none triggers (Iris 1.00, Digits 1.05, Cleveland ≈ 1.18) | P2 | audit | **measured (Phase 2):** none triggers; max/min ratios Iris 1.0000, Digits 1.0517, Cleveland 1.1799, so the fitness metric is accuracy for all three |
-| V5 | Evaluation time and total runtime | worst case per evaluation (5-fold, parallel folds): Iris 0.24 s, Digits 0.52 s (measured); Heart similar to Iris; total ≈ 40 min | P6 | timing benchmark → decision gate (ADR-005) | **measured (Phase 6, `scripts/benchmark_eval.py`):** worst case (200, 20, 2) per evaluation Iris 0.220 s, Digits 0.533 s, Heart 0.222 s; mid-range (125, 11, 6) 0.128 s, 0.325 s, 0.143 s; projected total 37.5 min (upper bound) and 22.9 min (typical), so 5-fold inner CV is kept |
+| V5 | Evaluation time and total runtime | worst case per evaluation (5-fold, parallel folds): Iris 0.24 s, Digits 0.52 s (measured); Heart similar to Iris; total ≈ 40 min | P6 | timing benchmark → decision gate (ADR-005) | **measured (Phase 6, `scripts/benchmark_eval.py`):** worst case (200, 20, 2) per evaluation Iris 0.220 s, Digits 0.533 s, Heart 0.222 s; mid-range (125, 11, 6) 0.128 s, 0.325 s, 0.143 s; projected total 37.5 min (upper bound) and 22.9 min (typical), so 5-fold inner CV is kept. **Actual (Phase 14, `results/20260925-083324_default`): 62.7 min**; median per-evaluation time in the run Iris 0.354 s, Digits 1.000 s, Heart 0.350 s, about 2.7× the benchmark's mid-range values (Iris phase ran with no other load). The short warm-call benchmark underestimated sustained cost; results are unaffected (ET-06) |
 | V6 | Parallel folds give identical scores to serial | expected identical | P6 | IT-08 | **verified (Phase 6):** identical fold scores with `n_jobs_folds` = 5 and 1 on Iris and Heart fold 0 (`tests/integration/test_parallel_equivalence.py`, IT-08 partial); the full-scale re-run comparison is Phase 14 |
 | V7 | Iris duplicate row | 1 (measured); kept | P2 | audit | **measured (Phase 2):** 1 exact duplicate (X, y) row (0.67% of rows, below the 1% removal threshold); kept |
 
@@ -184,7 +184,7 @@ class HeldOutTestSet:        # arrays are private (name-mangled); access only vi
     def __init__(self, X: np.ndarray, y: np.ndarray, indices: np.ndarray)
     indices: np.ndarray      # read-only property; len() = fold size; repr shows only n and "sealed"
     def reveal(self) -> tuple[np.ndarray, np.ndarray]   # copies; raises TestSetAccessError inside OptimizationPhase
-class OptimizationPhase:     # context manager over a process-wide depth counter (nesting- and exception-safe)
+class OptimizationPhase:     # context manager over a per-thread depth counter (nesting- and exception-safe; ADR-024)
 def optimization_phase_active() -> bool
 class TestSetAccessError(RuntimeError)
 @dataclass(frozen=True)

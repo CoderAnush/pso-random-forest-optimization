@@ -1,0 +1,617 @@
+2026-09-25T08:33:24.359Z INFO    pso_rf.experiments.runner: experiment 20260925-083324_default: config hash 80474a0c3a14
+2026-09-25T08:33:24.575Z INFO    pso_rf.experiments.runner: dataset iris: 150 samples, fitness metric accuracy
+2026-09-25T08:33:24.577Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:33:26.094Z INFO    pso_rf.experiments.runner: [iris|fold 0|baseline|seed 0] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.9417
+2026-09-25T08:33:26.094Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:33:26.190Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:33:26.205Z INFO    pso_rf.experiments.runner: [iris|fold 0|baseline|seed 0] test accuracy 1.0000 (evaluated once, after optimization)
+2026-09-25T08:33:26.207Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:34:15.130Z INFO    pso_rf.experiments.runner: [iris|fold 0|random_search|seed 0] done: best (126,13,10)=0.9583 after 210 evaluations, 210 unique fits
+2026-09-25T08:34:15.130Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:34:15.299Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:34:15.338Z INFO    pso_rf.experiments.runner: [iris|fold 0|random_search|seed 0] test accuracy 1.0000 (evaluated once, after optimization)
+2026-09-25T08:34:15.341Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:34:18.028Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 0/20  gbest (179,3,8)=0.9583  mean=0.9500  unique fits 10  *
+2026-09-25T08:34:20.949Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 1/20  gbest (179,3,8)=0.9583  mean=0.9525  unique fits 20
+2026-09-25T08:34:23.879Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 2/20  gbest (179,3,8)=0.9583  mean=0.9483  unique fits 30
+2026-09-25T08:34:27.094Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 3/20  gbest (179,3,8)=0.9583  mean=0.9558  unique fits 40
+2026-09-25T08:34:30.138Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 4/20  gbest (179,3,8)=0.9583  mean=0.9483  unique fits 49
+2026-09-25T08:34:33.604Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 5/20  gbest (179,3,8)=0.9583  mean=0.9500  unique fits 59
+2026-09-25T08:34:36.990Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 6/20  gbest (179,3,8)=0.9583  mean=0.9492  unique fits 69
+2026-09-25T08:34:39.987Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 7/20  gbest (179,3,8)=0.9583  mean=0.9550  unique fits 78
+2026-09-25T08:34:43.184Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 8/20  gbest (179,3,8)=0.9583  mean=0.9558  unique fits 87
+2026-09-25T08:34:46.460Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 9/20  gbest (179,3,8)=0.9583  mean=0.9517  unique fits 97
+2026-09-25T08:34:48.982Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 10/20  gbest (179,3,8)=0.9583  mean=0.9508  unique fits 105
+2026-09-25T08:34:52.334Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 11/20  gbest (179,3,8)=0.9583  mean=0.9483  unique fits 115
+2026-09-25T08:34:55.556Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 12/20  gbest (179,3,8)=0.9583  mean=0.9525  unique fits 123
+2026-09-25T08:34:58.848Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 13/20  gbest (179,3,8)=0.9583  mean=0.9533  unique fits 132
+2026-09-25T08:35:02.062Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 14/20  gbest (179,3,8)=0.9583  mean=0.9500  unique fits 141
+2026-09-25T08:35:04.755Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 15/20  gbest (179,3,8)=0.9583  mean=0.9508  unique fits 150
+2026-09-25T08:35:07.798Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 16/20  gbest (179,3,8)=0.9583  mean=0.9575  unique fits 159
+2026-09-25T08:35:10.884Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 17/20  gbest (179,3,8)=0.9583  mean=0.9550  unique fits 168
+2026-09-25T08:35:13.853Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 18/20  gbest (179,3,8)=0.9583  mean=0.9517  unique fits 176
+2026-09-25T08:35:16.661Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 19/20  gbest (179,3,8)=0.9583  mean=0.9483  unique fits 184
+2026-09-25T08:35:19.685Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] iter 20/20  gbest (179,3,8)=0.9583  mean=0.9558  unique fits 193
+2026-09-25T08:35:19.685Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] done: best (179,3,8)=0.9583 after 210 evaluations, 193 unique fits
+2026-09-25T08:35:19.685Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:35:19.974Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:35:20.009Z INFO    pso_rf.experiments.runner: [iris|fold 0|pso|seed 0] test accuracy 1.0000 (evaluated once, after optimization)
+2026-09-25T08:35:20.013Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:35:20.230Z INFO    pso_rf.experiments.runner: [iris|fold 1|baseline|seed 1] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.9333
+2026-09-25T08:35:20.230Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:35:20.382Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:35:20.406Z INFO    pso_rf.experiments.runner: [iris|fold 1|baseline|seed 1] test accuracy 0.9667 (evaluated once, after optimization)
+2026-09-25T08:35:20.410Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:36:16.594Z INFO    pso_rf.experiments.runner: [iris|fold 1|random_search|seed 1] done: best (121,11,8)=0.9417 after 210 evaluations, 209 unique fits
+2026-09-25T08:36:16.594Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:36:16.818Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:36:16.850Z INFO    pso_rf.experiments.runner: [iris|fold 1|random_search|seed 1] test accuracy 0.9667 (evaluated once, after optimization)
+2026-09-25T08:36:16.852Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:36:19.660Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 0/20  gbest (174,9,6)=0.9417  mean=0.9383  unique fits 10  *
+2026-09-25T08:36:22.623Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 1/20  gbest (174,9,6)=0.9417  mean=0.9408  unique fits 20
+2026-09-25T08:36:26.295Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 2/20  gbest (174,9,6)=0.9417  mean=0.9408  unique fits 30
+2026-09-25T08:36:30.081Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 3/20  gbest (174,9,6)=0.9417  mean=0.9417  unique fits 40
+2026-09-25T08:36:33.862Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 4/20  gbest (174,9,6)=0.9417  mean=0.9400  unique fits 50
+2026-09-25T08:36:37.599Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 5/20  gbest (174,9,6)=0.9417  mean=0.9408  unique fits 60
+2026-09-25T08:36:41.465Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 6/20  gbest (174,9,6)=0.9417  mean=0.9400  unique fits 70
+2026-09-25T08:36:45.280Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 7/20  gbest (174,9,6)=0.9417  mean=0.9392  unique fits 80
+2026-09-25T08:36:48.660Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 8/20  gbest (174,9,6)=0.9417  mean=0.9417  unique fits 90
+2026-09-25T08:36:51.402Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 9/20  gbest (174,9,6)=0.9417  mean=0.9417  unique fits 99
+2026-09-25T08:36:55.515Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 10/20  gbest (174,9,6)=0.9417  mean=0.9408  unique fits 109
+2026-09-25T08:36:59.646Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 11/20  gbest (174,9,6)=0.9417  mean=0.9408  unique fits 117
+2026-09-25T08:37:05.021Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 12/20  gbest (174,9,6)=0.9417  mean=0.9408  unique fits 127
+2026-09-25T08:37:09.957Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 13/20  gbest (174,9,6)=0.9417  mean=0.9408  unique fits 137
+2026-09-25T08:37:14.833Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 14/20  gbest (174,9,6)=0.9417  mean=0.9417  unique fits 146
+2026-09-25T08:37:17.982Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 15/20  gbest (174,9,6)=0.9417  mean=0.9417  unique fits 154
+2026-09-25T08:37:21.851Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 16/20  gbest (174,9,6)=0.9417  mean=0.9417  unique fits 163
+2026-09-25T08:37:24.862Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 17/20  gbest (174,9,6)=0.9417  mean=0.9400  unique fits 170
+2026-09-25T08:37:28.128Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 18/20  gbest (174,9,6)=0.9417  mean=0.9417  unique fits 179
+2026-09-25T08:37:30.536Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 19/20  gbest (174,9,6)=0.9417  mean=0.9417  unique fits 186
+2026-09-25T08:37:33.442Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] iter 20/20  gbest (174,9,6)=0.9417  mean=0.9417  unique fits 193
+2026-09-25T08:37:33.443Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] done: best (174,9,6)=0.9417 after 210 evaluations, 193 unique fits
+2026-09-25T08:37:33.443Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:37:33.796Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:37:33.836Z INFO    pso_rf.experiments.runner: [iris|fold 1|pso|seed 1] test accuracy 0.9667 (evaluated once, after optimization)
+2026-09-25T08:37:33.843Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:37:34.192Z INFO    pso_rf.experiments.runner: [iris|fold 2|baseline|seed 2] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.9667
+2026-09-25T08:37:34.192Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:37:34.410Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:37:34.453Z INFO    pso_rf.experiments.runner: [iris|fold 2|baseline|seed 2] test accuracy 0.9333 (evaluated once, after optimization)
+2026-09-25T08:37:34.457Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:38:45.486Z INFO    pso_rf.experiments.runner: [iris|fold 2|random_search|seed 2] done: best (176,6,2)=0.9750 after 210 evaluations, 210 unique fits
+2026-09-25T08:38:45.487Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:38:45.853Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:38:45.901Z INFO    pso_rf.experiments.runner: [iris|fold 2|random_search|seed 2] test accuracy 0.9333 (evaluated once, after optimization)
+2026-09-25T08:38:45.922Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:38:49.375Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 0/20  gbest (89,7,9)=0.9750  mean=0.9733  unique fits 10  *
+2026-09-25T08:38:52.514Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 1/20  gbest (89,7,9)=0.9750  mean=0.9742  unique fits 20
+2026-09-25T08:38:55.586Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 2/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 30
+2026-09-25T08:38:58.378Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 3/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 40
+2026-09-25T08:39:00.966Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 4/20  gbest (89,7,9)=0.9750  mean=0.9742  unique fits 49
+2026-09-25T08:39:04.036Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 5/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 59
+2026-09-25T08:39:06.984Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 6/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 69
+2026-09-25T08:39:10.233Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 7/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 79
+2026-09-25T08:39:13.362Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 8/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 89
+2026-09-25T08:39:16.321Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 9/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 99
+2026-09-25T08:39:19.408Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 10/20  gbest (89,7,9)=0.9750  mean=0.9733  unique fits 109
+2026-09-25T08:39:22.749Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 11/20  gbest (89,7,9)=0.9750  mean=0.9725  unique fits 118
+2026-09-25T08:39:25.435Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 12/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 127
+2026-09-25T08:39:27.658Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 13/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 136
+2026-09-25T08:39:29.852Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 14/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 145
+2026-09-25T08:39:32.008Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 15/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 153
+2026-09-25T08:39:34.100Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 16/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 161
+2026-09-25T08:39:36.531Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 17/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 170
+2026-09-25T08:39:39.012Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 18/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 180
+2026-09-25T08:39:41.411Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 19/20  gbest (89,7,9)=0.9750  mean=0.9742  unique fits 190
+2026-09-25T08:39:42.994Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] iter 20/20  gbest (89,7,9)=0.9750  mean=0.9750  unique fits 196
+2026-09-25T08:39:42.994Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] done: best (89,7,9)=0.9750 after 210 evaluations, 196 unique fits
+2026-09-25T08:39:42.994Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:39:43.142Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:39:43.165Z INFO    pso_rf.experiments.runner: [iris|fold 2|pso|seed 2] test accuracy 0.9333 (evaluated once, after optimization)
+2026-09-25T08:39:43.172Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:39:43.421Z INFO    pso_rf.experiments.runner: [iris|fold 3|baseline|seed 3] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.9417
+2026-09-25T08:39:43.421Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:39:43.594Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:39:43.619Z INFO    pso_rf.experiments.runner: [iris|fold 3|baseline|seed 3] test accuracy 1.0000 (evaluated once, after optimization)
+2026-09-25T08:39:43.623Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:40:46.297Z INFO    pso_rf.experiments.runner: [iris|fold 3|random_search|seed 3] done: best (79,2,6)=0.9500 after 210 evaluations, 210 unique fits
+2026-09-25T08:40:46.297Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:40:46.446Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:40:46.467Z INFO    pso_rf.experiments.runner: [iris|fold 3|random_search|seed 3] test accuracy 0.9667 (evaluated once, after optimization)
+2026-09-25T08:40:46.473Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:40:50.091Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 0/20  gbest (63,6,8)=0.9417  mean=0.9417  unique fits 10  *
+2026-09-25T08:40:54.315Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 1/20  gbest (63,6,8)=0.9417  mean=0.9417  unique fits 20
+2026-09-25T08:40:58.299Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 2/20  gbest (63,6,8)=0.9417  mean=0.9417  unique fits 30
+2026-09-25T08:41:02.580Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 3/20  gbest (63,6,8)=0.9417  mean=0.9417  unique fits 40
+2026-09-25T08:41:06.829Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 4/20  gbest (67,2,8)=0.9500  mean=0.9425  unique fits 50  *
+2026-09-25T08:41:10.846Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 5/20  gbest (67,2,8)=0.9500  mean=0.9425  unique fits 60
+2026-09-25T08:41:14.846Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 6/20  gbest (67,2,8)=0.9500  mean=0.9433  unique fits 70
+2026-09-25T08:41:18.748Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 7/20  gbest (67,2,8)=0.9500  mean=0.9425  unique fits 80
+2026-09-25T08:41:22.114Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 8/20  gbest (67,2,8)=0.9500  mean=0.9442  unique fits 89
+2026-09-25T08:41:26.164Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 9/20  gbest (67,2,8)=0.9500  mean=0.9442  unique fits 99
+2026-09-25T08:41:29.366Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 10/20  gbest (67,2,8)=0.9500  mean=0.9442  unique fits 107
+2026-09-25T08:41:32.930Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 11/20  gbest (67,2,8)=0.9500  mean=0.9442  unique fits 117
+2026-09-25T08:41:35.479Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 12/20  gbest (67,2,8)=0.9500  mean=0.9450  unique fits 124
+2026-09-25T08:41:38.484Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 13/20  gbest (67,2,8)=0.9500  mean=0.9450  unique fits 132
+2026-09-25T08:41:41.723Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 14/20  gbest (67,2,8)=0.9500  mean=0.9458  unique fits 140
+2026-09-25T08:41:44.246Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 15/20  gbest (67,2,8)=0.9500  mean=0.9450  unique fits 146
+2026-09-25T08:41:47.579Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 16/20  gbest (67,2,8)=0.9500  mean=0.9442  unique fits 154
+2026-09-25T08:41:51.089Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 17/20  gbest (67,2,8)=0.9500  mean=0.9450  unique fits 163
+2026-09-25T08:41:54.047Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 18/20  gbest (67,2,8)=0.9500  mean=0.9458  unique fits 171
+2026-09-25T08:41:56.930Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 19/20  gbest (67,2,8)=0.9500  mean=0.9458  unique fits 179
+2026-09-25T08:41:58.960Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] iter 20/20  gbest (67,2,8)=0.9500  mean=0.9475  unique fits 184
+2026-09-25T08:41:58.960Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] done: best (67,2,8)=0.9500 after 210 evaluations, 184 unique fits
+2026-09-25T08:41:58.960Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:41:59.131Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:41:59.168Z INFO    pso_rf.experiments.runner: [iris|fold 3|pso|seed 3] test accuracy 1.0000 (evaluated once, after optimization)
+2026-09-25T08:41:59.175Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:41:59.572Z INFO    pso_rf.experiments.runner: [iris|fold 4|baseline|seed 4] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.9583
+2026-09-25T08:41:59.573Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:41:59.848Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:41:59.892Z INFO    pso_rf.experiments.runner: [iris|fold 4|baseline|seed 4] test accuracy 0.9000 (evaluated once, after optimization)
+2026-09-25T08:41:59.896Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:44:11.976Z INFO    pso_rf.experiments.runner: [iris|fold 4|random_search|seed 4] done: best (196,3,6)=0.9667 after 210 evaluations, 209 unique fits
+2026-09-25T08:44:11.976Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:44:12.494Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:44:12.540Z INFO    pso_rf.experiments.runner: [iris|fold 4|random_search|seed 4] test accuracy 0.9000 (evaluated once, after optimization)
+2026-09-25T08:44:12.550Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:44:18.933Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 0/20  gbest (191,14,3)=0.9667  mean=0.9600  unique fits 10  *
+2026-09-25T08:44:25.726Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 1/20  gbest (191,14,3)=0.9667  mean=0.9633  unique fits 20
+2026-09-25T08:44:33.446Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 2/20  gbest (191,14,3)=0.9667  mean=0.9658  unique fits 30
+2026-09-25T08:44:42.812Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 3/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 40
+2026-09-25T08:44:55.168Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 4/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 50
+2026-09-25T08:45:05.045Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 5/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 60
+2026-09-25T08:45:12.514Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 6/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 69
+2026-09-25T08:45:20.031Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 7/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 78
+2026-09-25T08:45:29.227Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 8/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 88
+2026-09-25T08:45:36.580Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 9/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 96
+2026-09-25T08:45:43.246Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 10/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 104
+2026-09-25T08:45:50.100Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 11/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 112
+2026-09-25T08:45:56.492Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 12/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 120
+2026-09-25T08:46:03.219Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 13/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 130
+2026-09-25T08:46:07.258Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 14/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 135
+2026-09-25T08:46:13.133Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 15/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 144
+2026-09-25T08:46:19.436Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 16/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 152
+2026-09-25T08:46:23.279Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 17/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 157
+2026-09-25T08:46:28.745Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 18/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 165
+2026-09-25T08:46:33.661Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 19/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 171
+2026-09-25T08:46:39.349Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] iter 20/20  gbest (191,14,3)=0.9667  mean=0.9667  unique fits 178
+2026-09-25T08:46:39.349Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] done: best (191,14,3)=0.9667 after 210 evaluations, 178 unique fits
+2026-09-25T08:46:39.349Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:46:39.960Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=30)
+2026-09-25T08:46:40.020Z INFO    pso_rf.experiments.runner: [iris|fold 4|pso|seed 4] test accuracy 0.9000 (evaluated once, after optimization)
+2026-09-25T08:46:40.028Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:46:46.958Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 0/20  gbest (171,17,6)=0.9600  mean=0.9587  unique fits 10  *
+2026-09-25T08:46:53.097Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 1/20  gbest (171,17,6)=0.9600  mean=0.9593  unique fits 20
+2026-09-25T08:46:59.663Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 2/20  gbest (171,17,6)=0.9600  mean=0.9593  unique fits 30
+2026-09-25T08:47:06.437Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 3/20  gbest (171,17,6)=0.9600  mean=0.9593  unique fits 40
+2026-09-25T08:47:11.623Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 4/20  gbest (171,17,6)=0.9600  mean=0.9593  unique fits 49
+2026-09-25T08:47:17.691Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 5/20  gbest (171,17,6)=0.9600  mean=0.9593  unique fits 59
+2026-09-25T08:47:22.786Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 6/20  gbest (171,17,6)=0.9600  mean=0.9600  unique fits 68
+2026-09-25T08:47:28.480Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 7/20  gbest (171,17,6)=0.9600  mean=0.9600  unique fits 78
+2026-09-25T08:47:33.684Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 8/20  gbest (171,17,6)=0.9600  mean=0.9593  unique fits 87
+2026-09-25T08:47:39.724Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 9/20  gbest (171,17,6)=0.9600  mean=0.9600  unique fits 97
+2026-09-25T08:47:43.627Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 10/20  gbest (171,17,6)=0.9600  mean=0.9600  unique fits 104
+2026-09-25T08:47:49.806Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 11/20  gbest (171,17,6)=0.9600  mean=0.9600  unique fits 114
+2026-09-25T08:47:54.192Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 12/20  gbest (171,17,6)=0.9600  mean=0.9587  unique fits 122
+2026-09-25T08:47:59.198Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 13/20  gbest (171,17,6)=0.9600  mean=0.9600  unique fits 131
+2026-09-25T08:48:03.921Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 14/20  gbest (171,17,6)=0.9600  mean=0.9593  unique fits 139
+2026-09-25T08:48:08.509Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 15/20  gbest (171,17,6)=0.9600  mean=0.9600  unique fits 147
+2026-09-25T08:48:13.976Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 16/20  gbest (171,17,6)=0.9600  mean=0.9600  unique fits 156
+2026-09-25T08:48:17.966Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 17/20  gbest (171,17,6)=0.9600  mean=0.9600  unique fits 163
+2026-09-25T08:48:23.972Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 18/20  gbest (171,17,6)=0.9600  mean=0.9600  unique fits 173
+2026-09-25T08:48:29.203Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 19/20  gbest (171,17,6)=0.9600  mean=0.9587  unique fits 182
+2026-09-25T08:48:33.805Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] iter 20/20  gbest (171,17,6)=0.9600  mean=0.9593  unique fits 189
+2026-09-25T08:48:33.808Z INFO    pso_rf.experiments.runner: [iris|deployment|pso|seed 5] done: best (171,17,6)=0.9600 after 210 evaluations, 189 unique fits
+2026-09-25T08:48:33.808Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:48:33.840Z INFO    pso_rf.experiments.runner: dataset digits: 1797 samples, fitness metric accuracy
+2026-09-25T08:48:33.857Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:48:34.754Z INFO    pso_rf.experiments.runner: [digits|fold 0|baseline|seed 0] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.9673
+2026-09-25T08:48:34.754Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:48:35.554Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=360)
+2026-09-25T08:48:35.612Z INFO    pso_rf.experiments.runner: [digits|fold 0|baseline|seed 0] test accuracy 0.9694 (evaluated once, after optimization)
+2026-09-25T08:48:35.621Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:52:29.114Z INFO    pso_rf.experiments.runner: [digits|fold 0|random_search|seed 0] done: best (196,18,2)=0.9722 after 210 evaluations, 210 unique fits
+2026-09-25T08:52:29.114Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:52:30.413Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=360)
+2026-09-25T08:52:30.486Z INFO    pso_rf.experiments.runner: [digits|fold 0|random_search|seed 0] test accuracy 0.9778 (evaluated once, after optimization)
+2026-09-25T08:52:30.496Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:52:39.829Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 0/20  gbest (190,17,2)=0.9722  mean=0.9567  unique fits 10  *
+2026-09-25T08:52:50.530Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 1/20  gbest (190,17,2)=0.9722  mean=0.9665  unique fits 20
+2026-09-25T08:53:03.420Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 2/20  gbest (190,17,2)=0.9722  mean=0.9688  unique fits 30
+2026-09-25T08:53:16.868Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 3/20  gbest (152,19,2)=0.9729  mean=0.9692  unique fits 40  *
+2026-09-25T08:53:29.501Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 4/20  gbest (152,19,2)=0.9729  mean=0.9709  unique fits 50
+2026-09-25T08:53:39.330Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 5/20  gbest (152,19,2)=0.9729  mean=0.9708  unique fits 60
+2026-09-25T08:53:49.366Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 6/20  gbest (152,19,2)=0.9729  mean=0.9718  unique fits 69
+2026-09-25T08:54:03.077Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 7/20  gbest (152,19,2)=0.9729  mean=0.9715  unique fits 77
+2026-09-25T08:54:09.560Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 8/20  gbest (152,19,2)=0.9729  mean=0.9722  unique fits 82
+2026-09-25T08:54:21.892Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 9/20  gbest (152,19,2)=0.9729  mean=0.9717  unique fits 89
+2026-09-25T08:54:33.621Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 10/20  gbest (152,19,2)=0.9729  mean=0.9719  unique fits 96
+2026-09-25T08:54:44.768Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 11/20  gbest (152,19,2)=0.9729  mean=0.9721  unique fits 102
+2026-09-25T08:54:54.504Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 12/20  gbest (152,19,2)=0.9729  mean=0.9723  unique fits 107
+2026-09-25T08:54:57.626Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 13/20  gbest (152,19,2)=0.9729  mean=0.9724  unique fits 109
+2026-09-25T08:54:58.844Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 14/20  gbest (152,19,2)=0.9729  mean=0.9723  unique fits 110
+2026-09-25T08:55:04.803Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 15/20  gbest (152,19,2)=0.9729  mean=0.9724  unique fits 114
+2026-09-25T08:55:15.066Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 16/20  gbest (152,19,2)=0.9729  mean=0.9724  unique fits 120
+2026-09-25T08:55:25.119Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 17/20  gbest (152,19,2)=0.9729  mean=0.9726  unique fits 125
+2026-09-25T08:55:31.096Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 18/20  gbest (152,19,2)=0.9729  mean=0.9725  unique fits 128
+2026-09-25T08:55:34.929Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 19/20  gbest (152,19,2)=0.9729  mean=0.9724  unique fits 130
+2026-09-25T08:55:44.168Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] iter 20/20  gbest (152,19,2)=0.9729  mean=0.9725  unique fits 135
+2026-09-25T08:55:44.170Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] done: best (152,19,2)=0.9729 after 210 evaluations, 135 unique fits
+2026-09-25T08:55:44.170Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:55:45.524Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=360)
+2026-09-25T08:55:45.601Z INFO    pso_rf.experiments.runner: [digits|fold 0|pso|seed 0] test accuracy 0.9778 (evaluated once, after optimization)
+2026-09-25T08:55:45.607Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:55:46.825Z INFO    pso_rf.experiments.runner: [digits|fold 1|baseline|seed 1] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.9722
+2026-09-25T08:55:46.825Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:55:47.831Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=360)
+2026-09-25T08:55:47.899Z INFO    pso_rf.experiments.runner: [digits|fold 1|baseline|seed 1] test accuracy 0.9750 (evaluated once, after optimization)
+2026-09-25T08:55:47.905Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:59:22.544Z INFO    pso_rf.experiments.runner: [digits|fold 1|random_search|seed 1] done: best (198,15,5)=0.9770 after 210 evaluations, 209 unique fits
+2026-09-25T08:59:22.544Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T08:59:24.064Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=360)
+2026-09-25T08:59:24.149Z INFO    pso_rf.experiments.runner: [digits|fold 1|random_search|seed 1] test accuracy 0.9750 (evaluated once, after optimization)
+2026-09-25T08:59:24.155Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T08:59:35.322Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 0/20  gbest (127,19,3)=0.9722  mean=0.9584  unique fits 10  *
+2026-09-25T08:59:48.018Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 1/20  gbest (157,13,5)=0.9756  mean=0.9706  unique fits 20  *
+2026-09-25T09:00:03.137Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 2/20  gbest (157,13,5)=0.9756  mean=0.9699  unique fits 30
+2026-09-25T09:00:18.699Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 3/20  gbest (168,13,5)=0.9763  mean=0.9725  unique fits 40  *
+2026-09-25T09:00:36.100Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 4/20  gbest (168,13,5)=0.9763  mean=0.9710  unique fits 50
+2026-09-25T09:00:52.629Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 5/20  gbest (168,13,5)=0.9763  mean=0.9726  unique fits 60
+2026-09-25T09:01:02.072Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 6/20  gbest (168,13,5)=0.9763  mean=0.9708  unique fits 70
+2026-09-25T09:01:12.944Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 7/20  gbest (168,13,5)=0.9763  mean=0.9715  unique fits 79
+2026-09-25T09:01:22.824Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 8/20  gbest (178,13,5)=0.9777  mean=0.9733  unique fits 87  *
+2026-09-25T09:01:32.371Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 9/20  gbest (178,13,5)=0.9777  mean=0.9734  unique fits 95
+2026-09-25T09:01:42.706Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 10/20  gbest (178,13,5)=0.9777  mean=0.9726  unique fits 104
+2026-09-25T09:01:55.423Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 11/20  gbest (178,13,5)=0.9777  mean=0.9745  unique fits 113
+2026-09-25T09:02:10.799Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 12/20  gbest (178,13,5)=0.9777  mean=0.9747  unique fits 121
+2026-09-25T09:02:26.451Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 13/20  gbest (178,13,5)=0.9777  mean=0.9737  unique fits 130
+2026-09-25T09:02:37.221Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 14/20  gbest (178,13,5)=0.9777  mean=0.9720  unique fits 136
+2026-09-25T09:02:54.617Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 15/20  gbest (178,13,5)=0.9777  mean=0.9725  unique fits 145
+2026-09-25T09:03:09.056Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 16/20  gbest (178,13,5)=0.9777  mean=0.9729  unique fits 153
+2026-09-25T09:03:12.860Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 17/20  gbest (178,13,5)=0.9777  mean=0.9749  unique fits 155
+2026-09-25T09:03:22.259Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 18/20  gbest (178,13,5)=0.9777  mean=0.9744  unique fits 160
+2026-09-25T09:03:31.952Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 19/20  gbest (178,13,5)=0.9777  mean=0.9717  unique fits 165
+2026-09-25T09:03:36.910Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] iter 20/20  gbest (178,13,5)=0.9777  mean=0.9754  unique fits 168
+2026-09-25T09:03:36.911Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] done: best (178,13,5)=0.9777 after 210 evaluations, 168 unique fits
+2026-09-25T09:03:36.911Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:03:38.620Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=360)
+2026-09-25T09:03:38.692Z INFO    pso_rf.experiments.runner: [digits|fold 1|pso|seed 1] test accuracy 0.9722 (evaluated once, after optimization)
+2026-09-25T09:03:38.705Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:03:39.666Z INFO    pso_rf.experiments.runner: [digits|fold 2|baseline|seed 2] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.9708
+2026-09-25T09:03:39.668Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:03:40.456Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=359)
+2026-09-25T09:03:40.525Z INFO    pso_rf.experiments.runner: [digits|fold 2|baseline|seed 2] test accuracy 0.9610 (evaluated once, after optimization)
+2026-09-25T09:03:40.535Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:07:02.902Z INFO    pso_rf.experiments.runner: [digits|fold 2|random_search|seed 2] done: best (145,12,3)=0.9736 after 210 evaluations, 210 unique fits
+2026-09-25T09:07:02.902Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:07:03.790Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=359)
+2026-09-25T09:07:03.850Z INFO    pso_rf.experiments.runner: [digits|fold 2|random_search|seed 2] test accuracy 0.9721 (evaluated once, after optimization)
+2026-09-25T09:07:03.856Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:07:10.885Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 0/20  gbest (149,12,3)=0.9736  mean=0.9499  unique fits 10  *
+2026-09-25T09:07:19.490Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 1/20  gbest (149,12,3)=0.9736  mean=0.9609  unique fits 20
+2026-09-25T09:07:28.690Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 2/20  gbest (152,11,3)=0.9743  mean=0.9700  unique fits 30  *
+2026-09-25T09:07:38.575Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 3/20  gbest (168,11,3)=0.9750  mean=0.9705  unique fits 40  *
+2026-09-25T09:07:47.700Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 4/20  gbest (168,11,3)=0.9750  mean=0.9695  unique fits 49
+2026-09-25T09:07:57.455Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 5/20  gbest (172,11,3)=0.9757  mean=0.9714  unique fits 58  *
+2026-09-25T09:08:06.358Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 6/20  gbest (172,11,3)=0.9757  mean=0.9709  unique fits 67
+2026-09-25T09:08:15.855Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 7/20  gbest (172,11,3)=0.9757  mean=0.9707  unique fits 77
+2026-09-25T09:08:23.888Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 8/20  gbest (172,11,3)=0.9757  mean=0.9716  unique fits 85
+2026-09-25T09:08:32.963Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 9/20  gbest (172,11,3)=0.9757  mean=0.9713  unique fits 93
+2026-09-25T09:08:43.560Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 10/20  gbest (172,11,3)=0.9757  mean=0.9718  unique fits 103
+2026-09-25T09:08:52.755Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 11/20  gbest (172,11,3)=0.9757  mean=0.9711  unique fits 112
+2026-09-25T09:09:01.470Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 12/20  gbest (172,11,3)=0.9757  mean=0.9726  unique fits 120
+2026-09-25T09:09:09.388Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 13/20  gbest (172,11,3)=0.9757  mean=0.9713  unique fits 127
+2026-09-25T09:09:14.904Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 14/20  gbest (172,11,3)=0.9757  mean=0.9727  unique fits 132
+2026-09-25T09:09:20.155Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 15/20  gbest (172,11,3)=0.9757  mean=0.9727  unique fits 138
+2026-09-25T09:09:25.339Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 16/20  gbest (172,11,3)=0.9757  mean=0.9732  unique fits 143
+2026-09-25T09:09:27.095Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 17/20  gbest (172,11,3)=0.9757  mean=0.9723  unique fits 145
+2026-09-25T09:09:30.158Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 18/20  gbest (172,11,3)=0.9757  mean=0.9732  unique fits 148
+2026-09-25T09:09:33.330Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 19/20  gbest (172,11,3)=0.9757  mean=0.9729  unique fits 151
+2026-09-25T09:09:34.387Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] iter 20/20  gbest (172,11,3)=0.9757  mean=0.9744  unique fits 152
+2026-09-25T09:09:34.387Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] done: best (172,11,3)=0.9757 after 210 evaluations, 152 unique fits
+2026-09-25T09:09:34.387Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:09:35.088Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=359)
+2026-09-25T09:09:35.128Z INFO    pso_rf.experiments.runner: [digits|fold 2|pso|seed 2] test accuracy 0.9721 (evaluated once, after optimization)
+2026-09-25T09:09:35.136Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:09:35.785Z INFO    pso_rf.experiments.runner: [digits|fold 3|baseline|seed 3] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.9701
+2026-09-25T09:09:35.785Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:09:36.374Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=359)
+2026-09-25T09:09:36.415Z INFO    pso_rf.experiments.runner: [digits|fold 3|baseline|seed 3] test accuracy 0.9833 (evaluated once, after optimization)
+2026-09-25T09:09:36.417Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:12:02.259Z INFO    pso_rf.experiments.runner: [digits|fold 3|random_search|seed 3] done: best (101,9,4)=0.9757 after 210 evaluations, 210 unique fits
+2026-09-25T09:12:02.259Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:12:02.804Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=359)
+2026-09-25T09:12:02.836Z INFO    pso_rf.experiments.runner: [digits|fold 3|random_search|seed 3] test accuracy 0.9777 (evaluated once, after optimization)
+2026-09-25T09:12:02.841Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:12:10.134Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 0/20  gbest (67,9,6)=0.9701  mean=0.9494  unique fits 10  *
+2026-09-25T09:12:17.010Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 1/20  gbest (163,9,6)=0.9729  mean=0.9656  unique fits 20  *
+2026-09-25T09:12:24.375Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 2/20  gbest (163,9,6)=0.9729  mean=0.9692  unique fits 30
+2026-09-25T09:12:33.081Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 3/20  gbest (163,9,6)=0.9729  mean=0.9683  unique fits 40
+2026-09-25T09:12:43.110Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 4/20  gbest (153,9,6)=0.9736  mean=0.9683  unique fits 50  *
+2026-09-25T09:12:51.531Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 5/20  gbest (153,9,6)=0.9736  mean=0.9678  unique fits 59
+2026-09-25T09:12:59.455Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 6/20  gbest (153,9,6)=0.9736  mean=0.9686  unique fits 68
+2026-09-25T09:13:06.915Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 7/20  gbest (153,9,6)=0.9736  mean=0.9693  unique fits 77
+2026-09-25T09:13:15.442Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 8/20  gbest (153,9,6)=0.9736  mean=0.9702  unique fits 87
+2026-09-25T09:13:24.711Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 9/20  gbest (153,9,6)=0.9736  mean=0.9692  unique fits 97
+2026-09-25T09:13:33.271Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 10/20  gbest (153,9,6)=0.9736  mean=0.9687  unique fits 107
+2026-09-25T09:13:37.755Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 11/20  gbest (153,9,6)=0.9736  mean=0.9677  unique fits 112
+2026-09-25T09:13:43.137Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 12/20  gbest (153,9,6)=0.9736  mean=0.9705  unique fits 118
+2026-09-25T09:13:50.208Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 13/20  gbest (153,9,6)=0.9736  mean=0.9700  unique fits 126
+2026-09-25T09:13:57.717Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 14/20  gbest (153,9,6)=0.9736  mean=0.9688  unique fits 134
+2026-09-25T09:14:04.268Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 15/20  gbest (153,9,6)=0.9736  mean=0.9691  unique fits 141
+2026-09-25T09:14:09.153Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 16/20  gbest (153,9,6)=0.9736  mean=0.9710  unique fits 146
+2026-09-25T09:14:15.483Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 17/20  gbest (153,9,6)=0.9736  mean=0.9691  unique fits 153
+2026-09-25T09:14:20.256Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 18/20  gbest (153,9,6)=0.9736  mean=0.9700  unique fits 158
+2026-09-25T09:14:25.924Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 19/20  gbest (153,9,6)=0.9736  mean=0.9688  unique fits 164
+2026-09-25T09:14:29.453Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] iter 20/20  gbest (153,9,6)=0.9736  mean=0.9700  unique fits 168
+2026-09-25T09:14:29.453Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] done: best (153,9,6)=0.9736 after 210 evaluations, 168 unique fits
+2026-09-25T09:14:29.453Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:14:30.266Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=359)
+2026-09-25T09:14:30.319Z INFO    pso_rf.experiments.runner: [digits|fold 3|pso|seed 3] test accuracy 0.9805 (evaluated once, after optimization)
+2026-09-25T09:14:30.325Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:14:30.939Z INFO    pso_rf.experiments.runner: [digits|fold 4|baseline|seed 4] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.9764
+2026-09-25T09:14:30.939Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:14:31.534Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=359)
+2026-09-25T09:14:31.571Z INFO    pso_rf.experiments.runner: [digits|fold 4|baseline|seed 4] test accuracy 0.9721 (evaluated once, after optimization)
+2026-09-25T09:14:31.571Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:17:39.333Z INFO    pso_rf.experiments.runner: [digits|fold 4|random_search|seed 4] done: best (69,18,2)=0.9791 after 210 evaluations, 209 unique fits
+2026-09-25T09:17:39.335Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:17:39.801Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=359)
+2026-09-25T09:17:39.852Z INFO    pso_rf.experiments.runner: [digits|fold 4|random_search|seed 4] test accuracy 0.9721 (evaluated once, after optimization)
+2026-09-25T09:17:39.858Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:17:50.357Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 0/20  gbest (132,18,6)=0.9736  mean=0.9658  unique fits 10  *
+2026-09-25T09:18:00.979Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 1/20  gbest (125,19,6)=0.9757  mean=0.9711  unique fits 20  *
+2026-09-25T09:18:12.058Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 2/20  gbest (111,12,6)=0.9757  mean=0.9736  unique fits 30  *
+2026-09-25T09:18:20.884Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 3/20  gbest (111,12,6)=0.9757  mean=0.9723  unique fits 40
+2026-09-25T09:18:28.780Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 4/20  gbest (111,12,6)=0.9757  mean=0.9730  unique fits 49
+2026-09-25T09:18:37.282Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 5/20  gbest (100,16,6)=0.9771  mean=0.9729  unique fits 58  *
+2026-09-25T09:18:46.406Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 6/20  gbest (100,16,6)=0.9771  mean=0.9734  unique fits 68
+2026-09-25T09:18:55.161Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 7/20  gbest (100,16,6)=0.9771  mean=0.9740  unique fits 77
+2026-09-25T09:19:05.413Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 8/20  gbest (107,14,6)=0.9778  mean=0.9747  unique fits 87  *
+2026-09-25T09:19:15.600Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 9/20  gbest (107,14,6)=0.9778  mean=0.9737  unique fits 97
+2026-09-25T09:19:23.310Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 10/20  gbest (107,14,6)=0.9778  mean=0.9744  unique fits 104
+2026-09-25T09:19:31.718Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 11/20  gbest (107,14,6)=0.9778  mean=0.9747  unique fits 113
+2026-09-25T09:19:36.287Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 12/20  gbest (107,14,6)=0.9778  mean=0.9753  unique fits 120
+2026-09-25T09:19:41.514Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 13/20  gbest (107,14,6)=0.9778  mean=0.9748  unique fits 128
+2026-09-25T09:19:46.947Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 14/20  gbest (107,14,6)=0.9778  mean=0.9757  unique fits 136
+2026-09-25T09:19:51.652Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 15/20  gbest (107,14,6)=0.9778  mean=0.9757  unique fits 143
+2026-09-25T09:19:54.536Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 16/20  gbest (107,14,6)=0.9778  mean=0.9750  unique fits 147
+2026-09-25T09:20:00.249Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 17/20  gbest (107,14,6)=0.9778  mean=0.9748  unique fits 156
+2026-09-25T09:20:04.261Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 18/20  gbest (107,14,6)=0.9778  mean=0.9752  unique fits 162
+2026-09-25T09:20:08.152Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 19/20  gbest (107,14,6)=0.9778  mean=0.9750  unique fits 168
+2026-09-25T09:20:11.118Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] iter 20/20  gbest (107,14,6)=0.9778  mean=0.9757  unique fits 172
+2026-09-25T09:20:11.118Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] done: best (107,14,6)=0.9778 after 210 evaluations, 172 unique fits
+2026-09-25T09:20:11.118Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:20:11.726Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=359)
+2026-09-25T09:20:11.765Z INFO    pso_rf.experiments.runner: [digits|fold 4|pso|seed 4] test accuracy 0.9694 (evaluated once, after optimization)
+2026-09-25T09:20:11.773Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:20:20.851Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 0/20  gbest (200,14,4)=0.9755  mean=0.9435  unique fits 10  *
+2026-09-25T09:20:30.734Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 1/20  gbest (190,16,4)=0.9761  mean=0.9686  unique fits 19  *
+2026-09-25T09:20:43.543Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 2/20  gbest (192,13,3)=0.9761  mean=0.9739  unique fits 29  *
+2026-09-25T09:20:57.120Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 3/20  gbest (200,20,3)=0.9761  mean=0.9745  unique fits 39  *
+2026-09-25T09:21:08.153Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 4/20  gbest (200,12,3)=0.9766  mean=0.9759  unique fits 47  *
+2026-09-25T09:21:18.989Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 5/20  gbest (200,16,3)=0.9766  mean=0.9753  unique fits 55  *
+2026-09-25T09:21:27.519Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 6/20  gbest (200,16,3)=0.9766  mean=0.9753  unique fits 61
+2026-09-25T09:21:33.286Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 7/20  gbest (200,16,3)=0.9766  mean=0.9761  unique fits 65
+2026-09-25T09:21:40.217Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 8/20  gbest (168,16,3)=0.9772  mean=0.9759  unique fits 70  *
+2026-09-25T09:21:51.715Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 9/20  gbest (184,16,3)=0.9777  mean=0.9765  unique fits 79  *
+2026-09-25T09:22:04.335Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 10/20  gbest (184,16,3)=0.9777  mean=0.9762  unique fits 89
+2026-09-25T09:22:13.659Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 11/20  gbest (184,16,3)=0.9777  mean=0.9767  unique fits 96
+2026-09-25T09:22:22.124Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 12/20  gbest (184,16,3)=0.9777  mean=0.9767  unique fits 102
+2026-09-25T09:22:32.486Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 13/20  gbest (184,16,3)=0.9777  mean=0.9766  unique fits 110
+2026-09-25T09:22:42.632Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 14/20  gbest (184,16,3)=0.9777  mean=0.9767  unique fits 118
+2026-09-25T09:22:52.249Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 15/20  gbest (177,15,3)=0.9777  mean=0.9770  unique fits 126  *
+2026-09-25T09:23:01.260Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 16/20  gbest (177,15,3)=0.9777  mean=0.9756  unique fits 133
+2026-09-25T09:23:09.683Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 17/20  gbest (178,18,3)=0.9783  mean=0.9763  unique fits 140  *
+2026-09-25T09:23:21.968Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 18/20  gbest (178,18,3)=0.9783  mean=0.9768  unique fits 150
+2026-09-25T09:23:31.677Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 19/20  gbest (178,18,3)=0.9783  mean=0.9772  unique fits 158
+2026-09-25T09:23:40.150Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] iter 20/20  gbest (178,18,3)=0.9783  mean=0.9768  unique fits 165
+2026-09-25T09:23:40.150Z INFO    pso_rf.experiments.runner: [digits|deployment|pso|seed 5] done: best (178,18,3)=0.9783 after 210 evaluations, 165 unique fits
+2026-09-25T09:23:40.150Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:23:40.195Z INFO    pso_rf.experiments.runner: dataset heart_cleveland: 303 samples, fitness metric accuracy
+2026-09-25T09:23:40.240Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:23:40.821Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|baseline|seed 0] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.7974
+2026-09-25T09:23:40.822Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:23:41.023Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=61)
+2026-09-25T09:23:41.044Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|baseline|seed 0] test accuracy 0.8689 (evaluated once, after optimization)
+2026-09-25T09:23:41.048Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:24:56.465Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|random_search|seed 0] done: best (126,5,4)=0.8223 after 210 evaluations, 210 unique fits
+2026-09-25T09:24:56.465Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:24:56.846Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=61)
+2026-09-25T09:24:56.896Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|random_search|seed 0] test accuracy 0.8852 (evaluated once, after optimization)
+2026-09-25T09:24:56.900Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:25:01.041Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 0/20  gbest (197,14,7)=0.8179  mean=0.8052  unique fits 10  *
+2026-09-25T09:25:05.407Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 1/20  gbest (200,6,7)=0.8222  mean=0.8093  unique fits 20  *
+2026-09-25T09:25:09.602Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 2/20  gbest (200,6,7)=0.8222  mean=0.8085  unique fits 29
+2026-09-25T09:25:14.759Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 3/20  gbest (200,6,7)=0.8222  mean=0.8122  unique fits 39
+2026-09-25T09:25:19.313Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 4/20  gbest (200,6,7)=0.8222  mean=0.8126  unique fits 48
+2026-09-25T09:25:24.366Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 5/20  gbest (200,6,7)=0.8222  mean=0.8102  unique fits 57
+2026-09-25T09:25:29.317Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 6/20  gbest (200,6,7)=0.8222  mean=0.8143  unique fits 66
+2026-09-25T09:25:33.030Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 7/20  gbest (200,6,7)=0.8222  mean=0.8147  unique fits 73
+2026-09-25T09:25:37.354Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 8/20  gbest (200,6,7)=0.8222  mean=0.8151  unique fits 81
+2026-09-25T09:25:40.473Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 9/20  gbest (200,6,7)=0.8222  mean=0.8135  unique fits 87
+2026-09-25T09:25:43.770Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 10/20  gbest (200,6,7)=0.8222  mean=0.8127  unique fits 93
+2026-09-25T09:25:46.383Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 11/20  gbest (200,6,7)=0.8222  mean=0.8168  unique fits 98
+2026-09-25T09:25:49.645Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 12/20  gbest (200,6,7)=0.8222  mean=0.8139  unique fits 104
+2026-09-25T09:25:53.342Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 13/20  gbest (200,6,7)=0.8222  mean=0.8139  unique fits 111
+2026-09-25T09:25:55.799Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 14/20  gbest (200,6,7)=0.8222  mean=0.8127  unique fits 116
+2026-09-25T09:25:57.956Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 15/20  gbest (200,6,7)=0.8222  mean=0.8122  unique fits 120
+2026-09-25T09:26:00.085Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 16/20  gbest (200,6,7)=0.8222  mean=0.8156  unique fits 124
+2026-09-25T09:26:01.718Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 17/20  gbest (200,6,7)=0.8222  mean=0.8143  unique fits 127
+2026-09-25T09:26:03.837Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 18/20  gbest (200,6,7)=0.8222  mean=0.8143  unique fits 131
+2026-09-25T09:26:05.814Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 19/20  gbest (200,6,7)=0.8222  mean=0.8160  unique fits 135
+2026-09-25T09:26:08.333Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] iter 20/20  gbest (200,6,7)=0.8222  mean=0.8147  unique fits 140
+2026-09-25T09:26:08.333Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] done: best (200,6,7)=0.8222 after 210 evaluations, 140 unique fits
+2026-09-25T09:26:08.333Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:26:08.828Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=61)
+2026-09-25T09:26:08.867Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 0|pso|seed 0] test accuracy 0.9016 (evaluated once, after optimization)
+2026-09-25T09:26:08.874Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:26:09.162Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|baseline|seed 1] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.8431
+2026-09-25T09:26:09.162Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:26:09.375Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=61)
+2026-09-25T09:26:09.415Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|baseline|seed 1] test accuracy 0.7869 (evaluated once, after optimization)
+2026-09-25T09:26:09.418Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:27:21.420Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|random_search|seed 1] done: best (131,16,2)=0.8513 after 210 evaluations, 209 unique fits
+2026-09-25T09:27:21.422Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:27:21.665Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=61)
+2026-09-25T09:27:21.709Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|random_search|seed 1] test accuracy 0.7869 (evaluated once, after optimization)
+2026-09-25T09:27:21.713Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:27:24.970Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 0/20  gbest (118,4,5)=0.8432  mean=0.8333  unique fits 10  *
+2026-09-25T09:27:28.366Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 1/20  gbest (118,4,5)=0.8432  mean=0.8333  unique fits 20
+2026-09-25T09:27:31.254Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 2/20  gbest (118,4,5)=0.8432  mean=0.8337  unique fits 29
+2026-09-25T09:27:34.147Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 3/20  gbest (118,4,5)=0.8432  mean=0.8349  unique fits 38
+2026-09-25T09:27:36.945Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 4/20  gbest (118,4,5)=0.8432  mean=0.8382  unique fits 47
+2026-09-25T09:27:40.005Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 5/20  gbest (118,4,5)=0.8432  mean=0.8304  unique fits 56
+2026-09-25T09:27:42.821Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 6/20  gbest (117,4,5)=0.8473  mean=0.8374  unique fits 65  *
+2026-09-25T09:27:45.961Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 7/20  gbest (117,4,5)=0.8473  mean=0.8340  unique fits 75
+2026-09-25T09:27:48.280Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 8/20  gbest (117,4,5)=0.8473  mean=0.8349  unique fits 82
+2026-09-25T09:27:51.365Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 9/20  gbest (117,4,5)=0.8473  mean=0.8341  unique fits 91
+2026-09-25T09:27:54.491Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 10/20  gbest (117,4,5)=0.8473  mean=0.8329  unique fits 100
+2026-09-25T09:27:57.069Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 11/20  gbest (117,4,5)=0.8473  mean=0.8333  unique fits 107
+2026-09-25T09:27:59.950Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 12/20  gbest (117,4,5)=0.8473  mean=0.8353  unique fits 115
+2026-09-25T09:28:02.129Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 13/20  gbest (117,4,5)=0.8473  mean=0.8378  unique fits 121
+2026-09-25T09:28:04.664Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 14/20  gbest (117,4,5)=0.8473  mean=0.8341  unique fits 129
+2026-09-25T09:28:06.512Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 15/20  gbest (117,4,5)=0.8473  mean=0.8316  unique fits 136
+2026-09-25T09:28:08.536Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 16/20  gbest (117,4,5)=0.8473  mean=0.8382  unique fits 142
+2026-09-25T09:28:10.012Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 17/20  gbest (117,4,5)=0.8473  mean=0.8345  unique fits 146
+2026-09-25T09:28:11.867Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 18/20  gbest (117,4,5)=0.8473  mean=0.8366  unique fits 151
+2026-09-25T09:28:14.148Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 19/20  gbest (117,4,5)=0.8473  mean=0.8374  unique fits 158
+2026-09-25T09:28:16.623Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] iter 20/20  gbest (117,4,5)=0.8473  mean=0.8386  unique fits 165
+2026-09-25T09:28:16.623Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] done: best (117,4,5)=0.8473 after 210 evaluations, 165 unique fits
+2026-09-25T09:28:16.623Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:28:16.825Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=61)
+2026-09-25T09:28:16.876Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 1|pso|seed 1] test accuracy 0.8033 (evaluated once, after optimization)
+2026-09-25T09:28:16.883Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:28:17.178Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|baseline|seed 2] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.8054
+2026-09-25T09:28:17.179Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:28:17.402Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=61)
+2026-09-25T09:28:17.440Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|baseline|seed 2] test accuracy 0.8525 (evaluated once, after optimization)
+2026-09-25T09:28:17.443Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:29:31.613Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|random_search|seed 2] done: best (101,2,5)=0.8384 after 210 evaluations, 210 unique fits
+2026-09-25T09:29:31.613Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:29:31.822Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=61)
+2026-09-25T09:29:31.866Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|random_search|seed 2] test accuracy 0.8033 (evaluated once, after optimization)
+2026-09-25T09:29:31.866Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:29:35.281Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 0/20  gbest (109,5,5)=0.8176  mean=0.8098  unique fits 10  *
+2026-09-25T09:29:38.590Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 1/20  gbest (121,14,7)=0.8217  mean=0.8098  unique fits 20  *
+2026-09-25T09:29:41.973Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 2/20  gbest (101,13,7)=0.8218  mean=0.8119  unique fits 30  *
+2026-09-25T09:29:45.333Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 3/20  gbest (101,13,7)=0.8218  mean=0.8102  unique fits 40
+2026-09-25T09:29:48.428Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 4/20  gbest (118,11,7)=0.8259  mean=0.8110  unique fits 50  *
+2026-09-25T09:29:51.028Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 5/20  gbest (118,11,7)=0.8259  mean=0.8134  unique fits 59
+2026-09-25T09:29:53.949Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 6/20  gbest (118,11,7)=0.8259  mean=0.8118  unique fits 69
+2026-09-25T09:29:57.407Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 7/20  gbest (118,11,7)=0.8259  mean=0.8135  unique fits 79
+2026-09-25T09:30:00.672Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 8/20  gbest (118,11,7)=0.8259  mean=0.8155  unique fits 89
+2026-09-25T09:30:03.964Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 9/20  gbest (118,11,7)=0.8259  mean=0.8147  unique fits 99
+2026-09-25T09:30:06.980Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 10/20  gbest (118,11,7)=0.8259  mean=0.8176  unique fits 108
+2026-09-25T09:30:10.170Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 11/20  gbest (118,11,7)=0.8259  mean=0.8197  unique fits 118
+2026-09-25T09:30:14.452Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 12/20  gbest (118,11,7)=0.8259  mean=0.8188  unique fits 127
+2026-09-25T09:30:16.520Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 13/20  gbest (116,2,7)=0.8342  mean=0.8234  unique fits 133  *
+2026-09-25T09:30:19.132Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 14/20  gbest (103,2,7)=0.8384  mean=0.8205  unique fits 141  *
+2026-09-25T09:30:22.176Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 15/20  gbest (103,2,7)=0.8384  mean=0.8176  unique fits 151
+2026-09-25T09:30:23.797Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 16/20  gbest (106,2,7)=0.8425  mean=0.8235  unique fits 157  *
+2026-09-25T09:30:26.352Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 17/20  gbest (106,2,7)=0.8425  mean=0.8234  unique fits 166
+2026-09-25T09:30:28.269Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 18/20  gbest (106,2,7)=0.8425  mean=0.8263  unique fits 174
+2026-09-25T09:30:30.861Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 19/20  gbest (106,2,7)=0.8425  mean=0.8243  unique fits 183
+2026-09-25T09:30:33.554Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] iter 20/20  gbest (106,2,7)=0.8425  mean=0.8226  unique fits 192
+2026-09-25T09:30:33.554Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] done: best (106,2,7)=0.8425 after 210 evaluations, 192 unique fits
+2026-09-25T09:30:33.556Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:30:33.739Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=61)
+2026-09-25T09:30:33.765Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 2|pso|seed 2] test accuracy 0.8033 (evaluated once, after optimization)
+2026-09-25T09:30:33.770Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:30:34.070Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|baseline|seed 3] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.8105
+2026-09-25T09:30:34.070Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:30:34.258Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=60)
+2026-09-25T09:30:34.293Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|baseline|seed 3] test accuracy 0.8000 (evaluated once, after optimization)
+2026-09-25T09:30:34.296Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:31:40.095Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|random_search|seed 3] done: best (143,4,10)=0.8474 after 210 evaluations, 210 unique fits
+2026-09-25T09:31:40.095Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:31:40.361Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=60)
+2026-09-25T09:31:40.401Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|random_search|seed 3] test accuracy 0.8000 (evaluated once, after optimization)
+2026-09-25T09:31:40.403Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:31:44.056Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 0/20  gbest (184,13,6)=0.8434  mean=0.8327  unique fits 10  *
+2026-09-25T09:31:48.047Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 1/20  gbest (184,13,6)=0.8434  mean=0.8335  unique fits 20
+2026-09-25T09:31:52.406Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 2/20  gbest (184,13,6)=0.8434  mean=0.8364  unique fits 30
+2026-09-25T09:31:56.829Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 3/20  gbest (184,13,6)=0.8434  mean=0.8372  unique fits 40
+2026-09-25T09:32:01.152Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 4/20  gbest (184,13,6)=0.8434  mean=0.8397  unique fits 49
+2026-09-25T09:32:05.855Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 5/20  gbest (188,14,6)=0.8474  mean=0.8364  unique fits 58  *
+2026-09-25T09:32:10.538Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 6/20  gbest (188,14,6)=0.8474  mean=0.8380  unique fits 67
+2026-09-25T09:32:15.875Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 7/20  gbest (188,14,6)=0.8474  mean=0.8372  unique fits 77
+2026-09-25T09:32:20.040Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 8/20  gbest (188,14,6)=0.8474  mean=0.8413  unique fits 85
+2026-09-25T09:32:24.010Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 9/20  gbest (188,14,6)=0.8474  mean=0.8409  unique fits 93
+2026-09-25T09:32:27.388Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 10/20  gbest (188,14,6)=0.8474  mean=0.8409  unique fits 100
+2026-09-25T09:32:31.556Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 11/20  gbest (188,14,6)=0.8474  mean=0.8397  unique fits 109
+2026-09-25T09:32:34.463Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 12/20  gbest (188,14,6)=0.8474  mean=0.8392  unique fits 115
+2026-09-25T09:32:37.878Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 13/20  gbest (188,14,6)=0.8474  mean=0.8413  unique fits 122
+2026-09-25T09:32:41.489Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 14/20  gbest (188,14,6)=0.8474  mean=0.8388  unique fits 130
+2026-09-25T09:32:44.672Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 15/20  gbest (188,14,6)=0.8474  mean=0.8421  unique fits 137
+2026-09-25T09:32:47.907Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 16/20  gbest (188,14,6)=0.8474  mean=0.8401  unique fits 144
+2026-09-25T09:32:50.131Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 17/20  gbest (188,14,6)=0.8474  mean=0.8401  unique fits 149
+2026-09-25T09:32:52.678Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 18/20  gbest (188,14,6)=0.8474  mean=0.8393  unique fits 154
+2026-09-25T09:32:56.388Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 19/20  gbest (188,14,6)=0.8474  mean=0.8417  unique fits 161
+2026-09-25T09:32:58.506Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] iter 20/20  gbest (188,14,6)=0.8474  mean=0.8425  unique fits 165
+2026-09-25T09:32:58.506Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] done: best (188,14,6)=0.8474 after 210 evaluations, 165 unique fits
+2026-09-25T09:32:58.506Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:32:58.994Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=60)
+2026-09-25T09:32:59.094Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 3|pso|seed 3] test accuracy 0.7833 (evaluated once, after optimization)
+2026-09-25T09:32:59.100Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:32:59.415Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|baseline|seed 4] baseline {'n_estimators': 100, 'max_depth': None, 'min_samples_split': 2}: validation accuracy 0.8068
+2026-09-25T09:32:59.415Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:32:59.682Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=60)
+2026-09-25T09:32:59.730Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|baseline|seed 4] test accuracy 0.8500 (evaluated once, after optimization)
+2026-09-25T09:32:59.732Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:34:16.392Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|random_search|seed 4] done: best (196,3,6)=0.8478 after 210 evaluations, 209 unique fits
+2026-09-25T09:34:16.394Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:34:16.786Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=60)
+2026-09-25T09:34:16.834Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|random_search|seed 4] test accuracy 0.8500 (evaluated once, after optimization)
+2026-09-25T09:34:16.838Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:34:20.486Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 0/20  gbest (170,5,9)=0.8233  mean=0.8167  unique fits 10  *
+2026-09-25T09:34:24.583Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 1/20  gbest (155,7,6)=0.8234  mean=0.8163  unique fits 20  *
+2026-09-25T09:34:28.531Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 2/20  gbest (112,6,8)=0.8275  mean=0.8221  unique fits 30  *
+2026-09-25T09:34:32.297Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 3/20  gbest (134,3,9)=0.8396  mean=0.8278  unique fits 40  *
+2026-09-25T09:34:35.716Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 4/20  gbest (113,3,8)=0.8479  mean=0.8294  unique fits 49  *
+2026-09-25T09:34:39.030Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 5/20  gbest (113,3,8)=0.8479  mean=0.8285  unique fits 59
+2026-09-25T09:34:42.168Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 6/20  gbest (113,3,8)=0.8479  mean=0.8331  unique fits 68
+2026-09-25T09:34:44.780Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 7/20  gbest (113,3,8)=0.8479  mean=0.8294  unique fits 77
+2026-09-25T09:34:47.480Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 8/20  gbest (113,3,8)=0.8479  mean=0.8368  unique fits 86
+2026-09-25T09:34:49.851Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 9/20  gbest (113,3,8)=0.8479  mean=0.8360  unique fits 94
+2026-09-25T09:34:52.226Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 10/20  gbest (113,3,8)=0.8479  mean=0.8310  unique fits 102
+2026-09-25T09:34:55.132Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 11/20  gbest (113,3,8)=0.8479  mean=0.8319  unique fits 112
+2026-09-25T09:34:56.995Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 12/20  gbest (113,3,8)=0.8479  mean=0.8335  unique fits 118
+2026-09-25T09:34:59.065Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 13/20  gbest (113,3,8)=0.8479  mean=0.8359  unique fits 125
+2026-09-25T09:35:01.203Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 14/20  gbest (113,3,8)=0.8479  mean=0.8380  unique fits 132
+2026-09-25T09:35:03.043Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 15/20  gbest (113,3,8)=0.8479  mean=0.8380  unique fits 138
+2026-09-25T09:35:04.545Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 16/20  gbest (113,3,8)=0.8479  mean=0.8376  unique fits 143
+2026-09-25T09:35:07.109Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 17/20  gbest (113,3,8)=0.8479  mean=0.8355  unique fits 151
+2026-09-25T09:35:08.048Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 18/20  gbest (113,3,8)=0.8479  mean=0.8380  unique fits 154
+2026-09-25T09:35:08.800Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 19/20  gbest (113,3,8)=0.8479  mean=0.8405  unique fits 156
+2026-09-25T09:35:09.764Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] iter 20/20  gbest (113,3,8)=0.8479  mean=0.8425  unique fits 159
+2026-09-25T09:35:09.766Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] done: best (113,3,8)=0.8479 after 210 evaluations, 159 unique fits
+2026-09-25T09:35:09.766Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:35:09.970Z DEBUG   pso_rf.evaluation.splits: held-out test set revealed (n=60)
+2026-09-25T09:35:10.015Z INFO    pso_rf.experiments.runner: [heart_cleveland|fold 4|pso|seed 4] test accuracy 0.8500 (evaluated once, after optimization)
+2026-09-25T09:35:10.020Z DEBUG   pso_rf.evaluation.splits: optimization phase opened (depth 1)
+2026-09-25T09:35:14.032Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 0/20  gbest (111,3,2)=0.8385  mean=0.8299  unique fits 10  *
+2026-09-25T09:35:18.017Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 1/20  gbest (111,3,2)=0.8385  mean=0.8246  unique fits 20
+2026-09-25T09:35:22.185Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 2/20  gbest (107,3,4)=0.8417  mean=0.8283  unique fits 30  *
+2026-09-25T09:35:25.997Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 3/20  gbest (107,3,4)=0.8417  mean=0.8273  unique fits 40
+2026-09-25T09:35:29.980Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 4/20  gbest (110,3,4)=0.8450  mean=0.8266  unique fits 50  *
+2026-09-25T09:35:34.181Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 5/20  gbest (110,3,4)=0.8450  mean=0.8332  unique fits 60
+2026-09-25T09:35:38.330Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 6/20  gbest (110,3,4)=0.8450  mean=0.8328  unique fits 70
+2026-09-25T09:35:41.389Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 7/20  gbest (110,3,4)=0.8450  mean=0.8322  unique fits 78
+2026-09-25T09:35:44.627Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 8/20  gbest (110,3,4)=0.8450  mean=0.8318  unique fits 88
+2026-09-25T09:35:46.513Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 9/20  gbest (110,3,4)=0.8450  mean=0.8319  unique fits 94
+2026-09-25T09:35:48.789Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 10/20  gbest (110,3,4)=0.8450  mean=0.8332  unique fits 101
+2026-09-25T09:35:50.196Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 11/20  gbest (110,3,4)=0.8450  mean=0.8348  unique fits 105
+2026-09-25T09:35:51.472Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 12/20  gbest (110,3,4)=0.8450  mean=0.8325  unique fits 109
+2026-09-25T09:35:53.197Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 13/20  gbest (110,3,4)=0.8450  mean=0.8322  unique fits 114
+2026-09-25T09:35:55.194Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 14/20  gbest (110,3,4)=0.8450  mean=0.8342  unique fits 120
+2026-09-25T09:35:57.156Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 15/20  gbest (110,3,4)=0.8450  mean=0.8348  unique fits 126
+2026-09-25T09:35:59.345Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 16/20  gbest (110,3,4)=0.8450  mean=0.8335  unique fits 133
+2026-09-25T09:36:01.087Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 17/20  gbest (110,3,4)=0.8450  mean=0.8361  unique fits 138
+2026-09-25T09:36:03.061Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 18/20  gbest (110,3,4)=0.8450  mean=0.8371  unique fits 144
+2026-09-25T09:36:04.655Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 19/20  gbest (110,3,4)=0.8450  mean=0.8381  unique fits 149
+2026-09-25T09:36:05.845Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] iter 20/20  gbest (110,3,4)=0.8450  mean=0.8355  unique fits 153
+2026-09-25T09:36:05.845Z INFO    pso_rf.experiments.runner: [heart_cleveland|deployment|pso|seed 5] done: best (110,3,4)=0.8450 after 210 evaluations, 153 unique fits
+2026-09-25T09:36:05.845Z DEBUG   pso_rf.evaluation.splits: optimization phase closed (depth 0)
+2026-09-25T09:36:06.029Z INFO    pso_rf.experiments.runner: experiment 20260925-083324_default completed in 3761.7 s: results\20260925-083324_default

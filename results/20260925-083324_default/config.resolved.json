@@ -1,0 +1,92 @@
+{
+  "experiment": {
+    "name": "default",
+    "datasets": [
+      "iris",
+      "digits",
+      "heart_cleveland"
+    ],
+    "methods": [
+      "baseline",
+      "random_search",
+      "pso"
+    ],
+    "deployment_run": true,
+    "results_dir": "results",
+    "plots_dir": "plots",
+    "data_dir": "data",
+    "folds": null
+  },
+  "split": {
+    "outer_folds": 5,
+    "outer_seed": 42,
+    "inner_folds": 5,
+    "run_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "deployment_seed": 5
+  },
+  "fitness": {
+    "metric": "accuracy",
+    "class_ratio_gate": 1.5,
+    "diagnostics": [
+      "balanced_accuracy",
+      "f1_macro"
+    ],
+    "cache": true,
+    "n_jobs_folds": 5
+  },
+  "search_space": {
+    "n_estimators": {
+      "low": 50,
+      "high": 200
+    },
+    "max_depth": {
+      "low": 2,
+      "high": 20
+    },
+    "min_samples_split": {
+      "low": 2,
+      "high": 10
+    }
+  },
+  "pso": {
+    "n_particles": 10,
+    "max_iter": 20,
+    "w": 0.7298,
+    "c1": 1.49618,
+    "c2": 1.49618,
+    "v_max_frac": 0.2,
+    "v_init_frac": 0.1,
+    "boundary": "absorb",
+    "topology": "gbest",
+    "update": "synchronous",
+    "patience": {
+      "enabled": false,
+      "tol": 0.0001,
+      "iterations": 5
+    }
+  },
+  "random_search": {
+    "budget": 210
+  },
+  "random_forest": {
+    "n_jobs": 1
+  },
+  "baseline": {
+    "params": {}
+  },
+  "datasets": {
+    "iris": {},
+    "digits": {},
+    "heart_cleveland": {
+      "preprocessing": {
+        "impute": "most_frequent"
+      }
+    }
+  }
+}

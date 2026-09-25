@@ -1,0 +1,183 @@
+{
+  "exp_id": "20260925-083324_default",
+  "dataset": "digits",
+  "method": "pso",
+  "run_id": "fold_0",
+  "outer_fold": 0,
+  "seed": 0,
+  "best_hyperparameters": {
+    "n_estimators": 152,
+    "max_depth": 19,
+    "min_samples_split": 2
+  },
+  "best_validation_fitness": 0.9728561749903213,
+  "validation_cv_scores": [
+    0.9826388888888888,
+    0.96875,
+    0.9581881533101045,
+    0.9790940766550522,
+    0.975609756097561
+  ],
+  "fitness_metric": "accuracy",
+  "best_found_at_eval": 36,
+  "best_found_at_iteration": 3,
+  "n_evaluations": 210,
+  "n_unique_fits": 135,
+  "n_iterations": 20,
+  "stop_reason": "max_iter",
+  "convergence_iteration": 3,
+  "convergence_status": "plateaued",
+  "n_ties_with_best": 33,
+  "boundary_hits": [
+    "min_samples_split"
+  ],
+  "test_metrics": {
+    "accuracy": 0.9777777777777777,
+    "balanced_accuracy": 0.9776941226941226,
+    "precision_macro": 0.978203842940685,
+    "recall_macro": 0.9776941226941226,
+    "f1_macro": 0.9776070642240982,
+    "positive_class_precision": null,
+    "positive_class_recall": null,
+    "positive_class_f1": null,
+    "confusion_matrix": [
+      [
+        36,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        36,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        36,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        33,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        36,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        35,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        36,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        36,
+        0,
+        0
+      ],
+      [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        33,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        35
+      ]
+    ],
+    "labels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "n_opt_samples": 1437,
+  "n_test_samples": 360,
+  "optimization_finished_at": "2026-09-25T08:55:44.170Z",
+  "test_evaluated_at": "2026-09-25T08:55:45.585Z",
+  "total_time_s": 195.10286970000016
+}

@@ -13,7 +13,10 @@ Evolutionary Optimization mini-project: Anush Ramesh (CB.EN.U4ELC23005), EEE, Am
 
 ## Status
 
-Implementation in progress; no results yet. The design is fixed in the documents listed below.
+Implemented and run. The full experiment (3 datasets × 5 outer folds × {default RF, random search, PSO}) is in
+`results/20260925-083324_default/` (verified), with figures in `plots/20260925-083324_default/` and the write-up in
+[report/REPORT.md](report/REPORT.md). Headline: PSO **maintains** the default Random Forest's test accuracy and
+ties an equal-budget random search on this 3-variable space, while needing 10–24% fewer model fits.
 
 ## Installation
 

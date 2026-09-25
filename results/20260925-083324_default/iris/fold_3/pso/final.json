@@ -1,0 +1,71 @@
+{
+  "exp_id": "20260925-083324_default",
+  "dataset": "iris",
+  "method": "pso",
+  "run_id": "fold_3",
+  "outer_fold": 3,
+  "seed": 3,
+  "best_hyperparameters": {
+    "n_estimators": 67,
+    "max_depth": 2,
+    "min_samples_split": 8
+  },
+  "best_validation_fitness": 0.95,
+  "validation_cv_scores": [
+    0.9166666666666666,
+    1.0,
+    0.9583333333333334,
+    0.9583333333333334,
+    0.9166666666666666
+  ],
+  "fitness_metric": "accuracy",
+  "best_found_at_eval": 49,
+  "best_found_at_iteration": 4,
+  "n_evaluations": 210,
+  "n_unique_fits": 184,
+  "n_iterations": 20,
+  "stop_reason": "max_iter",
+  "convergence_iteration": 4,
+  "convergence_status": "plateaued",
+  "n_ties_with_best": 37,
+  "boundary_hits": [
+    "max_depth"
+  ],
+  "test_metrics": {
+    "accuracy": 1.0,
+    "balanced_accuracy": 1.0,
+    "precision_macro": 1.0,
+    "recall_macro": 1.0,
+    "f1_macro": 1.0,
+    "positive_class_precision": null,
+    "positive_class_recall": null,
+    "positive_class_f1": null,
+    "confusion_matrix": [
+      [
+        10,
+        0,
+        0
+      ],
+      [
+        0,
+        10,
+        0
+      ],
+      [
+        0,
+        0,
+        10
+      ]
+    ],
+    "labels": [
+      0,
+      1,
+      2
+    ]
+  },
+  "n_opt_samples": 120,
+  "n_test_samples": 30,
+  "optimization_finished_at": "2026-09-25T08:41:58.960Z",
+  "test_evaluated_at": "2026-09-25T08:41:59.153Z",
+  "total_time_s": 72.68628609995358
+}

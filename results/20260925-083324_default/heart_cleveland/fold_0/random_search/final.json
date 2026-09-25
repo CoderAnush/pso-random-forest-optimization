@@ -1,0 +1,61 @@
+{
+  "exp_id": "20260925-083324_default",
+  "dataset": "heart_cleveland",
+  "method": "random_search",
+  "run_id": "fold_0",
+  "outer_fold": 0,
+  "seed": 0,
+  "best_hyperparameters": {
+    "n_estimators": 126,
+    "max_depth": 5,
+    "min_samples_split": 4
+  },
+  "best_validation_fitness": 0.8222789115646257,
+  "validation_cv_scores": [
+    0.8163265306122449,
+    0.8367346938775511,
+    0.875,
+    0.7916666666666666,
+    0.7916666666666666
+  ],
+  "fitness_metric": "accuracy",
+  "best_found_at_eval": 160,
+  "best_found_at_iteration": null,
+  "n_evaluations": 210,
+  "n_unique_fits": 210,
+  "n_iterations": null,
+  "stop_reason": "budget",
+  "convergence_iteration": null,
+  "convergence_status": null,
+  "n_ties_with_best": 1,
+  "boundary_hits": [],
+  "test_metrics": {
+    "accuracy": 0.8852459016393442,
+    "balanced_accuracy": 0.8831168831168831,
+    "precision_macro": 0.8856209150326797,
+    "recall_macro": 0.8831168831168831,
+    "f1_macro": 0.8841248303934871,
+    "positive_class_precision": 0.8888888888888888,
+    "positive_class_recall": 0.8571428571428571,
+    "positive_class_f1": 0.8727272727272727,
+    "confusion_matrix": [
+      [
+        30,
+        3
+      ],
+      [
+        4,
+        24
+      ]
+    ],
+    "labels": [
+      0,
+      1
+    ]
+  },
+  "n_opt_samples": 242,
+  "n_test_samples": 61,
+  "optimization_finished_at": "2026-09-25T09:24:56.465Z",
+  "test_evaluated_at": "2026-09-25T09:24:56.887Z",
+  "total_time_s": 75.84176419995492
+}

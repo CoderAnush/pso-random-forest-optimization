@@ -1,0 +1,48 @@
+{
+  "dataset": "heart_cleveland",
+  "n_samples": 303,
+  "n_features": 13,
+  "n_classes": 2,
+  "class_counts": {
+    "0": 164,
+    "1": 139
+  },
+  "class_ratio": 1.1798561151079137,
+  "fitness_metric": "accuracy",
+  "missing_per_feature": {
+    "age": 0,
+    "sex": 0,
+    "cp": 0,
+    "trestbps": 0,
+    "chol": 0,
+    "fbs": 0,
+    "restecg": 0,
+    "thalach": 0,
+    "exang": 0,
+    "oldpeak": 0,
+    "slope": 0,
+    "ca": 4,
+    "thal": 2
+  },
+  "n_duplicate_rows": 0,
+  "duplicates_removed": false,
+  "feature_names": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "class_names": [
+    "no_disease",
+    "disease"
+  ]
+}

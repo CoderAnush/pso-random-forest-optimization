@@ -51,7 +51,9 @@ def _layout(fig: go.Figure, title: str | None = None, height: int = 360, **kw: A
     return fig
 
 
-def convergence(iterations: Sequence[Mapping[str, Any]], title: str = "Convergence") -> go.Figure:
+def convergence(
+    iterations: Sequence[Mapping[str, Any]], title: str = "Convergence", band_label: str = "swarm min–max"
+) -> go.Figure:
     """gbest (the fitness fed back and remembered), swarm mean and the min–max band per iteration."""
     frame = pd.DataFrame(iterations)
     fig = go.Figure()
@@ -74,7 +76,7 @@ def convergence(iterations: Sequence[Mapping[str, Any]], title: str = "Convergen
                 line={"width": 0},
                 fill="tonexty",
                 fillcolor="rgba(42,120,214,0.12)",
-                name="swarm min–max",
+                name=band_label,
                 hoverinfo="skip",
             )
         )
@@ -103,7 +105,8 @@ def convergence(iterations: Sequence[Mapping[str, Any]], title: str = "Convergen
                 "(%{customdata[0]}, %{customdata[1]}, %{customdata[2]})<extra></extra>",
             )
         )
-    fig.update_xaxes(title="PSO iteration", dtick=1 if len(frame) <= 21 else None)
+    last = int(frame.iteration.max()) if not frame.empty else 1
+    fig.update_xaxes(title="PSO iteration", dtick=1 if last <= 10 else 2, range=[-0.4, last + 0.4])
     fig.update_yaxes(title="validation accuracy (inner 5-fold CV)", tickformat=".3f")
     return _layout(fig, title)
 

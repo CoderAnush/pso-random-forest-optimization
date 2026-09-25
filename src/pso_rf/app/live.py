@@ -214,20 +214,22 @@ def render() -> None:
         st.subheader("Live run settings")
         label = st.selectbox("Dataset", list(DATASET_LABEL.values()), index=2, key="live_ds")
         dataset = next(k for k, v in DATASET_LABEL.items() if v == label)
-        fold = st.select_slider("Outer fold (its test part stays sealed)", options=[0, 1, 2, 3, 4], value=0)
-        n_particles = st.slider("Particles (N)", 4, 15, 10)
-        max_iter = st.slider("Iterations (T)", 2, 20, 8)
-        seed = st.number_input(
-            "Run seed", 0, 10_000, value=fold, help="Drives PSO, inner folds and RF seeds."
+        fold = st.select_slider(
+            "Outer fold (its test part stays sealed)", options=[0, 1, 2, 3, 4], value=0, key="live_fold"
         )
-        race = st.toggle("Race against random search (same budget)", value=True)
+        n_particles = st.slider("Particles (N)", 4, 15, 10, key="live_n")
+        max_iter = st.slider("Iterations (T)", 2, 20, 8, key="live_t")
+        seed = st.number_input(
+            "Run seed", 0, 10_000, value=fold, help="Drives PSO, inner folds and RF seeds.", key="live_seed"
+        )
+        race = st.toggle("Race against random search (same budget)", value=True, key="live_race")
         with st.expander("Manual tuning challenge"):
             st.caption("Pick a configuration by hand; it is scored exactly like a PSO candidate.")
-            manual_on = st.checkbox("Include my manual pick", value=True)
+            manual_on = st.checkbox("Include my manual pick", value=True, key="live_manual_on")
             manual = {
-                "n_estimators": st.slider("n_estimators", 50, 200, 60),
-                "max_depth": st.slider("max_depth", 2, 20, 3),
-                "min_samples_split": st.slider("min_samples_split", 2, 10, 10),
+                "n_estimators": st.slider("n_estimators", 50, 200, 60, key="live_m_n"),
+                "max_depth": st.slider("max_depth", 2, 20, 3, key="live_m_d"),
+                "min_samples_split": st.slider("min_samples_split", 2, 10, 10, key="live_m_s"),
             }
         budget = n_particles * (max_iter + 1)
         estimate = budget * T_EVAL_MID[dataset] * (2 if race else 1) + 2
@@ -338,6 +340,8 @@ def _draw_snapshot(snap: dict[str, Any], slots: dict[str, Any]) -> None:
             "update",
             iteration=last["iteration"] if last else None,
             total_iterations=snap["max_iter"],
+            config=pso["best_hyperparameters"],
+            fitness=pso["best_validation_fitness"],
             gbest=pso["best_hyperparameters"],
             gbest_fitness=pso["best_validation_fitness"],
         ),

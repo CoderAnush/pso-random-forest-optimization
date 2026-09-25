@@ -75,12 +75,12 @@ The live lab runs the experiment's own `run_fold`, so what is shown is exactly w
 
 | Item | Evidence file | Status |
 |---|---|---|
-| Closed-loop diagram with feedback and separated test lane | ARCHITECTURE §A/§C → F1, F2 | designed (P0) |
-| Loop implemented and wired | `experiments/runner.py`; IT-01, IT-03 | pending (P8) |
-| Feedback dependence proven | IT-02 | pending (P7) |
-| Test isolation proven | UT-15, IT-04…IT-07, ET-04 | pending (P4, P8, P11) |
-| Convergence data and plots | `iterations.csv`, F3, F7, F8, F11 | pending (P9, P12) |
-| Baseline and random-search comparison | `summary.csv`, T2, F4, F5, F9 | pending (P11, P12) |
-| Multi-dataset results | `summary.csv` across 3 datasets | pending (P14) |
-| Reproducibility demonstrated | manifest and re-run comparison | pending (P14) |
-| Slides ≤ 10, numbers cited | report / deck | pending (P15) |
+| Closed-loop diagram with feedback and separated test lane | ARCHITECTURE §A/§C → F1, F2 | done: ARCHITECTURE diagrams; live in the demo's loop diagram |
+| Loop implemented and wired | `experiments/runner.py`; IT-01, IT-03 | done: IT-01, IT-03 pass |
+| Feedback dependence proven | IT-02 | done: IT-02 passes; demo's feedback ablation |
+| Test isolation proven | UT-15, IT-04…IT-07, ET-04 | done: all pass; `verify` log check passes |
+| Convergence data and plots | `iterations.csv`, F3, F7, F8, F11 | done: `plots/20260925-083324_default/` |
+| Baseline and random-search comparison | `summary.csv`, T2, F4, F5, F9 | done: T2, F4, F5, F9 (report) |
+| Multi-dataset results | `summary.csv` across 3 datasets | done: `results/20260925-083324_default` |
+| Reproducibility demonstrated | manifest and re-run comparison | done: see report/REPORT.md §8 |
+| Slides ≤ 10, numbers cited | report / deck | report done (`report/REPORT.md`); deck pending |

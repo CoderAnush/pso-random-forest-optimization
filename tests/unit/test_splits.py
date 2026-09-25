@@ -152,3 +152,34 @@ def test_reveal_returns_copies_that_cannot_alter_the_sealed_data(sealed: HeldOut
     X_again, y_again = sealed.reveal()
     np.testing.assert_array_equal(X_again, np.arange(12.0).reshape(6, 2))
     np.testing.assert_array_equal(y_again, [0, 1, 0, 1, 0, 1])
+
+
+def test_phase_is_per_thread() -> None:
+    """A search open in one thread (e.g. another Streamlit session) must not block another thread's
+    evaluation, while the thread that opened the phase stays blocked."""
+    import threading
+
+    test = HeldOutTestSet(np.zeros((2, 1)), np.array([0, 1]), np.array([0, 1]))
+    opened, release, outcome = threading.Event(), threading.Event(), {}
+
+    def other_session() -> None:
+        with OptimizationPhase():
+            opened.set()
+            try:
+                test.reveal()
+                outcome["inside"] = "readable"
+            except TestSetAccessError:
+                outcome["inside"] = "blocked"
+            release.wait(5)
+
+    worker = threading.Thread(target=other_session)
+    worker.start()
+    assert opened.wait(5)
+    try:
+        assert not optimization_phase_active()  # this thread has no open phase
+        X, _ = test.reveal()  # so its final evaluation may read the test fold
+        assert len(X) == 2
+    finally:
+        release.set()
+        worker.join(5)
+    assert outcome["inside"] == "blocked"

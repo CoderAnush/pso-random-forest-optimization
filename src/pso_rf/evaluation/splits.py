@@ -8,6 +8,7 @@ is open.
 from __future__ import annotations
 
 import logging
+import threading
 from dataclasses import dataclass
 from types import TracebackType
 
@@ -18,7 +19,14 @@ from pso_rf.datasets.base import DatasetBundle
 
 log = logging.getLogger(__name__)
 
-_phase_depth = 0  # process-wide count of open OptimizationPhase contexts
+# Open OptimizationPhase contexts, counted per thread: a phase guards the flow of control that opened it.
+# Streamlit serves several browser sessions from one process on separate threads, so a process-wide flag would
+# let one session's search block another session's legitimate final evaluation (ADR-024).
+_state = threading.local()
+
+
+def _depth() -> int:
+    return getattr(_state, "depth", 0)
 
 
 class TestSetAccessError(RuntimeError):
@@ -28,20 +36,20 @@ class TestSetAccessError(RuntimeError):
 
 
 def optimization_phase_active() -> bool:
-    """True while at least one :class:`OptimizationPhase` context is open."""
-    return _phase_depth > 0
+    """True while at least one :class:`OptimizationPhase` context is open in the current thread."""
+    return _depth() > 0
 
 
 class OptimizationPhase:
     """Context manager for the optimization phase: :meth:`HeldOutTestSet.reveal` raises inside it.
 
-    Nesting is safe (a depth counter), and the state is restored even when the block raises.
+    The phase is per thread (it guards the code that opened it); nesting is safe (a depth counter), and the
+    state is restored even when the block raises.
     """
 
     def __enter__(self) -> OptimizationPhase:
-        global _phase_depth
-        _phase_depth += 1
-        log.debug("optimization phase opened (depth %d)", _phase_depth)
+        _state.depth = _depth() + 1
+        log.debug("optimization phase opened (depth %d)", _state.depth)
         return self
 
     def __exit__(
@@ -50,11 +58,10 @@ class OptimizationPhase:
         exc: BaseException | None,
         traceback: TracebackType | None,
     ) -> None:
-        global _phase_depth
-        if _phase_depth <= 0:
+        if _depth() <= 0:
             raise RuntimeError("OptimizationPhase exited more times than it was entered")
-        _phase_depth -= 1
-        log.debug("optimization phase closed (depth %d)", _phase_depth)
+        _state.depth = _depth() - 1
+        log.debug("optimization phase closed (depth %d)", _state.depth)
 
 
 def _read_only(array: np.ndarray, dtype: type | None = None) -> np.ndarray:
