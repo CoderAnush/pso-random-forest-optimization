@@ -95,7 +95,9 @@ pso-random-forest-optimization/
 │       ├── visualization/
 │       │   ├── __init__.py
 │       │   └── plots.py          figures F3–F11 from result files + SOURCES.json      P12
-│       ├── app/                  interactive review demo (Streamlit + Plotly, ADR-026)
+│       ├── web/                  Swarm Lab frontend (ADR-027): server.py (Tornado + SSE),
+│       │                         static/ (index.html, styles.css, js/, vendor/three.js)
+│       ├── app/                  classic Streamlit demo (ADR-026)
 │       │   ├── main.py           page setup and navigation
 │       │   ├── live.py           live closed-loop lab (runs run_fold with an observer callback)
 │       │   ├── results.py        experiment dashboard (reads results/<exp_id>/)

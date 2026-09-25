@@ -50,26 +50,30 @@ evidence is produced by the real experiment (Phase 14). **Nothing here is a resu
 
 Every number on a slide cites its source file (DOC-005).
 
-## 4. Live demonstration outline (≈5 minutes, interactive demo)
+## 4. Live demonstration outline (≈6 minutes, Swarm Lab)
 
-Launch before the review with `python -m pso_rf demo` (Streamlit, opens in the browser).
+Launch before the review: `python -m pso_rf web` (opens http://localhost:8600).
 
-1. **How it works** (1 min): the control-system mapping and the PSO equations. Press **Try to peek at the test
-   fold**: the request is blocked with `TestSetAccessError`. Press **Run the feedback ablation**: only true
-   feedback steers the swarm to the optimum (Proof 1 and Proof 2).
-2. **Live closed-loop lab** (2 min): Heart Disease, N = 10, T = 8, race on, manual pick on. Press **Run**.
-   - Every evaluation lights the forward path (PSO → hyperparameters → RF ×5 inner folds → fitness), and every
-     iteration lights the feedback edge.
-   - The test-fold card stays **SEALED**. Convergence and the 3-D swarm update live.
-   - The random-search race runs with its feedback edge drawn as **cut**.
-   - At the end the card turns **UNSEALED · scored once**, and the table compares the default RF, the manual
-     pick, random search and PSO.
-3. **Experiment results** (1.5 min): the verified badge and clean-tree provenance, then held-out accuracy over
-   5 folds, the paired deltas, the anytime curves (value of feedback), and the chosen configurations and
-   deployment recommendation per dataset.
-4. **Swarm replay** (0.5 min): press **Play** on a saved Digits fold to watch the swarm contract onto gbest.
+1. **How it works** (1 min):
+   - The animated loop diagram, and the open-loop contrast (**Show the open-loop comparator**).
+   - The outer/inner fold animation.
+   - **Try to peek at the test fold**: blocked with `TestSetAccessError`.
+   - **Run the feedback ablation**: only true feedback reaches the optimum.
+2. **Live lab** (2.5 min): Heart Disease, fold 0, N = 10, T = 10, race on, manual pick on. Press **Run**.
+   - Each evaluation lights PSO → hyperparameters → Random Forest → fitness, and each iteration lights the feedback
+     edge.
+   - In 3-D, particles move with their velocity vectors, and the gbest beacon jumps when it improves.
+   - The race chart runs PSO against random search at equal budget. The vault stays **SEALED**.
+   - At the end the vault flips to **UNSEALED · scored once**, showing test accuracy for the default RF, your pick,
+     random search and PSO, with the one-test-sample caveat.
+3. **Playground** (1.5 min): on the measured Heart landscape, try the **Herd (social)**, **No inertia** and
+   **Explorer** presets, then switch **Feedback** to *constant* and *mirrored*. Open **Terrain (3-D)**. Press **Run
+   30 seeds** for PSO vs random search on this landscape.
+4. **Results** (1 min): the verified badge and clean-tree provenance, the fold dots, the value-of-feedback curves,
+   the chosen configurations and ties, and the deployment recommendation.
 
-The live lab runs the experiment's own `run_fold`, so what is shown is exactly what was measured (ADR-026).
+The live lab runs the experiment's own `run_fold`; the playground is a labelled JavaScript port running on
+measured accuracies (ADR-027).
 
 ## 5. Review 2 readiness checklist
 

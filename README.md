@@ -40,7 +40,22 @@ python -m venv .venv
 
 (On Linux or macOS, use `.venv/bin/python`.)
 
-## Interactive demo
+## Interactive frontend: Swarm Lab
+
+```
+.venv/Scripts/python -m pso_rf web           # opens http://localhost:8600
+```
+
+Five views:
+- **Live lab:** tune N, T, w, c₁, c₂, the velocity clamp, fold and seed, then watch the real closed loop in 3-D while it races random search. The sealed test fold opens only at the end.
+- **Playground:** instant PSO over *measured* Random Forest accuracy landscapes, in 2-D map and 3-D terrain views, with presets and a feedback ablation.
+- **Results:** the verified experiment.
+- **Replay:** saved runs in 3-D.
+- **How it works:** the loop, the protocol, and live proofs.
+
+Works offline (three.js is bundled).
+
+Classic Streamlit demo:
 
 ```
 .venv/Scripts/python -m pso_rf demo          # or: .venv/Scripts/python -m streamlit run app.py

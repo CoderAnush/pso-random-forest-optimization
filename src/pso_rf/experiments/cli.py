@@ -41,7 +41,11 @@ def _parser() -> argparse.ArgumentParser:
     compare.add_argument("a", type=Path)
     compare.add_argument("b", type=Path)
 
-    demo = commands.add_parser("demo", help="launch the interactive demo (Streamlit)")
+    web = commands.add_parser("web", help="launch the interactive web frontend (live 3-D swarm, playground)")
+    web.add_argument("--port", type=int, default=8600)
+    web.add_argument("--no-browser", action="store_true", help="do not open a browser tab")
+
+    demo = commands.add_parser("demo", help="launch the classic Streamlit demo")
     demo.add_argument("--port", type=int, default=8501)
 
     audit = commands.add_parser("audit", help="audit the datasets and write data/DATASET_AUDIT.md")
@@ -102,6 +106,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             "identical (excluding timing fields)" if not differences else f"{len(differences)} difference(s)"
         )
         return 1 if differences else 0
+    if args.command == "web":
+        from pso_rf.web.server import serve
+
+        serve(args.port, open_browser=not args.no_browser)
+        return 0
     if args.command == "demo":
         import subprocess
 

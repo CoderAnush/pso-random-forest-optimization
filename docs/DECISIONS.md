@@ -40,6 +40,7 @@ Changes to any decision are made by adding a superseding ADR and updating the af
 | 024 | Test-set access guard | Accepted (default) | no |
 | 025 | Configuration format and layering | Accepted (default) | no |
 | 026 | Interactive demo for the final review | Accepted (owner) | no (adds the Review 2 demo) |
+| 027 | Web frontend "Swarm Lab" and measured landscapes | Accepted (owner) | no (Review 2 demo) |
 
 ---
 
@@ -496,3 +497,34 @@ Changes to any decision are made by adding a superseding ADR and updating the af
     untouched (UT-22 unchanged).
   - AppTest smoke tests cover every page and a small live run (`tests/app/`).
 - **PPT impact:** none. It serves as the Review 2 demonstration.
+
+## ADR-027: Web frontend "Swarm Lab" and measured fitness landscapes
+- **Decision:** add a custom web frontend (`src/pso_rf/web/`, launched with `python -m pso_rf web`). A Tornado
+  backend (already installed with Streamlit) serves a vanilla-JS single-page app, with three.js 0.160 vendored for
+  offline use (MIT licence file included). It has five views:
+  1. **Live lab:** the real loop streamed over server-sent events, with a 3-D swarm, an animated loop diagram, a
+     sealed test vault, and PSO racing random search concurrently. All PSO coefficients (N, T, w, c₁, c₂, velocity
+     clamp, seed, fold) are adjustable.
+  2. **Playground:** an instant, interactive PSO on measured landscapes, with 2-D map and 3-D terrain views,
+     presets, feedback ablation and a 30-seed PSO vs random search trial.
+  3. **Results:** the saved experiment, with its verification badge.
+  4. **Replay:** saved runs in 3-D.
+  5. **How it works:** the loop mapping, the protocol animation, and two live proofs.
+- **Rationale:** the owner asked for an interactive frontend in which variables can be changed and results seen
+  live. Streamlit re-renders the whole page for every change, so it cannot animate a 3-D swarm smoothly or stream
+  events at evaluation rate.
+- **Rules that keep it honest:**
+  - Live runs call `run_fold` with an observer callback, as in ADR-026. PSO and random search run in two threads,
+    which is safe because the optimization-phase guard is per thread (ADR-024 amendment). Test metrics are released
+    only after both searches and the baseline have finished.
+  - The playground runs a JavaScript port of the PSO update, labelled as such, so it responds instantly. Its default
+    objective is a **measured landscape**: `scripts/measure_landscape.py` evaluates the real inner-CV fitness F₀ on
+    outer fold 0's optimization portion over n_estimators ∈ {50, 60, …, 200} × max_depth ∈ {2…20} ×
+    min_samples_split ∈ {2, 5, 10}. That is 912 configurations per dataset, saved in
+    `results/landscape/<dataset>_fold0.json`. It never touches test data (it runs inside `OptimizationPhase`).
+  - The results and replay views read saved files only.
+- **Consequences:**
+  - The Streamlit demo (ADR-026) remains available as `python -m pso_rf demo`; the web frontend is the recommended
+    one for the review.
+  - `tests/app/test_web.py` covers every endpoint, input clamping, path-traversal rejection, the isolation proof,
+    and a real live job streamed end to end.
