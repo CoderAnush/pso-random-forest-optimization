@@ -110,7 +110,7 @@ A related structural check is UT-22: the optimizer cannot even receive data.
 
 | ID | Target | What is asserted |
 |---|---|---|
-| ET-01 | Smoke experiment | `python -m pso_rf run --config configs/demo.yaml` (then `configs/test.yaml`) completes on all 3 datasets and exits 0; CLI subset overrides (`--datasets`, `--folds`) work. |
+| ET-01 | Smoke experiment | `python -m pso_rf run` with `configs/demo.yaml` (Iris, fold 0: the live demo) and with `configs/test.yaml` (all 3 datasets, tiny budget) completes and exits 0; CLI subset overrides (`--datasets`, `--folds`, `--methods`) work, and `verify` passes on the output. |
 | ET-02 | Completeness audit | For every dataset × fold × method, the expected files exist. PSO and random search have exactly `budget` evaluations each. The deployment files exist. The manifest's dataset checksums match the files on disk. `config.resolved.json` hash equals the manifest's config hash. |
 | ET-03 | Summary consistency | `summary_folds.csv` and `summary.csv` are recomputed from the per-fold `final.json` and `predictions.csv` and match exactly; pooled accuracy equals the accuracy over concatenated predictions; win/tie/loss counts are consistent with the deltas. |
 | ET-04 | Temporal isolation | For every run, the `test_evaluated_at` timestamp is later than `optimization_finished_at`, and `run.log` shows no test-set reveal while an `OptimizationPhase` is open. |

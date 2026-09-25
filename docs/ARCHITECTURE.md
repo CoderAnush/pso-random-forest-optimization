@@ -311,7 +311,9 @@ requires.
 ```
 python -m pso_rf run   --config configs/default.yaml [--set pso.max_iter=30] [--datasets iris] [--folds 0]
 python -m pso_rf plot  --results results/<exp_id>
-python -m pso_rf audit --datasets all          # dataset audit only
+python -m pso_rf verify --results results/<exp_id>   # completeness, isolation, summary checks
+python -m pso_rf compare <results_a> <results_b>     # reproducibility (timing fields ignored)
+python -m pso_rf audit                               # dataset audit -> data/DATASET_AUDIT.md
 ```
 
 ## H. Configuration management

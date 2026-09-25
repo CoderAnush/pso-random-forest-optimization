@@ -90,12 +90,11 @@ pso-random-forest-optimization/
 │       │   ├── recorder.py       Recorder callback → CSV/JSON                         P8/P9
 │       │   ├── runner.py         run_fold, run_experiment (THE loop wiring)           P8/P10
 │       │   ├── summary.py        summary_folds.csv, summary.csv                       P11
-│       │   └── cli.py            run / plot / audit commands                          P10
+│       │   ├── verify.py         results audit (ET-02..04) and run comparison (IT-08) P10
+│       │   └── cli.py            run / plot / verify / compare / audit commands       P10
 │       ├── visualization/
 │       │   ├── __init__.py
-│       │   ├── convergence.py    gbest curves, anytime curves                         P12
-│       │   ├── comparison.py     method comparison, dataset deltas, confusion         P12
-│       │   └── trajectories.py   hyperparameter trajectories, particle fitness        P12
+│       │   └── plots.py          figures F3–F11 from result files + SOURCES.json      P12
 │       └── utils/
 │           ├── __init__.py
 │           ├── hashing.py        sha256 of files, arrays, configs                     P1

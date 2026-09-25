@@ -37,16 +37,21 @@ python -m venv .venv
 
 (On Linux or macOS, use `.venv/bin/python`.)
 
-## Usage (planned)
+## Usage
 
-| Command | Purpose | Available from |
-|---|---|---|
-| `python -m pytest -q` | run the test suite | Phase 1 |
-| `python -m pso_rf run --config configs/default.yaml` | full experiment: 3 datasets × 5 outer folds × {baseline, random search, PSO}, plus a deployment run per dataset | Phase 10 |
-| `python -m pso_rf run --config configs/demo.yaml` | small-budget live demo (Iris, fold 0) with a per-iteration trace | Phase 10 |
-| `python -m pso_rf plot --results results/<exp_id>` | figures generated from saved result files | Phase 12 |
+| Command | Purpose |
+|---|---|
+| `python -m pytest -q` | run the test suite (unit, integration, experiment level; about 3 minutes) |
+| `python -m pso_rf run --config configs/default.yaml` | full experiment: 3 datasets × 5 outer folds × {baseline, random search, PSO}, plus a deployment run per dataset |
+| `python -m pso_rf run --config configs/default.yaml --config configs/demo.yaml` | small-budget live demo (Iris, fold 0) with a per-iteration trace |
+| `python -m pso_rf verify --results results/<exp_id>` | audit a results directory: completeness, test isolation, summary consistency |
+| `python -m pso_rf compare <results_a> <results_b>` | check two runs are identical apart from timing fields |
+| `python -m pso_rf plot --results results/<exp_id>` | figures F3–F11 generated from the saved result files |
 
-Results will be written to `results/<exp_id>/` and figures to `plots/<exp_id>/`, as defined in
+Useful `run` options: `--datasets iris digits`, `--folds 0 1`, `--methods baseline pso`, `--set pso.max_iter=30`.
+Use the venv interpreter (`.venv/Scripts/python`) for all commands.
+
+Results are written to `results/<exp_id>/` and figures to `plots/<exp_id>/`, as defined in
 [docs/RESULTS_SCHEMA.md](docs/RESULTS_SCHEMA.md).
 
 ## Documentation

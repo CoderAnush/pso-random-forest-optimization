@@ -12,19 +12,33 @@ For one dataset × outer fold × method, :func:`run_fold`:
 
 from __future__ import annotations
 
+import json
 import logging
+import shlex
+import sys
 import time
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from pso_rf.datasets import DatasetBundle
-from pso_rf.evaluation import FitnessEvaluator, FitnessResult, FoldData, OptimizationData, OptimizationPhase
+from pso_rf.datasets import DatasetBundle, load_dataset
+from pso_rf.datasets.audit import audit
+from pso_rf.evaluation import (
+    FitnessEvaluator,
+    FitnessResult,
+    FoldData,
+    OptimizationData,
+    OptimizationPhase,
+    full_data,
+    outer_folds,
+)
 from pso_rf.evaluation.final import final_evaluate
 from pso_rf.experiments.config import DatasetSettings, ExperimentConfig
 from pso_rf.experiments.recorder import Recorder, RunContext
 from pso_rf.experiments.seeding import RunSeeds, make_rng
+from pso_rf.experiments.summary import write_summaries
 from pso_rf.models.baseline import BASELINE_CONFIG
 from pso_rf.optimization import (
     Evaluation,
@@ -36,7 +50,8 @@ from pso_rf.optimization import (
     SearchSpace,
 )
 from pso_rf.utils.io import append_csv_rows, utc_timestamp, write_json_atomic
-from pso_rf.utils.log import RunLoggerAdapter
+from pso_rf.utils.log import RunLoggerAdapter, close_logging, setup_logging
+from pso_rf.utils.manifest import build_manifest
 
 RUN_FILES = ("evaluations.csv", "iterations.csv", "final.json", "predictions.csv", "deployment.json")
 PREDICTION_COLUMNS = ("row_index", "y_true", "y_pred")
@@ -320,3 +335,115 @@ def _fresh_run_dir(path: Path) -> Path:
     for name in RUN_FILES:
         (path / name).unlink(missing_ok=True)
     return path
+
+
+# ------------------------------------------------------------------------------------------ experiment
+
+
+def run_experiment(
+    cfg: ExperimentConfig,
+    command: str | None = None,
+    repo_dir: Path | None = None,
+    exp_id: str | None = None,
+) -> Path:
+    """Run the whole experiment described by ``cfg`` and return ``results/<exp_id>/``.
+
+    Order: for each dataset (config order) → audit → outer folds → for each fold → baseline, random search,
+    PSO (each: optimize with the test fold sealed, then test once) → deployment run. Then the summaries are
+    built from the saved files and each deployment record gets its outer-CV performance estimate.
+    """
+    start = time.perf_counter()
+    repo_dir = Path.cwd() if repo_dir is None else Path(repo_dir)
+    exp_id = exp_id or f"{datetime.now(timezone.utc):%Y%m%d-%H%M%S}_{cfg.experiment.name}"
+    root = Path(cfg.experiment.results_dir) / exp_id
+    if root.exists():
+        raise FileExistsError(f"results directory already exists: {root}")
+    root.mkdir(parents=True)
+    setup_logging(root / "run.log")
+    command = command or " ".join(shlex.quote(arg) for arg in sys.argv)
+    try:
+        _log.info("experiment %s: config hash %s", exp_id, cfg.config_hash()[:12])
+        write_json_atomic(root / "config.resolved.json", cfg.to_dict())
+        bundles = {
+            name: load_dataset(name, Path(cfg.experiment.data_dir)) for name in cfg.experiment.datasets
+        }
+        manifest = build_manifest(
+            exp_id,
+            utc_timestamp(),
+            command,
+            cfg.config_hash(),
+            {name: _dataset_manifest(bundle) for name, bundle in bundles.items()},
+            repo_dir,
+            exclude=(cfg.experiment.results_dir, cfg.experiment.plots_dir),
+        )
+        write_json_atomic(root / "manifest.json", manifest)
+        deployments = {}
+        for name, bundle in bundles.items():
+            deployments[name] = _run_dataset(cfg, bundle, root, exp_id)
+        _folds, summary = write_summaries(root, cfg.experiment.datasets)
+        for name, record in deployments.items():
+            if record is None:
+                continue
+            record["performance_estimate"] = _performance_estimate(summary, name)
+            write_json_atomic(root / name / "deployment" / "pso" / "deployment.json", record)
+        manifest.update(finished_at=utc_timestamp(), status="completed")
+        write_json_atomic(root / "manifest.json", manifest)
+        _log.info("experiment %s completed in %.1f s: %s", exp_id, time.perf_counter() - start, root)
+        return root
+    except BaseException:
+        manifest_path = root / "manifest.json"
+        if manifest_path.exists():
+            record = json.loads(manifest_path.read_text(encoding="utf-8"))
+            interrupted = sys.exc_info()[0] is KeyboardInterrupt
+            record.update(finished_at=utc_timestamp(), status="interrupted" if interrupted else "failed")
+            write_json_atomic(manifest_path, record)
+        _log.exception("experiment %s did not complete", exp_id)
+        raise
+    finally:
+        close_logging()
+
+
+def _run_dataset(
+    cfg: ExperimentConfig, bundle: DatasetBundle, root: Path, exp_id: str
+) -> dict[str, Any] | None:
+    """Audit one dataset, run every selected fold × method, then its deployment run (if enabled)."""
+    settings = cfg.for_dataset(bundle.name)
+    record = audit(bundle, settings.fitness.class_ratio_gate, settings.fitness.metric)
+    write_json_atomic(root / bundle.name / "audit.json", record)
+    metric = record["fitness_metric"]
+    _log.info("dataset %s: %d samples, fitness metric %s", bundle.name, record["n_samples"], metric)
+    folds = outer_folds(bundle, cfg.split.outer_folds, cfg.split.outer_seed)
+    selected = cfg.experiment.folds if cfg.experiment.folds is not None else range(len(folds))
+    for k in selected:
+        for method in cfg.experiment.methods:
+            run_fold(cfg, bundle, folds[k], method, metric, root / bundle.name / f"fold_{k}" / method, exp_id)
+    if not cfg.experiment.deployment_run:
+        return None
+    return run_deployment(
+        cfg, bundle, full_data(bundle), metric, root / bundle.name / "deployment" / "pso", exp_id
+    )
+
+
+def _dataset_manifest(bundle: DatasetBundle) -> dict[str, Any]:
+    audit_facts = bundle.meta.get("audit", {})
+    return {
+        "source": bundle.meta.get("source"),
+        "n_samples": int(bundle.X.shape[0]),
+        "n_features": int(bundle.X.shape[1]),
+        "n_classes": len(bundle.class_names),
+        "sha256_raw": bundle.meta.get("sha256"),
+        "sha256_arrays": bundle.meta.get("sha256_arrays"),
+        "class_counts": audit_facts.get("class_counts"),
+    }
+
+
+def _performance_estimate(summary: Sequence[Mapping[str, Any]], dataset: str) -> dict[str, Any] | None:
+    for row in summary:
+        if row["dataset"] == dataset and row["method"] == "pso":
+            return {
+                "test_accuracy_mean": row["test_accuracy_mean"],
+                "test_accuracy_std": row["test_accuracy_std"],
+                "n_folds": row["n_folds"],
+                "source": "summary.csv",
+            }
+    return None
