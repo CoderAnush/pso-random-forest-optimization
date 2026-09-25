@@ -37,6 +37,16 @@ python -m venv .venv
 
 (On Linux or macOS, use `.venv/bin/python`.)
 
+## Interactive demo
+
+```
+.venv/Scripts/python -m pso_rf demo          # or: .venv/Scripts/python -m streamlit run app.py
+```
+
+Four views: a **live closed-loop lab** (watch PSO ⇄ Random Forest close the loop, race random search, open the
+sealed test fold once), the **experiment results** dashboard, a **swarm replay**, and **how it works** (with a
+live test-isolation proof and a feedback ablation).
+
 ## Usage
 
 | Command | Purpose |

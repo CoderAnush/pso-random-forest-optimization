@@ -95,6 +95,15 @@ pso-random-forest-optimization/
 │       ├── visualization/
 │       │   ├── __init__.py
 │       │   └── plots.py          figures F3–F11 from result files + SOURCES.json      P12
+│       ├── app/                  interactive review demo (Streamlit + Plotly, ADR-026)
+│       │   ├── main.py           page setup and navigation
+│       │   ├── live.py           live closed-loop lab (runs run_fold with an observer callback)
+│       │   ├── results.py        experiment dashboard (reads results/<exp_id>/)
+│       │   ├── replay.py         swarm replay of saved PSO runs
+│       │   ├── explain.py        control mapping, equations, isolation proof, feedback ablation
+│       │   ├── charts.py         Plotly figure builders (pure; unit-tested)
+│       │   ├── components.py     HTML: loop diagram, sealed test-fold card, KPI cards
+│       │   └── data.py           saved-experiment discovery and loading
 │       └── utils/
 │           ├── __init__.py
 │           ├── hashing.py        sha256 of files, arrays, configs                     P1

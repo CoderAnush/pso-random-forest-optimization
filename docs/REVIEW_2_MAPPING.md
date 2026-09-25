@@ -50,22 +50,26 @@ evidence is produced by the real experiment (Phase 14). **Nothing here is a resu
 
 Every number on a slide cites its source file (DOC-005).
 
-## 4. Live demonstration outline (≈3 minutes)
+## 4. Live demonstration outline (≈5 minutes, interactive demo)
 
-```
-python -m pso_rf run --config configs/demo.yaml --datasets iris --folds 0
-```
+Launch before the review with `python -m pso_rf demo` (Streamlit, opens in the browser).
 
-1. **Show the config** (`configs/demo.yaml`): the bounds, N, T, w, c1 and c2, the seeds, and that the test fold is
-   sealed.
-2. **Run it.** The console prints one line per iteration: *PSO proposes → RF trains → validation fitness → gbest
-   updates*. Point out a gbest improvement and the configuration change that followed it.
-3. **Open `evaluations.csv`.** Trace one particle across two iterations: position → configuration → fitness →
-   pbest → next position.
-4. **Show the test step.** The `final.json` timestamps show the test evaluated after the optimization ended; state
-   the test metric.
-5. **Show the pre-rendered plots** from the full experiment (F3, F4, F5).
-6. **Optional:** run `pytest -m isolation -q` to show the test-leak proofs passing.
+1. **How it works** (1 min): the control-system mapping and the PSO equations. Press **Try to peek at the test
+   fold**: the request is blocked with `TestSetAccessError`. Press **Run the feedback ablation**: only true
+   feedback steers the swarm to the optimum (Proof 1 and Proof 2).
+2. **Live closed-loop lab** (2 min): Heart Disease, N = 10, T = 8, race on, manual pick on. Press **Run**.
+   - Every evaluation lights the forward path (PSO → hyperparameters → RF ×5 inner folds → fitness), and every
+     iteration lights the feedback edge.
+   - The test-fold card stays **SEALED**. Convergence and the 3-D swarm update live.
+   - The random-search race runs with its feedback edge drawn as **cut**.
+   - At the end the card turns **UNSEALED · scored once**, and the table compares the default RF, the manual
+     pick, random search and PSO.
+3. **Experiment results** (1.5 min): the verified badge and clean-tree provenance, then held-out accuracy over
+   5 folds, the paired deltas, the anytime curves (value of feedback), and the chosen configurations and
+   deployment recommendation per dataset.
+4. **Swarm replay** (0.5 min): press **Play** on a saved Digits fold to watch the swarm contract onto gbest.
+
+The live lab runs the experiment's own `run_fold`, so what is shown is exactly what was measured (ADR-026).
 
 ## 5. Review 2 readiness checklist
 

@@ -39,6 +39,7 @@ Changes to any decision are made by adding a superseding ADR and updating the af
 | 023 | Package name and import layering | Accepted (default) | no |
 | 024 | Test-set access guard | Accepted (default) | no |
 | 025 | Configuration format and layering | Accepted (default) | no |
+| 026 | Interactive demo for the final review | Accepted (owner) | no (adds the Review 2 demo) |
 
 ---
 
@@ -451,3 +452,35 @@ Changes to any decision are made by adding a superseding ADR and updating the af
   reproducible).
 - **Consequences:** every run is described by a hashable config.
 - **PPT impact:** none.
+
+## ADR-026: Interactive demo for the final review
+- **Decision:** add an optional Streamlit + Plotly demo (`src/pso_rf/app/`, launched by `python -m pso_rf demo`
+  or `streamlit run app.py`) with four views:
+  1. **Live closed-loop lab:** runs the real loop on one outer fold and redraws the loop diagram, KPIs,
+     convergence and a 3-D swarm after every evaluation. It races random search at equal budget, scores the
+     owner's manual pick, and opens the sealed test fold only after each search.
+  2. **Experiment results:** the saved 3 × 5 × 3 experiment, with provenance and a verification badge.
+  3. **Swarm replay:** steps through saved PSO runs iteration by iteration.
+  4. **How it works:** the control mapping, the equations, a live test-isolation proof and a feedback ablation.
+- **Rationale:** the owner asked for an interactive final-review demo, modelled on their earlier Evo project but
+  stronger. The live lab makes the closed loop *visible*, which is the academic requirement, instead of
+  describing it.
+- **Rules that keep it honest:**
+  - Live runs call `experiments.runner.run_fold`, the experiment's own code path. A new `callbacks` argument
+    lets the page observe events; observers cannot change the search. Each live run is saved under
+    `results/live/` (git-ignored).
+  - The results and replay pages only read saved files. The test fold is never shown before a search ends.
+  - The manual pick is scored exactly like a candidate (inner CV), then once on the test fold.
+- **Alternatives:**
+  - *Static PNGs only:* not interactive.
+  - *A separate web stack (React/FastAPI):* a second implementation that could drift from the measured code.
+  - *Re-implementing the loop for the UI, as Evo did:* would break the guarantee that the demo equals the
+    experiment.
+- **Consequences:**
+  - Streamlit 1.28.1 and Plotly 6.5.0 become optional dependencies.
+  - A compatibility shim disables Plotly 6's base64 array encoding, which the plotly.js bundled with
+    Streamlit 1.28 cannot decode.
+  - The `app/` package imports from `experiments/` and sits above it; `optimization/` and `evaluation/` stay
+    untouched (UT-22 unchanged).
+  - AppTest smoke tests cover every page and a small live run (`tests/app/`).
+- **PPT impact:** none. It serves as the Review 2 demonstration.

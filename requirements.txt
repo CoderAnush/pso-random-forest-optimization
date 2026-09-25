@@ -9,3 +9,6 @@ pytest==9.1.1
 # scikit-learn runtime dependencies, pinned for reproducibility
 scipy==1.14.1
 threadpoolctl==3.6.0
+# interactive review demo (optional; ADR-026)
+streamlit==1.28.1
+plotly==6.5.0

@@ -70,9 +70,12 @@ Mappings: [REVIEW_1_MAPPING.md](docs/REVIEW_1_MAPPING.md), [REVIEW_2_MAPPING.md]
 
 | Inside the system | Outside the system |
 |---|---|
-| Loading 3 datasets; outer and inner CV; the RF pipeline; PSO; random search; recording; summaries; plots | Other models; other optimizers (except as future comparators); GPUs or clusters; web or UI; hyperparameters beyond the 3 in the core experiment |
+| Loading 3 datasets; outer and inner CV; the RF pipeline; PSO; random search; recording; summaries; plots; the interactive review demo (`src/pso_rf/app/`, ADR-026) | Other models; other optimizers (except as future comparators); GPUs or clusters; a production web service; hyperparameters beyond the 3 in the core experiment |
 
 ## 7. Architecture principles (mandatory)
+
+The demo (`src/pso_rf/app/`) follows these rules too: live runs go through `run_fold` (observers only), and the
+results and replay pages read saved files. Never give the demo its own copy of the loop (ADR-026).
 
 1. **Closed loop first.** PSO ⇄ evaluator are wired **only** in `pso_rf/experiments/runner.py`. There is no
    disconnected PSO script and no "optimize, then separately evaluate" shortcut.
@@ -196,7 +199,8 @@ Full formulation: [MATHEMATICAL_FORMULATION.md](docs/MATHEMATICAL_FORMULATION.md
 
 See [PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md). Key paths:
 - `CLAUDE.md` and `README.md` at the repo root; the other 13 design documents in `docs/`
-- `src/pso_rf/{datasets,preprocessing,models,evaluation,optimization,experiments,visualization,utils}/`
+- `src/pso_rf/{datasets,preprocessing,models,evaluation,optimization,experiments,visualization,utils,app}/`;
+  `app.py` + `.streamlit/config.toml` launch the demo
 - `configs/`, `data/raw/`, `results/<exp_id>/`, `plots/<exp_id>/`, `tests/{unit,integration,experiment}/`
 
 ## 17. Testing requirements

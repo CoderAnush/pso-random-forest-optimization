@@ -41,3 +41,8 @@ src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+# The demo layer holds UI copy, HTML and CSS strings; wrapping them would hurt readability.
+"src/pso_rf/app/*" = ["E501"]
+"tests/app/*" = ["E501"]

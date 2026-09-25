@@ -121,8 +121,13 @@ def run_fold(
     metric: str,
     out_dir: Path,
     exp_id: str,
+    callbacks: Sequence[Any] = (),
 ) -> dict[str, Any]:
-    """Run one method on one outer fold and return its ``final.json`` record (also written to ``out_dir``)."""
+    """Run one method on one outer fold and return its ``final.json`` record (also written to ``out_dir``).
+
+    ``callbacks`` receive the optimizer's events alongside the recorder (the live demo uses this to draw the
+    loop as it runs); they observe only and cannot change the search.
+    """
     start = time.perf_counter()
     settings = cfg.for_dataset(bundle.name)
     k = fold.fold_index
@@ -133,7 +138,7 @@ def run_fold(
 
     evaluator = _make_evaluator(cfg, settings, fold.opt, seeds, metric, log)
     with OptimizationPhase():
-        outcome = _optimize(method, cfg, settings, evaluator, context, out_dir, seeds, log)
+        outcome = _optimize(method, cfg, settings, evaluator, context, out_dir, seeds, log, callbacks)
     optimization_finished_at = utc_timestamp()
 
     final = final_evaluate(
@@ -245,6 +250,7 @@ def _optimize(
     out_dir: Path,
     seeds: RunSeeds,
     log: logging.LoggerAdapter,
+    callbacks: Sequence[Any] = (),
 ) -> _Outcome:
     """Select a configuration with ``method``; runs inside the optimization phase (test fold sealed)."""
     if method == "baseline":
@@ -266,11 +272,12 @@ def _optimize(
             logger=log,
             total_iterations=settings.pso.max_iter,
         )
-        result = PSOOptimizer(space, objective, settings.pso, make_rng(seeds.pso)).run([recorder])
+        result = PSOOptimizer(space, objective, settings.pso, make_rng(seeds.pso)).run([recorder, *callbacks])
     elif method == "random_search":
         recorder = Recorder(context, space.names, out_dir / "evaluations.csv", None, logger=log)
         budget = settings.random_search_budget
-        result = RandomSearch(space, objective, budget, make_rng(seeds.random_search)).run([recorder])
+        search = RandomSearch(space, objective, budget, make_rng(seeds.random_search))
+        result = search.run([recorder, *callbacks])
     else:
         raise ValueError(f"unknown method {method!r}")
     cv_scores = list(result.best_info.get("cv_scores", ()))

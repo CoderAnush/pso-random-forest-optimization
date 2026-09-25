@@ -41,6 +41,9 @@ def _parser() -> argparse.ArgumentParser:
     compare.add_argument("a", type=Path)
     compare.add_argument("b", type=Path)
 
+    demo = commands.add_parser("demo", help="launch the interactive demo (Streamlit)")
+    demo.add_argument("--port", type=int, default=8501)
+
     audit = commands.add_parser("audit", help="audit the datasets and write data/DATASET_AUDIT.md")
     audit.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     audit.add_argument("--data-dir", type=Path, default=Path("data"))
@@ -99,6 +102,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             "identical (excluding timing fields)" if not differences else f"{len(differences)} difference(s)"
         )
         return 1 if differences else 0
+    if args.command == "demo":
+        import subprocess
+
+        app = Path(__file__).resolve().parents[3] / "app.py"
+        command = [sys.executable, "-m", "streamlit", "run", str(app), "--server.port", str(args.port)]
+        return subprocess.call(command, cwd=app.parent)
     if args.command == "audit":
         from pso_rf.datasets import LOADERS, load_dataset
         from pso_rf.datasets.audit import audit, write_audit_markdown

@@ -10,3 +10,4 @@ plots/scratch_*/
 .ruff_cache/
 build/
 dist/
+results/live/
