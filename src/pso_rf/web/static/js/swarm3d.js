@@ -68,13 +68,15 @@ export class Swarm3D {
     this.renderer.setPixelRatio(Math.min(2, window.devicePixelRatio));
     container.prepend(this.renderer.domElement);
     this.scene = new THREE.Scene();
-    this.scene.fog = new THREE.Fog(0x0b0c0e, 5.5, 11);
+    this.scene.fog = new THREE.Fog(0x0b0c0e, 8, 18);
     this.camera = new THREE.PerspectiveCamera(42, 1, 0.05, 50);
     this.camera.position.set(3.3, 2.1, 3.6);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     Object.assign(this.controls, { enableDamping: true, dampingFactor: 0.08, autoRotate, autoRotateSpeed: 0.55,
-      minDistance: 2.2, maxDistance: 9 });
+      minDistance: 2.2, maxDistance: 7.5 });
     this.controls.addEventListener("start", () => { this.controls.autoRotate = false; });
+    this.detachView = attachViewControls(container, this.camera, this.controls,
+      { position: this.camera.position.clone(), target: this.controls.target.clone() });
     this.scene.add(new THREE.AmbientLight(0xffffff, 0.55));
     const key = new THREE.PointLight(0x9fc4ff, 30, 20); key.position.set(3, 4, 3); this.scene.add(key);
     this.buildFrame();
@@ -149,7 +151,6 @@ export class Swarm3D {
       this.particles.push({ mesh, glow, trail, trailPts: [], vel, head, cur: new THREE.Vector3(), target: new THREE.Vector3(),
         velTarget: new THREE.Vector3(), info: null, flash: 0, placed: false });
     }
-    this.particles.forEach((p, i) => { const on = i < n && p.placed; p.mesh.visible = on; p.trail.visible = on && this.showTrails; });
   }
 
   /** Move particle i to its new continuous position (smoothly), with the velocity that brought it there. */
@@ -262,7 +263,29 @@ export class Swarm3D {
     this.renderer.setSize(w, hgt); this.camera.aspect = w / hgt; this.camera.updateProjectionMatrix();
   }
   dispose() {
-    this.alive = false; cancelAnimationFrame(this.raf); this.ro.disconnect(); this.controls.dispose();
+    this.alive = false; cancelAnimationFrame(this.raf); this.ro.disconnect(); this.controls.dispose(); this.detachView();
     this.renderer.dispose(); this.renderer.domElement.remove(); this.tip.remove();
   }
+}
+
+/** Zoom only with Ctrl + wheel or the buttons, so scrolling the page never shrinks the scene. */
+export function attachViewControls(container, camera, controls, home) {
+  controls.enableZoom = false;
+  const dolly = (factor) => {
+    const offset = camera.position.clone().sub(controls.target);
+    const len = Math.min(controls.maxDistance, Math.max(controls.minDistance, offset.length() * factor));
+    camera.position.copy(controls.target).add(offset.setLength(len));
+  };
+  const onWheel = (e) => { if (!e.ctrlKey) return; e.preventDefault(); controls.autoRotate = false; dolly(e.deltaY > 0 ? 1.1 : 0.9); };
+  container.addEventListener("wheel", onWheel, { passive: false });
+  const bar = document.createElement("div");
+  bar.className = "view-ctl";
+  const btn = (label, title, fn) => { const b = document.createElement("button"); b.type = "button"; b.textContent = label; b.title = title; b.setAttribute("aria-label", title);
+    b.addEventListener("click", fn); bar.append(b); };
+  btn("+", "Zoom in", () => dolly(0.85));
+  btn("−", "Zoom out", () => dolly(1.18));
+  btn("⟲", "Reset view", () => { camera.position.copy(home.position); controls.target.copy(home.target); controls.autoRotate = true; });
+  const hint = document.createElement("span"); hint.textContent = "drag to rotate · Ctrl + scroll to zoom"; bar.append(hint);
+  container.append(bar);
+  return () => { container.removeEventListener("wheel", onWheel); bar.remove(); };
 }

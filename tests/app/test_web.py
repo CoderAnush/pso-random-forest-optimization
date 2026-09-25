@@ -54,7 +54,8 @@ class WebTest(AsyncHTTPTestCase):
         assert self.fetch("/api/landscape?dataset=nope").code == 404
         assert self.fetch("/api/live", method="POST", body="{not json").code == 400
         assert self.fetch("/api/live", method="POST", body=json.dumps({"dataset": "mnist"})).code == 400
-        assert self.fetch("/api/live/ffffffffffff/events").code == 404
+        gone = self.fetch("/api/live/ffffffffffff/events")
+        assert gone.code == 200 and b"event: gone" in gone.body  # the page stops reconnecting
 
     def test_isolation_proof(self) -> None:
         code, r = self.json("/api/proof/isolation", method="POST", body="")
@@ -102,3 +103,19 @@ def test_parse_params_clamps() -> None:
     )
     assert p["n_particles"] == 30 and p["w"] == 0.05 and p["fold"] == 4 and p["seed"] == 4
     assert p["manual"]["max_depth"] == 20
+
+
+def test_abandoned_live_job_is_cancelled(monkeypatch) -> None:
+    """A run whose browser tab went away stops, instead of competing with the next run for the CPU."""
+    monkeypatch.setattr(server, "ABANDON_AFTER_S", 0.5)
+    job = server.LiveJob(
+        server.parse_params({"dataset": "digits", "n_particles": 10, "max_iter": 20, "race": True})
+    )
+    runner = __import__("threading").Thread(target=server.run_job, args=(job,))
+    runner.start()
+    server.watchdog(job)  # nobody attached: cancels after the grace period
+    runner.join(120)
+    assert not runner.is_alive() and job.cancelled
+    kinds = [e["t"] for e in job.events]
+    assert kinds[-1] == "cancelled" and "vault" not in kinds
+    assert sum(e["t"] == "eval" for e in job.events) < 2 * 210  # stopped well before the full budget

@@ -128,7 +128,7 @@ Total evaluations per run: $N(T+1) = 210$.
 
 $$x_{i,d}^0 \sim U[l_d, u_d], \qquad v_{i,d}^0 \sim U\big[-0.1(u_d - l_d),\ 0.1(u_d - l_d)\big]$$
 
-Evaluate $f_i^0$ for all $i$. Then set $p_i^0 = x_i^0$, $\phi_i^0 = f_i^0$, and $g^0 = p_{i^*}^0$ with
+*(Demo option, off in the experiment: `pso.start` sets $x_0^0$ to a chosen configuration after the draw; ADR-027.)* Evaluate $f_i^0$ for all $i$. Then set $p_i^0 = x_i^0$, $\phi_i^0 = f_i^0$, and $g^0 = p_{i^*}^0$ with
 $i^* = \min \arg\max_i \phi_i^0$ (lowest index on ties).
 
 ### 7.3 Velocity update

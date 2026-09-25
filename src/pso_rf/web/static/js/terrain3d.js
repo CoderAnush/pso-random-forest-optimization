@@ -2,6 +2,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "/static/vendor/OrbitControls.js";
 import { LOWER, UPPER } from "./landscapes.js";
+import { attachViewControls } from "./swarm3d.js";
 import { fitnessColor } from "./ui.js";
 
 const SX = 1.5, SZ = 1.05, HGT = 0.95;
@@ -31,6 +32,8 @@ export class Terrain3D {
     Object.assign(this.controls, { enableDamping: true, autoRotate: true, autoRotateSpeed: 0.4, minDistance: 1.8, maxDistance: 7 });
     this.controls.target.set(0, 0.25, 0);
     this.controls.addEventListener("start", () => { this.controls.autoRotate = false; });
+    this.detachView = attachViewControls(container, this.camera, this.controls,
+      { position: this.camera.position.clone(), target: this.controls.target.clone() });
     this.scene.add(new THREE.AmbientLight(0xffffff, 0.32));
     const sun = new THREE.DirectionalLight(0xffffff, 0.95); sun.position.set(2, 4, 1.5); this.scene.add(sun);
     const rim = new THREE.DirectionalLight(0x86b6ef, 0.6); rim.position.set(-2, 1, -2); this.scene.add(rim);
@@ -92,5 +95,5 @@ export class Terrain3D {
     this.controls.update(); this.renderer.render(this.scene, this.camera);
   }
   resize() { const w = this.container.clientWidth || 600, h = this.container.clientHeight || 400; this.renderer.setSize(w, h); this.camera.aspect = w / h; this.camera.updateProjectionMatrix(); }
-  dispose() { this.alive = false; cancelAnimationFrame(this.raf); this.ro.disconnect(); this.controls.dispose(); this.renderer.dispose(); this.renderer.domElement.remove(); }
+  dispose() { this.alive = false; cancelAnimationFrame(this.raf); this.ro.disconnect(); this.controls.dispose(); this.detachView(); this.renderer.dispose(); this.renderer.domElement.remove(); }
 }

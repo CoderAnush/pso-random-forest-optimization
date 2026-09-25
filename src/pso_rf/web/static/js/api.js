@@ -23,12 +23,13 @@ export const api = {
  * Subscribe to a live job's events. Reconnects from the last received index, so no event is lost or duplicated.
  * Returns a function that stops listening.
  */
-export function streamLive(id, onEvent, onEnd) {
+export function streamLive(id, onEvent, onEnd, onGone) {
   let received = 0, source = null, stopped = false;
   const connect = () => {
     source = new EventSource(`/api/live/${id}/events?from=${received}`);
     source.onmessage = (m) => { received += 1; onEvent(JSON.parse(m.data)); };
     source.addEventListener("end", () => { source.close(); if (!stopped) onEnd && onEnd(); });
+    source.addEventListener("gone", () => { stopped = true; source.close(); onGone && onGone(); });
     source.onerror = () => { source.close(); if (!stopped) setTimeout(connect, 800); };
   };
   connect();

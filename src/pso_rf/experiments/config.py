@@ -406,6 +406,8 @@ def _pso_from_raw(raw: Any, where: str) -> PSOConfig:
     _check_keys(raw, [*plain, "patience"], where)
     kwargs = dict(raw)
     kwargs.update({f"patience_{key}": value for key, value in patience.items()})
+    if isinstance(kwargs.get("start"), list):
+        kwargs["start"] = tuple(kwargs["start"])
     return PSOConfig(**kwargs)
 
 
@@ -695,6 +697,13 @@ def _validate_pso(pso: PSOConfig, where: str, errors: _Errors) -> None:
         f"{where}.patience.iterations",
         "must be an integer >= 1",
         pso.patience_iterations,
+    )
+    start = pso.start
+    errors.check(
+        start is None or (isinstance(start, tuple) and len(start) >= 1 and all(_is_number(v) for v in start)),
+        f"{where}.start",
+        "must be null or a list of numbers (one per hyperparameter)",
+        start,
     )
 
 

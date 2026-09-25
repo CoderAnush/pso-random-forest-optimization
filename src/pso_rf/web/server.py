@@ -136,6 +136,24 @@ class LiveJob:
         self.lock = threading.Lock()
         self.done = False
         self.started = time.time()
+        self.watchers = 0  # open SSE connections
+        self.last_seen = time.time()
+        self.cancelled = False
+
+    def attach(self) -> None:
+        with self.lock:
+            self.watchers += 1
+            self.last_seen = time.time()
+
+    def detach(self) -> None:
+        with self.lock:
+            self.watchers -= 1
+            self.last_seen = time.time()
+
+    def abandoned(self, grace: float) -> bool:
+        """True if nobody has watched this job for ``grace`` seconds (tab closed, page left, reloaded)."""
+        with self.lock:
+            return self.watchers <= 0 and time.time() - self.last_seen > grace
 
     def emit(self, event: dict[str, Any]) -> None:
         with self.lock:
@@ -147,6 +165,21 @@ class LiveJob:
 
 
 JOBS: dict[str, LiveJob] = {}
+ABANDON_AFTER_S = 6.0
+
+
+class LiveCancelled(Exception):
+    """Raised inside the optimizer callback to stop a live run that nobody is watching any more."""
+
+
+def watchdog(job: LiveJob) -> None:
+    """Cancel a live job once no browser has been connected to it for a few seconds."""
+    while not job.done:
+        if job.abandoned(ABANDON_AFTER_S):
+            job.cancelled = True
+            log.info("live job %s cancelled: no viewer for %.0f s", job.id, ABANDON_AFTER_S)
+            return
+        time.sleep(1.0)
 
 
 class Stream(Callback):
@@ -156,6 +189,8 @@ class Stream(Callback):
         self.job, self.method = job, method
 
     def on_evaluation(self, event: EvaluationEvent) -> None:
+        if self.job.cancelled:
+            raise LiveCancelled()
         info = event.info or {}
         self.job.emit(
             {
@@ -233,6 +268,9 @@ def parse_params(body: dict[str, Any]) -> dict[str, Any]:
         }
     else:
         params["manual"] = None
+    # the chosen configuration can seed particle 0 of the swarm and/or be scored as a comparison
+    params["start_from_manual"] = bool(body.get("start_from_manual", False)) and params["manual"] is not None
+    params["compare_manual"] = bool(body.get("compare_manual", True)) and params["manual"] is not None
     return params
 
 
@@ -248,6 +286,9 @@ def live_config(params: dict[str, Any]) -> ExperimentConfig:
         f"pso.v_max_frac={params['v_max_frac']}",
         f"split.run_seeds=[{', '.join(map(str, seeds))}]",
     ]
+    if params.get("start_from_manual") and params.get("manual"):
+        m = params["manual"]
+        overrides.append(f"pso.start=[{m['n_estimators']}, {m['max_depth']}, {m['min_samples_split']}]")
     return load_config([REPO / "configs" / "default.yaml"], overrides)
 
 
@@ -340,6 +381,8 @@ def run_job(job: LiveJob) -> None:
                         "val": records[method]["best_validation_fitness"],
                     }
                 )
+            except LiveCancelled:
+                return
             except Exception as exc:  # reported to the browser; the job ends cleanly
                 log.exception("live %s failed", method)
                 errors.append(f"{method}: {type(exc).__name__}: {exc}")
@@ -352,12 +395,15 @@ def run_job(job: LiveJob) -> None:
             thread.start()
         for thread in threads:
             thread.join()
+        if job.cancelled:
+            job.emit({"t": "cancelled"})
+            return
         if errors:
             raise RuntimeError("; ".join(errors))
         job.emit({"t": "phase", "msg": "searches finished; scoring the default RF and opening the test fold"})
         records["baseline"] = run_fold(cfg, data, fold, "baseline", metric, out / "baseline", exp_id)
         results = {m: _summary(r) for m, r in records.items()}
-        if p["manual"]:
+        if p["manual"] and p["compare_manual"]:
             results["manual"] = score_manual(cfg, data, fold, p["manual"], metric)
         job.emit(
             {"t": "vault", "results": results, "n_test": len(fold.test), "elapsed": time.time() - job.started}
@@ -627,19 +673,27 @@ class LiveStartHandler(Api):
         job = LiveJob(parse_params(body))
         JOBS[job.id] = job
         threading.Thread(target=run_job, args=(job,), daemon=True).start()
+        threading.Thread(target=watchdog, args=(job,), daemon=True).start()
         self.send({"id": job.id, "params": job.params})
 
 
 class LiveStreamHandler(tornado.web.RequestHandler):
+    closed = False
+
+    def on_connection_close(self) -> None:
+        self.closed = True
+
     async def get(self, job_id: str) -> None:
-        job = JOBS.get(job_id)
-        if job is None:
-            raise tornado.web.HTTPError(404)
         self.set_header("Content-Type", "text/event-stream")
         self.set_header("Cache-Control", "no-cache")
+        job = JOBS.get(job_id)
+        if job is None:  # e.g. the server was restarted: tell the page to stop reconnecting
+            self.write("event: gone\ndata: {}\n\n")
+            return
         index = int(self.get_argument("from", "0"))
+        job.attach()
         try:
-            while True:
+            while not self.closed:
                 events, done = job.since(index)
                 for event in events:
                     self.write(f"data: {json.dumps(event, allow_nan=False)}\n\n")
@@ -653,6 +707,8 @@ class LiveStreamHandler(tornado.web.RequestHandler):
                 await asyncio.sleep(0.04)
         except StreamClosedError:
             return
+        finally:
+            job.detach()
 
 
 class IndexHandler(tornado.web.RequestHandler):

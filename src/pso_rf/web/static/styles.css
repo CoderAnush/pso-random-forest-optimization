@@ -105,6 +105,12 @@ details.more summary::before { content: "▸ "; color: var(--muted); }
 details.more[open] summary::before { content: "▾ "; }
 details.more .controls { margin-top: 12px; }
 
+/* starting-hyperparameter panel */
+.pick { display: flex; flex-direction: column; gap: 12px; padding: 12px; border-radius: 12px; border: 1px dashed var(--you);
+  background: rgba(195,194,183,.05); }
+.pick-title { font-weight: 700; font-size: 13.5px; }
+.pick .switch { font-size: 13px; }
+
 /* dataset chooser */
 .ds-cards { display: grid; gap: 8px; }
 .ds-card { text-align: left; border: 1px solid var(--axis); background: var(--surface-2); border-radius: 12px; padding: 10px 12px;
@@ -135,6 +141,12 @@ details.more .controls { margin-top: 12px; }
   color: var(--ink-2); font-size: 15px; pointer-events: none; padding: 30px; line-height: 1.6; }
 .overlay-msg > div { background: rgba(13,13,13,.78); border: 1px solid var(--grid); border-radius: 12px; padding: 14px 20px; max-width: 560px; }
 .overlay-msg b { color: #fff; }
+
+.view-ctl { position: absolute; right: 12px; top: 46px; display: flex; align-items: center; gap: 6px; z-index: 3; }
+.view-ctl button { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--axis); background: rgba(34,34,32,.9);
+  color: var(--ink); font-size: 16px; cursor: pointer; line-height: 1; }
+.view-ctl button:hover { border-color: var(--pso); }
+.view-ctl span { font-size: 11px; color: var(--muted); margin-left: 4px; }
 
 /* loop diagram */
 .loop-svg { width: 100%; height: auto; display: block; }

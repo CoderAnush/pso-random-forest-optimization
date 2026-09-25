@@ -5,7 +5,7 @@ export const COLORS = {
   ink: "#ffffff", ink2: "#c3c2b7", muted: "#898781", grid: "#2c2c2a", axis: "#383835", surface: "#1a1a19",
 };
 export const LABEL = {
-  pso: "PSO (closed loop)", random_search: "Random search (open loop)", baseline: "Default RF", manual: "Your manual pick",
+  pso: "PSO (closed loop)", random_search: "Random search (open loop)", baseline: "Default RF", manual: "Your starting pick",
 };
 export const HP = ["n_estimators", "max_depth", "min_samples_split"];
 export const BOUNDS = [[50, 200], [2, 20], [2, 10]];

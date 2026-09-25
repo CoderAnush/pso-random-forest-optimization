@@ -35,7 +35,9 @@ class PSOConfig:
 
     ``v_max_frac`` and ``v_init_frac`` are fractions of each dimension's range (upper - lower).
     The patience rule is off by default; when on, the run stops once gbest has improved by less than
-    ``patience_tol`` over ``patience_iterations`` iterations.
+    ``patience_tol`` over ``patience_iterations`` iterations. ``start`` (demo option, off in the experiment)
+    places particle 0 at a chosen configuration; the random draws are unchanged, so ``start=None`` reproduces
+    the standard run exactly.
     """
 
     n_particles: int = 10
@@ -51,6 +53,7 @@ class PSOConfig:
     patience_enabled: bool = False
     patience_tol: float = 1e-4
     patience_iterations: int = 5
+    start: tuple[float, ...] | None = None  # optional starting position of particle 0 (off by default)
 
 
 # ------------------------------------------------------------------------------------ pure update functions
@@ -120,6 +123,8 @@ class PSOOptimizer:
             raise NotImplementedError(
                 "only boundary='absorb', topology='gbest' and update='synchronous' are implemented"
             )
+        if config.start is not None and len(config.start) != space.dim:
+            raise ValueError(f"start must have {space.dim} values, got {config.start}")
         if config.n_particles < 1 or config.max_iter < 0:
             raise ValueError("n_particles must be >= 1 and max_iter >= 0")
         self.space = space
@@ -139,6 +144,10 @@ class PSOOptimizer:
 
         # §7.2 initialization (t = 0)
         X = rng.uniform(lower, upper, size=(N, D))
+        if (
+            cfg.start is not None
+        ):  # seed particle 0 at the chosen configuration (after the draw: same RNG stream)
+            X[0] = space.clip(np.asarray(cfg.start, dtype=np.float64))
         V = rng.uniform(-v_init, v_init, size=(N, D))
         configs, F, infos = self._evaluate_swarm(X)
 

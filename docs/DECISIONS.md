@@ -528,3 +528,15 @@ Changes to any decision are made by adding a superseding ADR and updating the af
     one for the review.
   - `tests/app/test_web.py` covers every endpoint, input clamping, path-traversal rejection, the isolation proof,
     and a real live job streamed end to end.
+- **Amendment (2026-09-25): starting point and abandoned runs.**
+  - *Starting point:* `pso.start` (a list, one value per hyperparameter; default `null`) places particle 0 at a
+    chosen configuration. It is used only by the live lab's "Your starting hyperparameters" panel. The position is
+    assigned *after* the usual random draw, so the RNG stream is unchanged: `start = null` reproduces the standard
+    run exactly (tests `test_start_*`), and the experiment configuration keeps it `null`.
+  - *Abandoned runs:* a live run nobody has watched for 6 s (tab closed, page left, reloaded) is cancelled from the
+    observer callback, so abandoned runs no longer compete with the next one for the CPU
+    (`test_abandoned_live_job_is_cancelled`).
+  - *Unknown runs:* an unknown job id (e.g. after a server restart) answers `event: gone`, so the page stops
+    reconnecting.
+  - *3-D views:* they zoom only with Ctrl + wheel or the on-screen buttons, so scrolling the page never shrinks
+    the scene.

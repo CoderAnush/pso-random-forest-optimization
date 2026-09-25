@@ -258,3 +258,31 @@ def test_evaluation_info_is_forwarded_untouched(space: SearchSpace) -> None:
 def test_unsupported_variants_are_rejected(space: SearchSpace) -> None:
     with pytest.raises(NotImplementedError):
         PSOOptimizer(space, lambda c: 0.0, PSOConfig(boundary="reflect"), np.random.default_rng(0))
+
+
+# ------------------------------------------------------------------ optional starting position (demo option)
+
+
+def test_start_places_particle_zero_and_keeps_the_rest(space: SearchSpace) -> None:
+    _, plain = run(space, quadratic(space), seed=4, max_iter=0)
+    _, seeded = run(space, quadratic(space), seed=4, max_iter=0, start=(60.0, 3.0, 10.0))
+    assert seeded.events[0].position == (60.0, 3.0, 10.0)
+    assert seeded.events[0].config == {"n_estimators": 60, "max_depth": 3, "min_samples_split": 10}
+    # same random stream: every other particle and every velocity is unchanged
+    assert [e.position for e in seeded.events[1:]] == [e.position for e in plain.events[1:]]
+    assert [e.velocity for e in seeded.events] == [e.velocity for e in plain.events]
+
+
+def test_start_none_is_the_standard_run(space: SearchSpace) -> None:
+    a, ca = run(space, quadratic(space), seed=9)
+    b, cb = run(space, quadratic(space), seed=9, start=None)
+    assert [e.position for e in ca.events] == [
+        e.position for e in cb.events
+    ] and a.best_config == b.best_config
+
+
+def test_start_is_clipped_and_checked(space: SearchSpace) -> None:
+    _, c = run(space, quadratic(space), seed=0, max_iter=0, start=(500.0, 0.0, 5.0))
+    assert c.events[0].position == (200.0, 2.0, 5.0)
+    with pytest.raises(ValueError):
+        PSOOptimizer(space, quadratic(space), PSOConfig(start=(60.0, 3.0)), np.random.default_rng(0))

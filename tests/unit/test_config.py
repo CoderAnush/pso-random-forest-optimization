@@ -253,3 +253,13 @@ def test_yaml_layers_must_be_mappings(default_yaml: Path, tmp_path: Path) -> Non
 def test_config_is_frozen(test_config: ExperimentConfig) -> None:
     with pytest.raises(dataclasses.FrozenInstanceError):
         test_config.pso = PSOConfig()  # type: ignore[misc]
+
+
+def test_pso_start_option(configs_dir) -> None:
+    from pso_rf.experiments.config import ConfigError, load_config
+
+    assert load_config([configs_dir / "default.yaml"]).pso.start is None
+    cfg = load_config([configs_dir / "default.yaml"], ["pso.start=[60, 3, 10]"])
+    assert cfg.pso.start == (60, 3, 10) and cfg.for_dataset("heart_cleveland").pso.start == (60, 3, 10)
+    with pytest.raises(ConfigError):
+        load_config([configs_dir / "default.yaml"], ["pso.start=[60, 'a', 10]"])

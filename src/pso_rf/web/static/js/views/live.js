@@ -13,7 +13,8 @@ function save(v) { try { localStorage.setItem(STORE, JSON.stringify(v)); } catch
 
 export function mount(root, meta) {
   const st = { dataset: "heart_cleveland", fold: 0, n_particles: 10, max_iter: 10, ...meta.defaults, max_iter: 10, race: true,
-    manualOn: true, manual: { n_estimators: 60, max_depth: 3, min_samples_split: 10 }, seed: null, ...saved() };
+    manualOn: true, startOn: true, manual: { n_estimators: 60, max_depth: 3, min_samples_split: 10 }, seed: null, ...saved() };
+  if (st.startOn == null) st.startOn = true;
   let stop = null, running = false, disposed = false;
 
   // ---------------------------------------------------------------- controls
@@ -45,9 +46,22 @@ export function mount(root, meta) {
     Object.assign(st, meta.defaults); sW.value = st.w; sC1.value = st.c1; sC2.value = st.c2; sV.value = st.v_max_frac;
   });
   const raceT = toggle({ label: "Race random search (same budget, no feedback)", checked: st.race, onChange: (v) => { st.race = v; updateEst(); } });
-  const manT = toggle({ label: "Include my manual pick", checked: st.manualOn, onChange: (v) => { st.manualOn = v; swarm.setManual(v ? st.manual : null); } });
-  const manS = HP.map((k, i) => slider({ label: k, min: [50, 2, 2][i], max: [200, 20, 10][i], value: st.manual[k],
-    onInput: (v) => { st.manual[k] = v; if (st.manualOn) swarm.setManual(st.manual); } }));
+  const showPick = () => swarm.setManual(st.manualOn || st.startOn ? st.manual : null);
+  const pickNote = h("div", { class: "hint" });
+  const notePick = () => {
+    const c = `(${st.manual.n_estimators}, ${st.manual.max_depth}, ${st.manual.min_samples_split})`;
+    pickNote.textContent = st.startOn
+      ? `Particle 0 starts at ${c}; the other particles start at random. PSO then tries to improve on your choice.`
+      : `The swarm starts fully at random${st.manualOn ? `; ${c} is only scored for comparison` : ""}.`;
+  };
+  const startT = toggle({ label: "Start the swarm from these values (particle 0)", checked: st.startOn,
+    onChange: (v) => { st.startOn = v; showPick(); notePick(); } });
+  const manT = toggle({ label: "Also score them on the test fold (comparison)", checked: st.manualOn,
+    onChange: (v) => { st.manualOn = v; showPick(); notePick(); } });
+  const LBL = { n_estimators: "n_estimators (trees)", max_depth: "max_depth (tree depth)", min_samples_split: "min_samples_split" };
+  const manS = HP.map((k, i) => slider({ label: LBL[k], min: [50, 2, 2][i], max: [200, 20, 10][i], value: st.manual[k],
+    onInput: (v) => { st.manual[k] = v; showPick(); notePick(); } }));
+  notePick();
   const est = h("div", { class: "caption" });
   const runBtn = h("button", { type: "button", class: "btn primary big" }, "▶  Run the closed loop");
   runBtn.addEventListener("click", () => start());
@@ -60,12 +74,11 @@ export function mount(root, meta) {
   const side = h("aside", { class: "lab-side card controls" },
     h("div", { class: "ctl" }, h("label", {}, "Dataset"), dsCards),
     h("div", { class: "ctl" }, h("label", {}, "Outer fold"), foldSeg, h("div", { class: "hint" }, "This fold's test part stays sealed until the search ends.")),
+    h("div", { class: "pick" }, h("div", { class: "pick-title" }, "Your starting hyperparameters"), ...manS, startT, manT, pickNote),
     sN, sT,
     h("details", { class: "more" }, h("summary", {}, "PSO coefficients"), h("div", { class: "controls" }, sW, sC1, sC2, sV,
       h("div", { class: "ctl" }, h("label", {}, "Run seed"), seedIn, h("div", { class: "hint" }, "Drives PSO, inner folds and forest seeds.")), resetCoef)),
     raceT,
-    h("details", { class: "more" }, h("summary", {}, "Manual tuning challenge"),
-      h("div", { class: "controls" }, h("div", { class: "hint" }, "Pick a configuration by hand; it is scored exactly like a PSO candidate, then once on the test fold."), manT, ...manS)),
     est, runBtn);
 
   // ---------------------------------------------------------------- stage
@@ -88,7 +101,7 @@ export function mount(root, meta) {
     h("span", {}, h("i", { style: { background: "transparent", border: "1.5px dashed #c3c2b7" } }), "your pick"));
   viewport.append(hud, overlay, chips, legend);
   const swarm = new Swarm3D(viewport);
-  if (st.manualOn) swarm.setManual(st.manual);
+  showPick();
 
   const loopBox = h("div");
   const loop = new LoopDiagram(loopBox);
@@ -137,13 +150,13 @@ export function mount(root, meta) {
   function idle() {
     if (running) return;
     const d = meta.datasets.find((x) => x.key === st.dataset);
-    overlay.innerHTML = `<div><b>${d.label}</b>, outer fold ${st.fold}: <b>${d.n_opt}</b> samples for optimization, <b>${d.n_test}</b> sealed for the final test.<br>Press <b>Run the closed loop</b>. Drag to orbit, scroll to zoom.</div>`;
+    overlay.innerHTML = `<div><b>${d.label}</b>, outer fold ${st.fold}: <b>${d.n_opt}</b> samples for optimization, <b>${d.n_test}</b> sealed for the final test.<br>Press <b>Run the closed loop</b>. Drag to rotate; Ctrl + scroll (or the + / − buttons) to zoom.</div>`;
     overlay.classList.remove("hidden");
     hudIt.innerHTML = ""; hudG.innerHTML = ""; hudE.innerHTML = "";
   }
   idle();
   function resetRun(params, budget) {
-    swarm.reset(); if (st.manualOn) swarm.setManual(st.manual);
+    swarm.reset(); showPick();
     conv.clearAll(); race.clearAll(); feed.replaceChildren(); resultBox.classList.add("hidden"); resultBox.replaceChildren();
     run = { params, budget, pso: [], rs: [], iters: [], best: { pso: -Infinity, random_search: -Infinity }, n: { pso: 0, random_search: 0 },
       unique: 0, lastPulse: 0 };
@@ -217,6 +230,7 @@ export function mount(root, meta) {
     if (ev.t === "search_done") { status.textContent = `${LABEL[ev.m]} finished: best ${fmt.cfg(ev.best)} = ${fmt.acc(ev.val)} (validation)`; return; }
     if (ev.t === "phase") { status.textContent = ev.msg; loop.light([]); return; }
     if (ev.t === "vault") { openVault(ev); return; }
+    if (ev.t === "cancelled") { status.textContent = "Run cancelled."; finish(); return; }
     if (ev.t === "error") { toast(`Live run failed: ${ev.msg}`, "error", 8000); status.textContent = ev.msg; }
   }
   function openVault(ev) {
@@ -249,11 +263,13 @@ export function mount(root, meta) {
     if (running) return;
     save({ ...st });
     const body = { dataset: st.dataset, fold: st.fold, n_particles: st.n_particles, max_iter: st.max_iter, w: st.w, c1: st.c1, c2: st.c2,
-      v_max_frac: st.v_max_frac, seed: st.seed, race: st.race, manual: st.manualOn ? st.manual : null };
+      v_max_frac: st.v_max_frac, seed: st.seed, race: st.race, manual: st.manualOn || st.startOn ? st.manual : null,
+      start_from_manual: st.startOn, compare_manual: st.manualOn };
     running = true; runBtn.disabled = true; runBtn.textContent = "Running the loop…";
     try {
       const job = await api.startLive(body);
-      stop = streamLive(job.id, onEvent, () => { if (running) finish(); });
+      stop = streamLive(job.id, onEvent, () => { if (running) finish(); },
+        () => { toast("This run is no longer on the server (it was restarted or cancelled). Press Run again.", "error", 7000); finish(); });
     } catch (err) { toast(err.message, "error", 7000); running = false; runBtn.disabled = false; runBtn.textContent = "▶  Run the closed loop"; }
   }
 
